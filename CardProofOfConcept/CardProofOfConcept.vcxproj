@@ -146,6 +146,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Card.h" />
+    <ClInclude Include="Deck.h" />
     <ClInclude Include="Fire_Spirit.h" />
     <ClInclude Include="Pyromaniac.h" />
     <ClInclude Include="Soul.h" />
@@ -155,6 +156,7 @@
   <ItemGroup>
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="CardProofOfConcept.cpp" />
+    <ClCompile Include="Deck.cpp" />
     <ClCompile Include="Fire_Spirit.cpp" />
     <ClCompile Include="Pyromaniac.cpp" />
     <ClCompile Include="Soul.cpp" />

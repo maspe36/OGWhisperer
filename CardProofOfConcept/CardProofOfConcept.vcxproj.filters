@@ -48,6 +48,9 @@
     <ClInclude Include="Pyromaniac.h">
       <Filter>Header Files\Cards</Filter>
     </ClInclude>
+    <ClInclude Include="Deck.h">
+      <Filter>Header Files\BaseClasses</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -67,6 +70,9 @@
     </ClCompile>
     <ClCompile Include="Pyromaniac.cpp">
       <Filter>Source Files\Cards</Filter>
+    </ClCompile>
+    <ClCompile Include="Deck.cpp">
+      <Filter>Source Files\BaseClasses</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
