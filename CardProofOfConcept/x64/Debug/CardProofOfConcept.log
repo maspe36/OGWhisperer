@@ -1,0 +1,5 @@
+﻿  Deck.cpp
+f:\computer programming\c++\whisperer\cardproofofconcept\deck.cpp(30): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  CardProofOfConcept.cpp
+  Generating Code...
+  CardProofOfConcept.vcxproj -> F:\Computer Programming\C++\Whisperer\x64\Debug\CardProofOfConcept.exe

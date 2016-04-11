@@ -16,8 +16,7 @@ public:
 	Card Draw();
 	void Shuffle();
 	void Add(Card& cardToAdd);
-	vector<Card> getCards();
-private:
-	vector<Card> Cards;
+	void PrintDeck();
+	static vector<Card> Cards;
 };
 

@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "Deck.h"
+#include<string>
 
+vector<Card> Deck::Cards;
 
 Deck::Deck()
 {
@@ -21,7 +23,21 @@ Card Deck::Draw()
 
 void Deck::Shuffle()
 {
-	random_shuffle(Cards.begin(), Cards.end());
+
+	vector<Card> Copy(Cards);
+	int Max, Current;
+
+	Max = Cards.size();
+
+	srand((unsigned)time(NULL));
+	Cards.clear();
+
+	for (int Counter = 0; Counter < Max; Counter++)
+	{
+		Current = rand() % Copy.size();
+		Cards.push_back(Copy[Current]);
+		Copy.erase(Copy.begin() + Current);
+	}
 }
 
 void Deck::Add(Card& cardToAdd)
@@ -29,7 +45,8 @@ void Deck::Add(Card& cardToAdd)
 	Cards.push_back(cardToAdd);
 }
 
-vector<Card> Deck::getCards()
+void Deck::PrintDeck()
 {
-	return Cards;
+	for (auto& i : Cards)
+		cout << i.Name << endl;
 }
