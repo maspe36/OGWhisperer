@@ -51,6 +51,18 @@
     <ClInclude Include="Deck.h">
       <Filter>Header Files\BaseClasses</Filter>
     </ClInclude>
+    <ClInclude Include="Hellhound.h">
+      <Filter>Header Files\Cards</Filter>
+    </ClInclude>
+    <ClInclude Include="Hellspark_Mutt.h">
+      <Filter>Header Files\Cards</Filter>
+    </ClInclude>
+    <ClInclude Include="Cards.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseClasses.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -73,6 +85,12 @@
     </ClCompile>
     <ClCompile Include="Deck.cpp">
       <Filter>Source Files\BaseClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="Hellhound.cpp">
+      <Filter>Source Files\Cards</Filter>
+    </ClCompile>
+    <ClCompile Include="Hellspark_Mutt.cpp">
+      <Filter>Source Files\Cards</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -145,9 +145,13 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BaseClasses.h" />
     <ClInclude Include="Card.h" />
+    <ClInclude Include="Cards.h" />
     <ClInclude Include="Deck.h" />
     <ClInclude Include="Fire_Spirit.h" />
+    <ClInclude Include="Hellhound.h" />
+    <ClInclude Include="Hellspark_Mutt.h" />
     <ClInclude Include="Pyromaniac.h" />
     <ClInclude Include="Soul.h" />
     <ClInclude Include="stdafx.h" />
@@ -158,6 +162,8 @@
     <ClCompile Include="CardProofOfConcept.cpp" />
     <ClCompile Include="Deck.cpp" />
     <ClCompile Include="Fire_Spirit.cpp" />
+    <ClCompile Include="Hellhound.cpp" />
+    <ClCompile Include="Hellspark_Mutt.cpp" />
     <ClCompile Include="Pyromaniac.cpp" />
     <ClCompile Include="Soul.cpp" />
     <ClCompile Include="stdafx.cpp">

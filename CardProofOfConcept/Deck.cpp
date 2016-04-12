@@ -29,8 +29,9 @@ void Deck::Shuffle()
 
 	Max = Cards.size();
 
-	srand((unsigned)time(NULL));
 	Cards.clear();
+	//Seed rand()
+	srand(time(NULL));
 
 	for (int Counter = 0; Counter < Max; Counter++)
 	{

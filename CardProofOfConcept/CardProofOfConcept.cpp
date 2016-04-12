@@ -3,25 +3,24 @@
 
 #include "stdafx.h"
 #include <string>
-#include "Fire_Spirit.h"
-#include "Pyromaniac.h"
 #include <vector>
-#include "Deck.h"
+#include "BaseClasses.h"
+#include "Cards.h"
 
 int main()
 {
 	//I want a factory...
 	Fire_Spirit firespirit1;
 	Fire_Spirit firespirit2;
-	Fire_Spirit firespirit3;
-	Fire_Spirit firespirit4;
-	Fire_Spirit firespirit5;
 
 	Pyromaniac pyromaniac1;
 	Pyromaniac pyromaniac2;
-	Pyromaniac pyromaniac3;
-	Pyromaniac pyromaniac4;
-	Pyromaniac pyromaniac5;
+
+	Hellhound hellhound1;
+	Hellhound hellhound2;
+
+	Hellspark_Mutt hellsparkmutt1;
+	Hellspark_Mutt hellsparkmutt2;
 
 	cout << "Cost: " + to_string(firespirit1.Cost) + '\n'
 		<< "Name: " + firespirit1.Name + '\n'
@@ -49,15 +48,15 @@ int main()
 	Deck player1;
 	player1.Add(firespirit1);
 	player1.Add(firespirit2);
-	player1.Add(firespirit3);
-	player1.Add(firespirit4);
-	player1.Add(firespirit5);
 
 	player1.Add(pyromaniac1);
 	player1.Add(pyromaniac2);
-	player1.Add(pyromaniac3);
-	player1.Add(pyromaniac4);
-	player1.Add(pyromaniac5);
+
+	player1.Add(hellhound1);
+	player1.Add(hellhound2);
+
+	player1.Add(hellsparkmutt1);
+	player1.Add(hellsparkmutt2);
 
 	cout << "Unshuffled Deck\n------------" << endl;
 	player1.PrintDeck();
