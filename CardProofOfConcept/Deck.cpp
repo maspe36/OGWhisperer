@@ -13,10 +13,12 @@ Deck::~Deck()
 {
 }
 
-Card Deck::Draw()
+auto Deck::Draw()
 {
-	Card temp;
-	temp = Cards.back();
+
+	auto temp = Cards.front();
+
+	Cards.erase(Cards.begin());
 
 	return temp;
 }

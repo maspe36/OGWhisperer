@@ -13,7 +13,7 @@ class Deck
 public:
 	Deck();
 	~Deck();
-	Card Draw();
+	auto Draw();
 	void Shuffle();
 	void Add(Card& cardToAdd);
 	void PrintDeck();

@@ -68,6 +68,21 @@ int main()
 	cout << "Shuffled Deck\n------------" << endl;
 	player1.PrintDeck();
 
+	player1.Shuffle();
+	//random_shuffle(player1.Cards.begin(), player1.Cards.end());
+	cout << "\nI just shuffled myself\n" << endl;
+
+	cout << "Shuffled Deck 2\n------------" << endl;
+	player1.PrintDeck();
+
+	cout << "\n" << endl;
+
+	auto& temp = player1.Draw();
+	cout << temp.Name << endl;
+
+	cout << "After Draw Deck \n------------" << endl;
+	player1.PrintDeck();
+
     return 0;
 }
 
