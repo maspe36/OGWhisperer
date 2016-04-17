@@ -41,7 +41,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
@@ -152,6 +152,7 @@
     <ClInclude Include="Fire_Spirit.h" />
     <ClInclude Include="Hellhound.h" />
     <ClInclude Include="Hellspark_Mutt.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Pyromaniac.h" />
     <ClInclude Include="Soul.h" />
     <ClInclude Include="stdafx.h" />
@@ -164,6 +165,7 @@
     <ClCompile Include="Fire_Spirit.cpp" />
     <ClCompile Include="Hellhound.cpp" />
     <ClCompile Include="Hellspark_Mutt.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Pyromaniac.cpp" />
     <ClCompile Include="Soul.cpp" />
     <ClCompile Include="stdafx.cpp">

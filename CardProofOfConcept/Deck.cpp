@@ -1,8 +1,10 @@
 #include "stdafx.h"
 #include "Deck.h"
 #include<string>
+#include "Soul.h"
+#include <memory>
 
-vector<Card> Deck::Cards;
+vector<Card*> Deck::Cards;
 
 Deck::Deck()
 {
@@ -13,7 +15,7 @@ Deck::~Deck()
 {
 }
 
-auto Deck::Draw()
+auto Deck::Draw() -> Card*
 {
 
 	auto temp = Cards.front();
@@ -26,7 +28,7 @@ auto Deck::Draw()
 void Deck::Shuffle()
 {
 
-	vector<Card> Copy(Cards);
+	vector<Card*> Copy(Cards);
 	int Max, Current;
 
 	Max = Cards.size();
@@ -43,13 +45,13 @@ void Deck::Shuffle()
 	}
 }
 
-void Deck::Add(Card& cardToAdd)
+void Deck::Add(Card* cardToAdd)
 {
 	Cards.push_back(cardToAdd);
 }
 
 void Deck::PrintDeck()
 {
-	for (auto& i : Cards)
-		cout << i.Name << endl;
+	for (auto i : Cards)
+		cout << i->Name << endl;
 }

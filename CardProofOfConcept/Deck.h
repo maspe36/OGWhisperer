@@ -6,17 +6,17 @@
 #include <algorithm>    // std::random_shuffle
 #include <ctime>        // std::time
 #include <cstdlib>      // std::rand, std::srand
-
+#include <memory>
 
 class Deck
 {
 public:
 	Deck();
 	~Deck();
-	auto Draw();
+	Card* Draw();
 	void Shuffle();
-	void Add(Card& cardToAdd);
+	void Add(Card* cardToAdd);
 	void PrintDeck();
-	static vector<Card> Cards;
+	static vector<Card*> Cards;
 };
 
