@@ -7,7 +7,13 @@ Player::Player()
 {
 }
 
-void Player::PlayCard(vector<Card*>& Hand, int index)
+Player::Player(Deck NewDeck, string NewUserName)
+{
+	MainDeck = NewDeck;
+	UserName = NewUserName;
+}
+
+void Player::PlayCard(int index)
 {
 	Card* FromHand = Hand.at(index);
 
@@ -38,5 +44,10 @@ void Player::PrintHand()
 {
 	for (auto i : Hand)
 		cout << i->Name << endl;
+}
+
+void Player::DrawCard()
+{
+	Hand.push_back(MainDeck.Draw());
 }
 

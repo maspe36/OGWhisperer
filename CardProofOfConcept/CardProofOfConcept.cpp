@@ -68,30 +68,27 @@ int main()
 	genericDeck.Add(hellsparkmutt2);
 
 	genericDeck.Shuffle();
+	
+	//New players need a deck and a name
+	Player* player1 = new Player(genericDeck, "Maspe36");
+	Player* player2 = new Player(genericDeck, "ScottSterling");
 
-	Player* player1 = new Player();
-	player1->UserName = "Maspe36";
-	player1->Deck = genericDeck;
-
-	Player* player2 = new Player();
-	player2->UserName = "ScottSterling";
+	GameState myGame(player1, player2);
 
 	//Draw a card and add it to the players hand
-	player1->Hand.push_back(player1->Deck.Draw());
-
-	player1->PrintHand();
+	myGame.player1->DrawCard();
+	myGame.player1->PrintHand();
 
 	//Make a wrapper method?
-	//Play the first card in a players hand
-	player1->PlayCard(player1->Hand, 0);
-	
-	player1->PrintHand();
+	//Play card at index in hand
+	myGame.player1->PlayCard(0);
+	myGame.player1->PrintHand();
 
 	//Make a wrapper method?
 	//Attack the player with the first soul in play
-	player1->SoulsInPlay.at(0)->Attacking(player2);
+	myGame.player1->SoulsInPlay.at(0)->Attacking(player2);
 
-	cout << player2->UserName << " has " << player2->Health << " remaining!" << endl;
+	cout << myGame.player2->UserName << " has " << myGame.player2->Health << " remaining!" << endl;
 
     return 0;
 }

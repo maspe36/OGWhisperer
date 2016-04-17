@@ -150,6 +150,7 @@
     <ClInclude Include="Cards.h" />
     <ClInclude Include="Deck.h" />
     <ClInclude Include="Fire_Spirit.h" />
+    <ClInclude Include="GameState.h" />
     <ClInclude Include="Hellhound.h" />
     <ClInclude Include="Hellspark_Mutt.h" />
     <ClInclude Include="Player.h" />
@@ -163,6 +164,7 @@
     <ClCompile Include="CardProofOfConcept.cpp" />
     <ClCompile Include="Deck.cpp" />
     <ClCompile Include="Fire_Spirit.cpp" />
+    <ClCompile Include="GameState.cpp" />
     <ClCompile Include="Hellhound.cpp" />
     <ClCompile Include="Hellspark_Mutt.cpp" />
     <ClCompile Include="Player.cpp" />

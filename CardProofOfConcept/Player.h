@@ -8,14 +8,16 @@ class Player
 {
 public:
 	Player();
+	Player(Deck NewDeck, string NewUserName);
 	int Health = 30;
-	Deck Deck;
+	Deck MainDeck;
 	string UserName;
 	vector<Card*> Hand;
 	vector<Soul*> SoulsInPlay;
 	//vector<Swift*> SwiftsInPlay;
 	//vector<Constant*> ConstantsInPlay;
-	void PlayCard(vector<Card*>& Hand, int index);
+	void PlayCard(int index);
 	void PrintHand();
+	void DrawCard();
 };
 

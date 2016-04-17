@@ -60,10 +60,13 @@
     <ClInclude Include="Cards.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BaseClasses.h">
+    <ClInclude Include="Player.h">
+      <Filter>Header Files\BaseClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
+    <ClInclude Include="BaseClasses.h">
       <Filter>Header Files\BaseClasses</Filter>
     </ClInclude>
   </ItemGroup>
@@ -97,6 +100,9 @@
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Source Files\BaseClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
