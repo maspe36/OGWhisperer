@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "Soul.h"
-#include "Player.h"
 
 void Soul::Attacking(Soul* DefendingSoul)
 {

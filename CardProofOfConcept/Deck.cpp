@@ -1,8 +1,7 @@
-#include "stdafx.h"
-#include "Deck.h"
-#include<string>
-#include "Soul.h"
+#include "stdafx.h" 
+#include <string>
 #include <memory>
+#include "BaseClasses.h"
 
 vector<Card*> Deck::Cards;
 
