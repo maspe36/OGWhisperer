@@ -40,14 +40,39 @@ void Player::PlayCard(int index)
 	//}
 }
 
-void Player::PrintHand()
+//Again a memory leak? How do I free this space?
+string Player::HandToString()
 {
-	for (auto i : Hand)
-		cout << i->Name << endl;
+	//CardName+CardSoul+CardDescription#...
+	string HandString;
+
+	for (auto i : Hand) {
+		HandString += (i->ToString() + "#");
+	}
+
+	return HandString;
 }
 
 void Player::DrawCard()
 {
 	Hand.push_back(MainDeck.Draw());
+}
+
+string Player::ToString()
+{
+	//PlayerName+PlayerHealth
+	return UserName + "+" + to_string(Health);
+}
+
+//Do I have a memory leak here? How can I free this memory?
+string Player::SoulsInPlayToString()
+{
+	string SoulsInPlayString;
+
+	for (auto i : SoulsInPlay) {
+		SoulsInPlayString += (i->ToString() + "#");
+	}
+
+	return SoulsInPlayString;
 }
 

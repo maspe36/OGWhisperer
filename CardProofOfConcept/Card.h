@@ -13,5 +13,6 @@ public:
 	Card() {}
 	virtual ~Card() {};
 	Card(int Cost, string Name, string Description) : Cost(Cost), Name(Name), Description(Description) {}
+	string ToString();
 };
 

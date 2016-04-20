@@ -77,18 +77,25 @@ int main()
 
 	//Draw a card and add it to the players hand
 	myGame.player1->DrawCard();
-	myGame.player1->PrintHand();
+	myGame.player1->DrawCard();
+	myGame.player1->DrawCard();
+	cout << myGame.player1->HandToString() << endl;
+
+	//Print GameState
+	cout << myGame.ToString(myGame.player1) << endl;
 
 	//Make a wrapper method?
 	//Play card at index in hand
 	myGame.player1->PlayCard(0);
-	myGame.player1->PrintHand();
+	cout << myGame.player1->HandToString() << endl;
 
 	//Make a wrapper method?
 	//Attack the player with the first soul in play
 	myGame.player1->SoulsInPlay.at(0)->Attacking(player2);
+	cout << player1->SoulsInPlay.at(0)->Name + " attacked " + player2->UserName + " for " + to_string(player1->SoulsInPlay.at(0)->Attack) << endl;
 
-	cout << myGame.player2->UserName << " has " << myGame.player2->Health << " remaining!" << endl;
+	//cout << myGame.player2->UserName << " has " << myGame.player2->Health << " remaining!" << endl;
+	cout << myGame.ToString(myGame.player1) << endl;
 
     return 0;
 }

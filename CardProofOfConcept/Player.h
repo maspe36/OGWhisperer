@@ -17,7 +17,9 @@ public:
 	//vector<Swift*> SwiftsInPlay;
 	//vector<Constant*> ConstantsInPlay;
 	void PlayCard(int index);
-	void PrintHand();
 	void DrawCard();
+	string HandToString();
+	string ToString();
+	string SoulsInPlayToString();
 };
 

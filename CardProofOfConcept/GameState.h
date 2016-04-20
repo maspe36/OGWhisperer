@@ -7,5 +7,7 @@ public:
 	Player* player1;
 	Player* player2;
 	~GameState();
+
+	string ToString(Player* ActivePlayer);
 };
 
