@@ -10,7 +10,8 @@ GameState::GameState(Player* newPlayer1, Player* newPlayer2)
 
 GameState::~GameState()
 {
-	
+	delete player1;
+	delete player2;
 }
 
 string GameState::ToString(Player* ActivePlayer)

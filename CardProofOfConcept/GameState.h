@@ -1,5 +1,9 @@
 #pragma once
 #include "Player.h"
+#include "stdafx.h"
+
+using namespace std;
+
 class GameState
 {
 public:

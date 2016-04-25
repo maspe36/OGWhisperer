@@ -8,6 +8,7 @@ class Player
 {
 public:
 	Player();
+	~Player();
 	Player(Deck NewDeck, string NewUserName);
 	int Health = 30;
 	Deck MainDeck;

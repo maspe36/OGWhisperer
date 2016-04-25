@@ -1,2 +1,4 @@
-﻿  CardProofOfConcept.cpp
+﻿  Deck.cpp
+f:\computer programming\c++\whisperer\cardproofofconcept\deck.cpp(37): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+f:\computer programming\c++\whisperer\cardproofofconcept\deck.cpp(41): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
   CardProofOfConcept.vcxproj -> F:\Computer Programming\C++\Whisperer\x64\Debug\CardProofOfConcept.exe

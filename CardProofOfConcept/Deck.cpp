@@ -12,6 +12,10 @@ Deck::Deck()
 
 Deck::~Deck()
 {
+	////Delete all the cards in the deck
+	//for (auto i : Cards) {
+	//	delete i;
+	//}
 }
 
 auto Deck::Draw() -> Card*

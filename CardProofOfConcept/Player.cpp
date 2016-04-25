@@ -7,6 +7,26 @@ Player::Player()
 {
 }
 
+Player::~Player()
+{
+	//Delete the hand
+	for (auto i : Hand) {
+		delete i;
+	}
+	//Delete the souls in play
+	for (auto i : SoulsInPlay) {
+		delete i;
+	}
+	////Delete the constants in play
+	//for (auto i : ConstatnsInPlay) {
+	//	delete i;
+	//}
+	////Delete the swifts in play
+	//for (auto i : SwiftsInPlay) {
+	//	delete i;
+	//}
+}
+
 Player::Player(Deck NewDeck, string NewUserName)
 {
 	MainDeck = NewDeck;
