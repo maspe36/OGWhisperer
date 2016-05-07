@@ -12,6 +12,7 @@ public:
 	Player* player2;
 	~GameState();
 
+	void Start();
 	string ToString(Player* ActivePlayer);
 };
 

@@ -14,6 +14,43 @@ GameState::~GameState()
 	delete player2;
 }
 
+void GameState::Start() {
+	bool IsPlayer1Turn = true;
+
+	//While both players have more than 0 health
+	while (player1->Health > 0 && player2->Health > 0)
+	{
+		//Player 1 turn loop
+		//Player 1 Draw
+		while (IsPlayer1Turn)
+		{
+			//Should be a message recieved in plain text from the client
+			string MessageFromClient = "1:Example";
+			char Protocol = MessageFromClient[0];
+			switch (Protocol) {
+			case '1':
+				string CardFromClientInfo = MessageFromClient.substr(2);
+			  /*Soul* CardFromClient = Factory.CreateCard(CardFromClientInfo);
+				if(player1->IsCardInHand(CardFromClient))
+				{
+					if(player1->IsCardPlayable(CardFromClient))
+					{
+						player1->SoulsInPlay.Add(CardFromClient);
+					}
+				}*/
+				break;
+			}
+			//Check effects
+		}
+		//Player 2 turn loop
+		//Player 1 Draw
+		while (!IsPlayer1Turn)
+		{
+
+		}
+	}
+}
+
 string GameState::ToString(Player* ActivePlayer)
 {
 	//GameState?
