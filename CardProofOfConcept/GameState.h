@@ -8,11 +8,13 @@ class GameState
 {
 public:
 	GameState(Player* newPlayer1, Player* newPlayer2);
-	Player* player1;
-	Player* player2;
+	vector<Player*> PlayersInGame;
+	Player* ActivePlayer;
 	~GameState();
 
 	void Start();
-	string ToString(Player* ActivePlayer);
+	void ChangeActivePlayer();
+	void StartOfTurnEffects();
+	string ToString(Player* RecivingGameStatePlayer);
 };
 
