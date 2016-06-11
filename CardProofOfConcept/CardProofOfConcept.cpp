@@ -69,33 +69,43 @@ int main()
 
 	genericDeck.Shuffle();
 	
-	//New players need a deck and a name
+	// New players need a deck and a name
 	Player* player1 = new Player(genericDeck, "Maspe36");
 	Player* player2 = new Player(genericDeck, "ScottSterling");
 
-	GameState* myGame = new GameState(player1, player2);
+	vector<Player*> Players = { player1, player2 };
 
-	//Draw a card and add it to the players hand
-	myGame->player1->DrawCard();
-	myGame->player1->DrawCard();
-	myGame->player1->DrawCard();
-	cout << myGame->player1->HandToString() << endl;
+	GameState* myGame = new GameState(Players);
 
-	//Print GameState
-	cout << myGame->ToString(myGame->player1) << endl;
+	// Draw a card and add it to the players hand
+	myGame->ActivePlayer->DrawCard();
+	myGame->ActivePlayer->DrawCard();
+	myGame->ActivePlayer->DrawCard();
+	cout << myGame->ActivePlayer->HandToString() << endl;
 
-	//Make a wrapper method?
-	//Play card at index in hand
-	myGame->player1->PlayCard(0);
-	cout << myGame->player1->HandToString() << endl;
+	// Print GameState
+	// cout << myGame->ToString(myGame->ActivePlayer) << endl;
 
-	//Make a wrapper method?
-	//Attack the player with the first soul in play
-	myGame->player1->SoulsInPlay.at(0)->Attacking(player2);
-	cout << player1->SoulsInPlay.at(0)->Name + " attacked " + player2->UserName + " for " + to_string(player1->SoulsInPlay.at(0)->Attack) << endl;
+	// Make a wrapper method?
+	// Play card at index in hand
+	myGame->ActivePlayer->PlayCard(0);
+	cout << myGame->ActivePlayer->HandToString() << endl;
 
-	//cout << myGame.player2->UserName << " has " << myGame.player2->Health << " remaining!" << endl;
-	cout << myGame->ToString(myGame->player1) << endl;
+	// Make a wrapper method?
+	// Attack the player with the first soul in play
+
+	// This will be sent along with the message from the client as to who to declare an attack on
+	int PlayerIndexToBeAttacked = 1;
+	int AttackingSoulIndex = 0;
+	myGame->ActivePlayer->SoulsInPlay.at
+		(AttackingSoulIndex)->Attacking(myGame->PlayersInGame[PlayerIndexToBeAttacked]);
+
+	cout << myGame->ActivePlayer->SoulsInPlay.at
+		(AttackingSoulIndex)->Name + " attacked " + myGame->PlayersInGame
+			[PlayerIndexToBeAttacked]->UserName + " for " + to_string(myGame->ActivePlayer->SoulsInPlay.at(0)->Attack) << endl;
+
+	// cout << myGame.player2->UserName << " has " << myGame.player2->Health << " remaining!" << endl;
+	// cout << myGame->ToString(myGame->ActivePlayer) << endl;
 
 	delete myGame;
 

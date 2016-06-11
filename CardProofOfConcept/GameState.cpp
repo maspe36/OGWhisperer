@@ -2,10 +2,15 @@
 #include "GameState.h"
 #include <string>
 
-GameState::GameState(Player* newPlayer1, Player* newPlayer2)
+GameState::GameState(vector<Player*> Players)
 {
-	PlayersInGame.push_back(newPlayer1);
-	PlayersInGame.push_back(newPlayer2);
+	// Set our players in the game equal to the inserted vector of players entering the game
+	PlayersInGame = Players;
+
+	// Initialize ActivePlayer
+	// This determines who goes first, we need to make it random whoever goes first
+	// For now we can just let the first player in the vector go first
+	ActivePlayer = PlayersInGame[0];
 }
 
 GameState::~GameState()
@@ -17,46 +22,15 @@ GameState::~GameState()
 	}
 }
 
-string GameState::ToString(Player* RecivingGameStatePlayer)
-{
-	//GameState?
-	//Player1=PlayerName+PlayerHealth
-	//&Player1SoulsInPlay=SoulName+SoulCost+SoulDescription#...
-	//&PlayerConstantsInPlay=ConstantName+ConstantCost+ConstantDescription#...
-	//&Player1CountOfDeck=CountOfDeck
-
-	//! = player info is starting
-	//& = continuation of player info from the !
-	//# = seperates multiple cards returned in a section of the player info (ex. SoulsInPlay) 
-
-	//for each player in vector<player*>, print their souls, constants, deck and hand counts. Send the active player their hand
-	string GameStateInfo = "GameState?";
-	for (int i = 0; i < PlayersInGame.size; i++) {
-		GameStateInfo +=
-			"!Player" + to_string(i) + "=" + PlayersInGame[i]->ToString() +
-			"&Player" + to_string(i) + "SoulsInPlay=" + PlayersInGame[i]->SoulsInPlayToString() +
-			//"&Player" + to_string(i) + "ConstantsInPlay=" + PlayersInGame[i]->ConstantsInPlayToString() +
-			//"&Player" + to_string(i) + "SwiftsInPlay=" + PlayersInGame[i]->SwiftsInPlayToString() +
-			"&Player" + to_string(i) + "DeckCount=" + to_string(PlayersInGame[i]->MainDeck.Cards.size());
-			"&Player" + to_string(i) + "HandCount=" + to_string(PlayersInGame[i]->Hand.size());
-	}
-	//Print all cards in active players hand if they are the active player
-	if (RecivingGameStatePlayer == ActivePlayer) {
-		GameStateInfo += 
-			"&ActivePlayerHand=" + ActivePlayer->HandToString();
-	}
-	return GameStateInfo;
-}
-
 void GameState::ChangeActivePlayer() {
 	//If the active player is the last item in the vector
-	if (ActivePlayer == PlayersInGame.back()) {
+	if (ActivePlayer->Compare(PlayersInGame.back())) {
 		//Set it to the front of the vector
 		ActivePlayer = PlayersInGame.front();
 	}
 	else {
 		//Find the index of the current active player
-		int IndexOfActivePlayer = distance(PlayersInGame.begin(), find(PlayersInGame.begin(), PlayersInGame.end(), 3));
+		int IndexOfActivePlayer = find(PlayersInGame.begin(), PlayersInGame.end(), ActivePlayer) - PlayersInGame.begin();
 		//Go one past it
 		ActivePlayer = PlayersInGame[IndexOfActivePlayer + 1];
 	}

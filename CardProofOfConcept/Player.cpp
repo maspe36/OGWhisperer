@@ -60,22 +60,20 @@ void Player::PlayCard(int index)
 	//}
 }
 
-//Again a memory leak? How do I free this space?
-string Player::HandToString()
-{
-	//CardName+CardSoul+CardDescription#...
-	string HandString;
-
-	for (auto i : Hand) {
-		HandString += (i->ToString() + "#");
-	}
-
-	return HandString;
-}
-
 void Player::DrawCard()
 {
 	Hand.push_back(MainDeck.Draw());
+}
+
+string Player::HandToString()
+{
+	string CardsInHand;
+
+	for (auto i : Hand) {
+		CardsInHand += (i->ToString() + "#");
+	}
+
+	return CardsInHand;
 }
 
 string Player::ToString()
@@ -94,5 +92,27 @@ string Player::SoulsInPlayToString()
 	}
 
 	return SoulsInPlayString;
+}
+
+bool Player::Compare(Player * OtherPlayer)
+{
+	// If username is not sufficent...
+	// Must compare the following...
+	// Health
+	// Deck Contents
+	// Username
+	// Hand Contents
+	// Souls on Field
+	// Swifts on Field
+	// Constants on Field
+	// Graveyard
+
+	// But for now we will assume that the username is sufficent enough
+	if (UserName.compare(OtherPlayer->UserName) != 0){
+		return false;
+	}
+	else {
+		return true;
+	}
 }
 

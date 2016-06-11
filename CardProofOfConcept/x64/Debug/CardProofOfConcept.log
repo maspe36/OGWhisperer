@@ -1,4 +1,17 @@
-﻿  Deck.cpp
-f:\computer programming\c++\whisperer\cardproofofconcept\deck.cpp(37): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-f:\computer programming\c++\whisperer\cardproofofconcept\deck.cpp(41): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-  CardProofOfConcept.vcxproj -> F:\Computer Programming\C++\Whisperer\x64\Debug\CardProofOfConcept.exe
+﻿  stdafx.cpp
+  Soul.cpp
+  Pyrophile.cpp
+  Pyromaniac.cpp
+  Player.cpp
+  Hellspark_Mutt.cpp
+  Hellhound.cpp
+  GameState.cpp
+g:\computer programming\c++\whisperer\cardproofofconcept\gamestate.cpp(33): warning C4244: 'initializing': conversion from '__int64' to 'int', possible loss of data
+  Fire_Spirit.cpp
+  Deck.cpp
+g:\computer programming\c++\whisperer\cardproofofconcept\deck.cpp(37): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+g:\computer programming\c++\whisperer\cardproofofconcept\deck.cpp(41): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  CardProofOfConcept.cpp
+  Card.cpp
+  Generating Code...
+  CardProofOfConcept.vcxproj -> G:\Computer Programming\C++\Whisperer\x64\Debug\CardProofOfConcept.exe

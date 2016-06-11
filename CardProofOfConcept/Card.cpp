@@ -8,6 +8,6 @@ Card::~Card()
 
 string Card::ToString()
 {
-	//CardName+CardCost+CardDescription
-	return Name + "+" + to_string(Cost) + "+" + Description;
+	// CardName
+	return Name;
 }

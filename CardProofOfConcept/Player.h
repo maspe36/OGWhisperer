@@ -17,10 +17,13 @@ public:
 	vector<Soul*> SoulsInPlay;
 	//vector<Swift*> SwiftsInPlay;
 	//vector<Constant*> ConstantsInPlay;
+	vector<Card*> Graveyard;
+
 	void PlayCard(int index);
 	void DrawCard();
 	string HandToString();
 	string ToString();
 	string SoulsInPlayToString();
+	bool Compare(Player* OtherPlayer);
 };
 

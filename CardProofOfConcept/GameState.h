@@ -7,7 +7,7 @@ using namespace std;
 class GameState
 {
 public:
-	GameState(Player* newPlayer1, Player* newPlayer2);
+	GameState(vector<Player*> Players);
 	vector<Player*> PlayersInGame;
 	Player* ActivePlayer;
 	~GameState();
@@ -15,6 +15,5 @@ public:
 	void Start();
 	void ChangeActivePlayer();
 	void StartOfTurnEffects();
-	string ToString(Player* RecivingGameStatePlayer);
 };
 

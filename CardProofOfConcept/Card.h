@@ -9,9 +9,10 @@ public:
 	int Cost;
 	string Name;
 	string Description;
+	string EffectText;
 
 	virtual ~Card();
-	Card(int Cost, string Name, string Description) : Cost(Cost), Name(Name), Description(Description) {}
 	string ToString();
+	Card(int Cost, string Name, string EffectText, string Description) : Cost(Cost), Name(Name), EffectText(EffectText), Description(Description) {}
 };
 

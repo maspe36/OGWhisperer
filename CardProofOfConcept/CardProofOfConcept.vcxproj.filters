@@ -25,6 +25,132 @@
     <Filter Include="Source Files\Cards">
       <UniqueIdentifier>{127fe4ce-4c87-4862-9f5f-8e98253419de}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Cards\Souls">
+      <UniqueIdentifier>{c9647145-3927-4adb-8232-45109daba9b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Cards\Swifts">
+      <UniqueIdentifier>{c41df1f6-fd29-4839-b99a-91433813617c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Cards\Constants">
+      <UniqueIdentifier>{586a2380-387f-4a7b-bc1e-c4eccfb678a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Cards\Souls">
+      <UniqueIdentifier>{03376b3a-a49a-45dd-97c2-9f19804aaf19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Cards\Swifts">
+      <UniqueIdentifier>{537d4736-23e8-4a55-865e-26361f937e42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Cards\Constants">
+      <UniqueIdentifier>{0443f67b-b11f-46c7-aab4-998f226e37c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Cards\Swifts\Fire">
+      <UniqueIdentifier>{eac26947-adb8-46d8-8e89-5971c26a060a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Cards\Swifts\Earth">
+      <UniqueIdentifier>{898af4b6-196e-431e-ad52-ce978aff185e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Cards\Swifts\Light">
+      <UniqueIdentifier>{8fd7cd40-6ec7-4188-83fd-cc8625db54dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Cards\Swifts\Dark">
+      <UniqueIdentifier>{eb4acf96-31a8-48e3-8c18-15d05bb6d181}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Cards\Swifts\Wind">
+      <UniqueIdentifier>{5274320e-e8d1-4edd-adf0-a10562c799d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Cards\Swifts\Water">
+      <UniqueIdentifier>{0e302ae8-e483-4b3b-9371-8a97fe7dbbca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Cards\Souls\Fire">
+      <UniqueIdentifier>{2c15b93f-4264-4575-92ac-20fe416e3baf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Cards\Souls\Water">
+      <UniqueIdentifier>{ca569eeb-a89f-4de8-9baf-1317774ff979}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Cards\Souls\Wind">
+      <UniqueIdentifier>{8c2a720c-22bb-4aa0-aee9-64c46450e12f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Cards\Souls\Earth">
+      <UniqueIdentifier>{434f11f0-14c2-4d4e-8a2f-f072c0c4b3c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Cards\Souls\Light">
+      <UniqueIdentifier>{657c94c5-89f8-4e99-b54c-89f80e6ca8ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Cards\Souls\Dark">
+      <UniqueIdentifier>{b5cb4451-f480-4732-ba18-460319c0cf28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Cards\Constants\Fire">
+      <UniqueIdentifier>{1516ce8f-7c9a-41a8-bce5-a8aca2d3e32c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Cards\Constants\Water">
+      <UniqueIdentifier>{842d4379-1868-49c4-8f11-501b557b22a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Cards\Constants\Earth">
+      <UniqueIdentifier>{2fba2995-d9cd-4261-b06f-f9e61965897a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Cards\Constants\Wind">
+      <UniqueIdentifier>{4ad72ebe-4cb1-4600-9ffd-9f30f0e29a48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Cards\Constants\Light">
+      <UniqueIdentifier>{7bcf7746-487d-4e9b-9de3-a49a0b683974}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Cards\Constants\Dark">
+      <UniqueIdentifier>{59d80c56-65df-4b6e-9ca4-f205371f2719}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Cards\Souls\Fire">
+      <UniqueIdentifier>{1a27742e-da3b-469f-9f7c-c96676892087}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Cards\Souls\Water">
+      <UniqueIdentifier>{9904f251-842d-4f3f-9661-4803dc7ae265}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Cards\Souls\Earth">
+      <UniqueIdentifier>{ecd904d1-bb0f-4ee9-99a0-be16bfa22fc1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Cards\Souls\Wind">
+      <UniqueIdentifier>{4c91392e-0bac-4857-8ad7-b74e7859c937}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Cards\Souls\Light">
+      <UniqueIdentifier>{f7ee417e-3138-40e2-aa04-60237f7697b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Cards\Souls\Dark">
+      <UniqueIdentifier>{9da34008-6393-4c90-b04f-887d3962fbc1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Cards\Swifts\Fire">
+      <UniqueIdentifier>{9c723464-c5e0-4ff6-9962-dd16c610258f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Cards\Swifts\Water">
+      <UniqueIdentifier>{5a1cc7b8-552b-4522-9aa8-3b54d9eaa854}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Cards\Swifts\Earth">
+      <UniqueIdentifier>{074d8242-7dc6-4e7f-a620-a12faab7b65b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Cards\Swifts\Wind">
+      <UniqueIdentifier>{c2b10b27-864f-4a67-b198-30bb5caa9f8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Cards\Swifts\Light">
+      <UniqueIdentifier>{518227c2-8109-4f58-8eb3-7b0fc71b512f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Cards\Swifts\Dark">
+      <UniqueIdentifier>{6cba537e-c5f3-403c-8918-e7b8c5beefc3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Cards\Constants\Fire">
+      <UniqueIdentifier>{58cd5fba-d0c3-4993-9b39-68731f3baad5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Cards\Constants\Water">
+      <UniqueIdentifier>{b924918a-2c26-44b5-aaef-8c23fa474a5a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Cards\Constants\Earth">
+      <UniqueIdentifier>{1a1fdc49-8827-4098-b37f-4639d06ab645}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Cards\Constants\Wind">
+      <UniqueIdentifier>{e5c37d5d-6c98-4b3d-aef1-fd3a8da32fec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Cards\Constants\Light">
+      <UniqueIdentifier>{7000704c-db3d-4034-817e-05eaa2e3b711}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Cards\Constants\Dark">
+      <UniqueIdentifier>{0998c48f-f319-453d-99a7-5e4464a688d1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -42,20 +168,8 @@
     <ClInclude Include="Soul.h">
       <Filter>Header Files\BaseClasses</Filter>
     </ClInclude>
-    <ClInclude Include="Fire_Spirit.h">
-      <Filter>Header Files\Cards</Filter>
-    </ClInclude>
-    <ClInclude Include="Pyromaniac.h">
-      <Filter>Header Files\Cards</Filter>
-    </ClInclude>
     <ClInclude Include="Deck.h">
       <Filter>Header Files\BaseClasses</Filter>
-    </ClInclude>
-    <ClInclude Include="Hellhound.h">
-      <Filter>Header Files\Cards</Filter>
-    </ClInclude>
-    <ClInclude Include="Hellspark_Mutt.h">
-      <Filter>Header Files\Cards</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Header Files\BaseClasses</Filter>
@@ -68,6 +182,21 @@
     </ClInclude>
     <ClInclude Include="GameState.h">
       <Filter>Header Files\BaseClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="Fire_Spirit.h">
+      <Filter>Header Files\Cards\Souls\Fire</Filter>
+    </ClInclude>
+    <ClInclude Include="Hellhound.h">
+      <Filter>Header Files\Cards\Souls\Fire</Filter>
+    </ClInclude>
+    <ClInclude Include="Hellspark_Mutt.h">
+      <Filter>Header Files\Cards\Souls\Fire</Filter>
+    </ClInclude>
+    <ClInclude Include="Pyromaniac.h">
+      <Filter>Header Files\Cards\Souls\Fire</Filter>
+    </ClInclude>
+    <ClInclude Include="Pyrophile.h">
+      <Filter>Header Files\Cards\Souls\Fire</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -83,26 +212,29 @@
     <ClCompile Include="Soul.cpp">
       <Filter>Source Files\BaseClasses</Filter>
     </ClCompile>
-    <ClCompile Include="Fire_Spirit.cpp">
-      <Filter>Source Files\Cards</Filter>
-    </ClCompile>
-    <ClCompile Include="Pyromaniac.cpp">
-      <Filter>Source Files\Cards</Filter>
-    </ClCompile>
     <ClCompile Include="Deck.cpp">
       <Filter>Source Files\BaseClasses</Filter>
-    </ClCompile>
-    <ClCompile Include="Hellhound.cpp">
-      <Filter>Source Files\Cards</Filter>
-    </ClCompile>
-    <ClCompile Include="Hellspark_Mutt.cpp">
-      <Filter>Source Files\Cards</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Source Files\BaseClasses</Filter>
     </ClCompile>
     <ClCompile Include="GameState.cpp">
       <Filter>Source Files\BaseClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="Fire_Spirit.cpp">
+      <Filter>Source Files\Cards\Souls\Fire</Filter>
+    </ClCompile>
+    <ClCompile Include="Hellhound.cpp">
+      <Filter>Source Files\Cards\Souls\Fire</Filter>
+    </ClCompile>
+    <ClCompile Include="Hellspark_Mutt.cpp">
+      <Filter>Source Files\Cards\Souls\Fire</Filter>
+    </ClCompile>
+    <ClCompile Include="Pyromaniac.cpp">
+      <Filter>Source Files\Cards\Souls\Fire</Filter>
+    </ClCompile>
+    <ClCompile Include="Pyrophile.cpp">
+      <Filter>Source Files\Cards\Souls\Fire</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
