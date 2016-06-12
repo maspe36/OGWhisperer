@@ -88,7 +88,7 @@ int main()
 	// Play card at index in hand
 	int CardToPlay;
 	cin >> CardToPlay;
-	myGame->PlayCard(CardToPlay);
+	myGame->PlayCard(myGame->ActivePlayer, CardToPlay);
 	cout << myGame->ActivePlayer->HandToString() << endl;
 
 	// Attempt to activate mutt's effect

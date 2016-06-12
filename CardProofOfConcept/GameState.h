@@ -17,6 +17,6 @@ public:
 
 	void Start();
 	void ChangeActivePlayer();
-	void PlayCard(int HandIndex); // Only the active player may play a card
+	void PlayCard(Player * CardOwner, int HandIndex);
 };
 

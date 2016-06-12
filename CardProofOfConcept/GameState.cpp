@@ -33,9 +33,9 @@ void GameState::ChangeActivePlayer() {
 	}
 }
 
-void GameState::PlayCard(int HandIndex)
+void GameState::PlayCard(Player* CardOwner, int HandIndex)
 {
-	Card *FromHand = ActivePlayer->Hand.at(HandIndex);
+	Card *FromHand = CardOwner->Hand.at(HandIndex);
 
 	Soul *SoulCard = nullptr;
 	//Type2 *t2 = nullptr;
@@ -44,11 +44,11 @@ void GameState::PlayCard(int HandIndex)
 	if (SoulCard = dynamic_cast<Soul*>(FromHand))
 	{
 		// Logically put the card in play
-		ActivePlayer->SoulsInPlay.push_back(SoulCard);
+		CardOwner->SoulsInPlay.push_back(SoulCard);
 		// Declare it has entered play
-		cout << SoulCard->Name << " has entered the field for " << ActivePlayer->UserName << endl;
+		cout << SoulCard->Name << " has entered the field for " << CardOwner->UserName << endl;
 		// Remove the card from the hand if it succesfully enters the field
-		ActivePlayer->Hand.erase(ActivePlayer->Hand.begin() + HandIndex);
+		CardOwner->Hand.erase(CardOwner->Hand.begin() + HandIndex);
 		// Add the card to the stack
 		Stack.push_back(SoulCard);
 	}
