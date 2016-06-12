@@ -3,10 +3,6 @@
 #include "BaseClasses.h"
 using namespace std;
 
-Player::Player()
-{
-}
-
 Player::~Player()
 {
 	//Delete the hand
@@ -27,15 +23,14 @@ Player::~Player()
 	//}
 }
 
-Player::Player(Deck NewDeck, string NewUserName)
+Player::Player(vector<Card*> NewDeck, string NewUserName) : MainDeck(NewDeck), UserName(NewUserName)
 {
-	MainDeck = NewDeck;
-	UserName = NewUserName;
+	ShuffleDeck();
 }
 
 void Player::PlayCard(int index)
 {
-	Card* FromHand = Hand.at(index);
+	Card *FromHand = Hand.at(index);
 
 	Soul *SoulCard = nullptr;
 	//Type2 *t2 = nullptr;
@@ -62,7 +57,11 @@ void Player::PlayCard(int index)
 
 void Player::DrawCard()
 {
-	Hand.push_back(MainDeck.Draw());
+	Card* temp = MainDeck.front();
+
+	MainDeck.erase(MainDeck.begin());
+
+	Hand.push_back(temp);
 }
 
 string Player::HandToString()
@@ -113,6 +112,25 @@ bool Player::Compare(Player * OtherPlayer)
 	}
 	else {
 		return true;
+	}
+}
+
+void Player::ShuffleDeck()
+{
+	vector<Card*> Copy(MainDeck);
+	int Max, Current;
+
+	Max = MainDeck.size();
+
+	MainDeck.clear();
+	//Seed rand()
+	srand(time(NULL));
+
+	for (int Counter = 0; Counter < Max; Counter++)
+	{
+		Current = rand() % Copy.size();
+		MainDeck.push_back(Copy[Current]);
+		Copy.erase(Copy.begin() + Current);
 	}
 }
 

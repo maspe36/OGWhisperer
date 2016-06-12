@@ -10,3 +10,12 @@ void Soul::Attacking(Player* DefendingPlayer)
 {
 	DefendingPlayer->Health = DefendingPlayer->Health - Attack;
 }
+
+bool Soul::IsEffectTriggered(GameState* CurrentGame)
+{
+	return false;
+}
+
+void Soul::Effect(GameState* CurrentGame)
+{
+}

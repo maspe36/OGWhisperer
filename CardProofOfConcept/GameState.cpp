@@ -2,11 +2,8 @@
 #include "GameState.h"
 #include <string>
 
-GameState::GameState(vector<Player*> Players)
+GameState::GameState(vector<Player*> Players) : PlayersInGame(Players)
 {
-	// Set our players in the game equal to the inserted vector of players entering the game
-	PlayersInGame = Players;
-
 	// Initialize ActivePlayer
 	// This determines who goes first, we need to make it random whoever goes first
 	// For now we can just let the first player in the vector go first
@@ -34,11 +31,6 @@ void GameState::ChangeActivePlayer() {
 		//Go one past it
 		ActivePlayer = PlayersInGame[IndexOfActivePlayer + 1];
 	}
-}
-
-void GameState::StartOfTurnEffects() {
-	ActivePlayer->DrawCard();
-	//ActivePlayer->RefillDevotion();
 }
 
 void GameState::Start() {

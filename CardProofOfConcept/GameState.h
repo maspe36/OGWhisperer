@@ -14,6 +14,5 @@ public:
 
 	void Start();
 	void ChangeActivePlayer();
-	void StartOfTurnEffects();
 };
 

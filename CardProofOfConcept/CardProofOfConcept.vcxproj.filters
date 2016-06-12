@@ -168,17 +168,11 @@
     <ClInclude Include="Soul.h">
       <Filter>Header Files\BaseClasses</Filter>
     </ClInclude>
-    <ClInclude Include="Deck.h">
-      <Filter>Header Files\BaseClasses</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Header Files\BaseClasses</Filter>
     </ClInclude>
     <ClInclude Include="BaseClasses.h">
       <Filter>Header Files\BaseClasses</Filter>
-    </ClInclude>
-    <ClInclude Include="Cards.h">
-      <Filter>Header Files\Cards</Filter>
     </ClInclude>
     <ClInclude Include="GameState.h">
       <Filter>Header Files\BaseClasses</Filter>
@@ -198,6 +192,63 @@
     <ClInclude Include="Pyrophile.h">
       <Filter>Header Files\Cards\Souls\Fire</Filter>
     </ClInclude>
+    <ClInclude Include="Cards.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dark_Constants.h">
+      <Filter>Header Files\Cards\Constants</Filter>
+    </ClInclude>
+    <ClInclude Include="Earth_Constants.h">
+      <Filter>Header Files\Cards\Constants</Filter>
+    </ClInclude>
+    <ClInclude Include="Fire_Constants.h">
+      <Filter>Header Files\Cards\Constants</Filter>
+    </ClInclude>
+    <ClInclude Include="Light_Constants.h">
+      <Filter>Header Files\Cards\Constants</Filter>
+    </ClInclude>
+    <ClInclude Include="Water_Constants.h">
+      <Filter>Header Files\Cards\Constants</Filter>
+    </ClInclude>
+    <ClInclude Include="Wind_Constants.h">
+      <Filter>Header Files\Cards\Constants</Filter>
+    </ClInclude>
+    <ClInclude Include="Dark_Souls.h">
+      <Filter>Header Files\Cards\Souls</Filter>
+    </ClInclude>
+    <ClInclude Include="Earth_Souls.h">
+      <Filter>Header Files\Cards\Souls</Filter>
+    </ClInclude>
+    <ClInclude Include="Fire_Souls.h">
+      <Filter>Header Files\Cards\Souls</Filter>
+    </ClInclude>
+    <ClInclude Include="Light_Souls.h">
+      <Filter>Header Files\Cards\Souls</Filter>
+    </ClInclude>
+    <ClInclude Include="Water_Souls.h">
+      <Filter>Header Files\Cards\Souls</Filter>
+    </ClInclude>
+    <ClInclude Include="Wind_Souls.h">
+      <Filter>Header Files\Cards\Souls</Filter>
+    </ClInclude>
+    <ClInclude Include="Dark_Swifts.h">
+      <Filter>Header Files\Cards\Swifts</Filter>
+    </ClInclude>
+    <ClInclude Include="Earth_Swifts.h">
+      <Filter>Header Files\Cards\Swifts</Filter>
+    </ClInclude>
+    <ClInclude Include="Fire_Swifts.h">
+      <Filter>Header Files\Cards\Swifts</Filter>
+    </ClInclude>
+    <ClInclude Include="Light_Swifts.h">
+      <Filter>Header Files\Cards\Swifts</Filter>
+    </ClInclude>
+    <ClInclude Include="Water_Swifts.h">
+      <Filter>Header Files\Cards\Swifts</Filter>
+    </ClInclude>
+    <ClInclude Include="Wind_Swifts.h">
+      <Filter>Header Files\Cards\Swifts</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -210,9 +261,6 @@
       <Filter>Source Files\BaseClasses</Filter>
     </ClCompile>
     <ClCompile Include="Soul.cpp">
-      <Filter>Source Files\BaseClasses</Filter>
-    </ClCompile>
-    <ClCompile Include="Deck.cpp">
       <Filter>Source Files\BaseClasses</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">

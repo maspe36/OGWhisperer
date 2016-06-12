@@ -4,8 +4,8 @@
 #include "stdafx.h"
 #include <string>
 #include <vector>
-#include "BaseClasses.h"
 #include "Cards.h"
+#include "GameState.h"
 
 int main()
 {
@@ -54,20 +54,18 @@ int main()
 	//cout << player2->Health << endl;
 
 
-	Deck genericDeck;
-	genericDeck.Add(firespirit1);
-	genericDeck.Add(firespirit2);
+	vector<Card*> genericDeck;
+	genericDeck.push_back(firespirit1);
+	genericDeck.push_back(firespirit2);
 
-	genericDeck.Add(pyromaniac1);
-	genericDeck.Add(pyromaniac2);
+	genericDeck.push_back(pyromaniac1);
+	genericDeck.push_back(pyromaniac2);
 
-	genericDeck.Add(hellhound1);
-	genericDeck.Add(hellhound2);
+	genericDeck.push_back(hellhound1);
+	genericDeck.push_back(hellhound2);
 
-	genericDeck.Add(hellsparkmutt1);
-	genericDeck.Add(hellsparkmutt2);
-
-	genericDeck.Shuffle();
+	genericDeck.push_back(hellsparkmutt1);
+	genericDeck.push_back(hellsparkmutt2);
 	
 	// New players need a deck and a name
 	Player* player1 = new Player(genericDeck, "Maspe36");
@@ -91,6 +89,13 @@ int main()
 	myGame->ActivePlayer->PlayCard(0);
 	cout << myGame->ActivePlayer->HandToString() << endl;
 
+	// Attempt to activate mutt's effect
+	//cout << myGame->PlayersInGame[1]->Health << endl;
+
+	myGame->ActivePlayer->SoulsInPlay.at(0)->Effect(myGame);
+
+	//cout << myGame->PlayersInGame[1]->Health << endl;
+	
 	// Make a wrapper method?
 	// Attack the player with the first soul in play
 
