@@ -1,16 +1,2 @@
-﻿  stdafx.cpp
-  Soul.cpp
-  Pyrophile.cpp
-  Pyromaniac.cpp
-  Player.cpp
-g:\computer programming\c++\whisperer\cardproofofconcept\player.cpp(123): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-g:\computer programming\c++\whisperer\cardproofofconcept\player.cpp(127): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-  Hellspark_Mutt.cpp
-  Hellhound.cpp
-  GameState.cpp
-g:\computer programming\c++\whisperer\cardproofofconcept\gamestate.cpp(30): warning C4244: 'initializing': conversion from '__int64' to 'int', possible loss of data
-  Fire_Spirit.cpp
-  CardProofOfConcept.cpp
-  Card.cpp
-  Generating Code...
+﻿  CardProofOfConcept.cpp
   CardProofOfConcept.vcxproj -> G:\Computer Programming\C++\Whisperer\x64\Debug\CardProofOfConcept.exe

@@ -86,15 +86,13 @@ int main()
 
 	// Make a wrapper method?
 	// Play card at index in hand
-	myGame->ActivePlayer->PlayCard(0);
+	int CardToPlay;
+	cin >> CardToPlay;
+	myGame->PlayCard(CardToPlay);
 	cout << myGame->ActivePlayer->HandToString() << endl;
 
 	// Attempt to activate mutt's effect
-	//cout << myGame->PlayersInGame[1]->Health << endl;
-
 	myGame->ActivePlayer->SoulsInPlay.at(0)->Effect(myGame);
-
-	//cout << myGame->PlayersInGame[1]->Health << endl;
 	
 	// Make a wrapper method?
 	// Attack the player with the first soul in play

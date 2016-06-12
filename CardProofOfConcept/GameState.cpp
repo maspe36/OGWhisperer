@@ -1,6 +1,6 @@
 #include "stdafx.h"
-#include "GameState.h"
 #include <string>
+#include "BaseClasses.h"
 
 GameState::GameState(vector<Player*> Players) : PlayersInGame(Players)
 {
@@ -31,6 +31,35 @@ void GameState::ChangeActivePlayer() {
 		//Go one past it
 		ActivePlayer = PlayersInGame[IndexOfActivePlayer + 1];
 	}
+}
+
+void GameState::PlayCard(int HandIndex)
+{
+	Card *FromHand = ActivePlayer->Hand.at(HandIndex);
+
+	Soul *SoulCard = nullptr;
+	//Type2 *t2 = nullptr;
+	//Type3 *t3 = nullptr;
+
+	if (SoulCard = dynamic_cast<Soul*>(FromHand))
+	{
+		// Logically put the card in play
+		ActivePlayer->SoulsInPlay.push_back(SoulCard);
+		// Declare it has entered play
+		cout << SoulCard->Name << " has entered the field for " << ActivePlayer->UserName << endl;
+		// Remove the card from the hand if it succesfully enters the field
+		ActivePlayer->Hand.erase(ActivePlayer->Hand.begin() + HandIndex);
+		// Add the card to the stack
+		Stack.push_back(SoulCard);
+	}
+	// if (t2 = dynamic_cast<Type2*>(p))
+	//{
+	//t2->type2Method();
+	//}
+	//else if (t3 = dynamic_cast<Type3*>(p))
+	//{
+	//t3->type3Method();
+	//}
 }
 
 void GameState::Start() {

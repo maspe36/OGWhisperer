@@ -26,7 +26,6 @@ public:
 	//vector<Constant*> ConstantsInPlay;
 	vector<Card*> Graveyard;
 
-	void PlayCard(int index);
 	void DrawCard();
 	string HandToString();
 	string ToString();
