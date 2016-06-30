@@ -37,6 +37,17 @@ void Player::DrawCard()
 	Hand.push_back(temp);
 }
 
+void Player::DrawCard(int Amount)
+{
+	for (int i = 0; i < Amount; i++) {
+		Card* temp = MainDeck.front();
+
+		MainDeck.erase(MainDeck.begin());
+
+		Hand.push_back(temp);
+	}
+}
+
 string Player::HandToString()
 {
 	string CardsInHand;
@@ -105,5 +116,15 @@ void Player::ShuffleDeck()
 		MainDeck.push_back(Copy[Current]);
 		Copy.erase(Copy.begin() + Current);
 	}
+}
+
+void Player::HandToDeck()
+{
+	for (int i = 0; i < Hand.size(); i++) {
+		Card* temp = Hand[i];
+
+		MainDeck.push_back(temp);
+	}
+	Hand.clear();
 }
 

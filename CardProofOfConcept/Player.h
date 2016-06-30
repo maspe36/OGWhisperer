@@ -27,10 +27,12 @@ public:
 	vector<Card*> Graveyard;
 
 	void DrawCard();
+	void DrawCard(int Amount);
 	string HandToString();
 	string ToString();
 	string SoulsInPlayToString();
 	bool Compare(Player* OtherPlayer);
 	void ShuffleDeck();
+	void HandToDeck();
 };
 
