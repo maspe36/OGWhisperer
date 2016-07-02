@@ -1,3 +1,14 @@
 ﻿  GameState.cpp
-g:\computer programming\c++\whisperer\cardproofofconcept\gamestate.cpp(30): warning C4244: 'initializing': conversion from '__int64' to 'int', possible loss of data
+g:\computer programming\c++\whisperer\cardproofofconcept\gamestate.cpp(31): warning C4244: 'initializing': conversion from '__int64' to 'int', possible loss of data
+g:\computer programming\c++\whisperer\cardproofofconcept\gamestate.cpp(69): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  Generating Code...
+  Skipping... (no relevant changes detected)
+  Soul.cpp
+  Pyrophile.cpp
+  Pyromaniac.cpp
+  Player.cpp
+  Hellspark_Mutt.cpp
+  Hellhound.cpp
+  Fire_Spirit.cpp
+  CardProofOfConcept.cpp
   CardProofOfConcept.vcxproj -> G:\Computer Programming\C++\Whisperer\x64\Debug\CardProofOfConcept.exe

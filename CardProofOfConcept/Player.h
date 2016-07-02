@@ -18,6 +18,8 @@ public:
 	Player(vector<Card*> NewDeck, string NewUserName);
 	int Health = 30;
 	string UserName;
+	int MulligansTaken = 0;
+	bool KeepHand = false;
 
 	vector<Card*> MainDeck;
 	vector<Card*> Hand;

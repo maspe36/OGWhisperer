@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include <string>
+#include <sstream>
 #include "BaseClasses.h"
 
 GameState::GameState(vector<Player*> Players) : PlayersInGame(Players)
@@ -65,45 +66,84 @@ void GameState::PlayCard(Player* CardOwner, int HandIndex)
 void GameState::Start() {
 	bool IsGameLive = true;
 	bool IsMulliganState = true;
+	int MaxPlayerKeeps = PlayersInGame.size();
+	int PlayersThatKept = 0;
+
+	cout << "Begin Mulligans!" << endl;
+	cout << endl;
 
 	for (int i = 0; i < PlayersInGame.size(); i++) {
 		// Draw 5 cards before the game starts
 		PlayersInGame[i]->DrawCard(5);
 	}
 
-	for (int i = 0; i < PlayersInGame.size(); i++) {
-		cout << PlayersInGame[i]->UserName << endl;
+	while (IsMulliganState) {
+		cout << "Max Player Keeps: " << MaxPlayerKeeps << endl;
+		cout << "Players Keeping: " << PlayersThatKept << endl;
+		cout << endl;
+
 		// Show them the cards
-		cout << PlayersInGame[i]->HandToString() << endl;
+		for (int i = 0; i < PlayersInGame.size(); i++) {
+			cout << PlayersInGame[i]->UserName << endl;
+			cout << PlayersInGame[i]->HandToString() << endl;
+		}
+			
+		// Get the user input
+		// UserIndex	:	IsMulligan
+		// Parts[0]		:	Parts[1]
+		string Choice;
+		getline(cin, Choice);
 
-		// Do they want to mulligan?
-		int IsMulligan;
+		// Remove delimiter character and replace it with space
+		for (int i = 0; i < Choice.length(); i++)
+		{
+			if (Choice[i] == ':')
+				Choice[i] = ' ';
+		}
 
-		// This and the cards kept from the mulligan should equal 5 when all is said and done
-		int SupplementaryCards = 0;
+		// Split the string and store the contents 
+		vector<int> Parts;
+		stringstream Spliter(Choice);
+		int temp;
+		while (Spliter >> temp) {
+			Parts.push_back(temp);
+		}
 
-		while (cin >> IsMulligan) {
-			if (IsMulligan > 0) {
-				SupplementaryCards++;
+		int Index = Parts[0];
+		int IsMulligan = Parts[1];
 
-				if (SupplementaryCards >= 5) {
-					break;
-				}
-
-				PlayersInGame[i]->HandToDeck();
-				PlayersInGame[i]->DrawCard(5 - SupplementaryCards);
-
-				// Show them the cards
-				cout << PlayersInGame[i]->HandToString() << endl;
-			}
-			else 
-			{
+		// They want to mulligan
+		if (IsMulligan == 1) {
+			// Have they mulliganed too many times?
+			if (PlayersInGame[Index]->MulligansTaken >= 5) {
+				PlayersInGame[Index]->KeepHand = true;
+				PlayersThatKept++;
 				break;
 			}
+			// Begin mulligan logic
+			else {
+				// Increase the mulligan counter
+				PlayersInGame[Index]->MulligansTaken = (PlayersInGame[Index]->MulligansTaken + 1);
+				// Return their hand to the deck
+				PlayersInGame[Index]->HandToDeck();
+				// Draw 5 cards minus the amount of mulligans taken!
+				PlayersInGame[Index]->DrawCard(5 - PlayersInGame[Index]->MulligansTaken);
+			}
 		}
-		PlayersInGame[i]->DrawCard(SupplementaryCards);
-		cout << PlayersInGame[i]->HandToString() << endl;
+		// They want to keep
+		else {
+			PlayersInGame[Index]->KeepHand = true;
+			PlayersThatKept++;
+		}
+
+		// If every player has decided to keep, we are done mulliganning
+		if (PlayersThatKept == MaxPlayerKeeps) {
+			IsMulliganState = false;
+		}
 	}
+	cout << "End Mulligans..." << endl;
+	cout << endl;
+	cout << "Start Game!" << endl;
 
 	//While the game is ongoing or 'live'
 	while (IsGameLive)
