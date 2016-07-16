@@ -158,3 +158,14 @@ void Player::PlayCard(Card* ToPlay, string Detail)
 	//}
 }
 
+void Player::PrintDeck() {
+	// For debugging purposes, print the deck
+	for (size_t i = 0; i < MainDeck.size(); i++) {
+		cout << MainDeck[i]->Name << endl;
+	}
+
+	cout << endl;
+	cout << " - - - - - - - - - - - - - " << endl;
+	cout << endl;
+}
+

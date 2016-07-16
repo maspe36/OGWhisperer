@@ -126,6 +126,8 @@ void GameState::Start() {
 				PlayersInGame[Index]->MulligansTaken = (PlayersInGame[Index]->MulligansTaken + 1);
 				// Return their hand to the deck
 				PlayersInGame[Index]->HandToDeck();
+				// Shuffle the deck!
+				PlayersInGame[Index]->ShuffleDeck();
 				// Draw 5 cards minus the amount of mulligans taken!
 				PlayersInGame[Index]->DrawCard(5 - PlayersInGame[Index]->MulligansTaken);
 			}

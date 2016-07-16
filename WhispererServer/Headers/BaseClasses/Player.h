@@ -43,5 +43,7 @@ public:
 	void ShuffleDeck();
 	void HandToDeck();
 	void PlayCard(Card* ToPlay, string Detail);
+
+	void PrintDeck();
 };
 
