@@ -167,29 +167,6 @@ void GameState::Start() {
 		{
 			Card *FromHand = PlayersInGame[Index]->Hand.at(stoi(Detail));
 
-			Soul *SoulCard = nullptr;
-			//Type2 *t2 = nullptr;
-			//Type3 *t3 = nullptr;
-
-			if (SoulCard = dynamic_cast<Soul*>(FromHand))
-			{
-				// Logically put the card in play
-				PlayersInGame[Index]->SoulsInPlay.push_back(SoulCard);
-				// Declare it has entered play
-				cout << SoulCard->Name << " has entered the field for " << PlayersInGame[Index]->UserName << endl;
-				// Remove the card from the hand if it succesfully enters the field
-				PlayersInGame[Index]->Hand.erase(PlayersInGame[Index]->Hand.begin() + stoi(Detail));
-				// Add the card to the stack
-				Stack.push_back(SoulCard);
-			}
-			// if (t2 = dynamic_cast<Type2*>(p))
-			//{
-			//t2->type2Method();
-			//}
-			//else if (t3 = dynamic_cast<Type3*>(p))
-			//{
-			//t3->type3Method();
-			//}
 		}
 		break;
 		case 'e':

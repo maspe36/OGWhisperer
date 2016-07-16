@@ -10,7 +10,19 @@ public:
 	int Attack;
 	int Defense;
 
-	Soul(int Cost, string Name, string EffectText, string Description, int Attack, int Defense) :Card(Cost, Name, EffectText, Description), Attack(Attack), Defense(Defense) {}
+	// ==================
+	// Constructor Format
+	// ==================
+
+	// Card Cost
+	// Card Name
+	// Card EffectText
+	// Card Description (Flavour text)
+	// Card Color
+	// Soul Attack
+	// Soul Defense
+
+	Soul(vector<int> Cost, string Name, string EffectText, string Description, string Color, int Attack, int Defense) :Card(Cost, Name, EffectText, Description, Color), Attack(Attack), Defense(Defense) {}
 	void Attacking(Soul* DefendingSoul);
 	void Attacking(Player* DefendingPlayer);
 

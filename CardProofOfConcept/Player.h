@@ -16,11 +16,13 @@ class Player
 public:
 	~Player();
 	Player(vector<Card*> NewDeck, string NewUserName);
+
 	int Health = 30;
-	string UserName;
 	int MulligansTaken = 0;
+	string UserName;
 	bool KeepHand = false;
 
+	int Devotion[6] = {1,1,1,1,1,1};
 	vector<Card*> MainDeck;
 	vector<Card*> Hand;
 	vector<Soul*> SoulsInPlay;
@@ -28,13 +30,18 @@ public:
 	//vector<Constant*> ConstantsInPlay;
 	vector<Card*> Graveyard;
 
-	void DrawCard();
-	void DrawCard(int Amount);
+	
 	string HandToString();
 	string ToString();
 	string SoulsInPlayToString();
+
 	bool Compare(Player* OtherPlayer);
+	bool IsPlayable(Card* ToPlay);
+
+	void DrawCard();
+	void DrawCard(int Amount);
 	void ShuffleDeck();
 	void HandToDeck();
+	void PlayCard(Card* ToPlay, string Detail);
 };
 

@@ -4,7 +4,7 @@ class Hellhound :
 	public Soul
 {
 public:
-	Hellhound() : Soul(3, "Hellhound", "Rush", "", 3, 1) {}
+	Hellhound() : Soul({ 0,0,3,0,0,0 }, "Hellhound", "Rush", "", "Red", 3, 1) {}
 	~Hellhound();
 };
 
