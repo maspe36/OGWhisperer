@@ -36,7 +36,7 @@ void GameState::ChangeActivePlayer() {
 
 void GameState::PlayCard(Player* CardOwner, int HandIndex)
 {
-	Card *FromHand = CardOwner->Hand.at(HandIndex);
+	//Card *FromHand = CardOwner->Hand.at(HandIndex);
 
 	Soul *SoulCard = nullptr;
 	//Type2 *t2 = nullptr;
