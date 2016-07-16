@@ -1,2 +1,13 @@
-﻿  Player.cpp
+﻿  WhispererServer.cpp
+  stdafx.cpp
+  Pyrophile.cpp
+  Pyromaniac.cpp
+  Hellspark_Mutt.cpp
+  Hellhound.cpp
+  Fire_Spirit.cpp
+  Soul.cpp
+  Player.cpp
+  GameState.cpp
+  Card.cpp
+  Generating Code...
   WhispererServer.vcxproj -> G:\Computer Programming\C++\Whisperer\Debug\WhispererServer.exe

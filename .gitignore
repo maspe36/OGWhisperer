@@ -2,4 +2,5 @@
 Debug/
 ipch/
 x64/
-/WhispererServer.VC.db
+WhispererServer.VC.db
+WhispererServer.VC.VC.db
