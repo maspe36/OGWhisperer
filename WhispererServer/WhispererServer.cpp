@@ -58,6 +58,5 @@ int main()
 	//	(AttackingSoulIndex)->Name + " attacked " + myGame->PlayersInGame
 	//		[PlayerIndexToBeAttacked]->UserName + " for " + to_string(myGame->ActivePlayer->SoulsInPlay.at(0)->Attack) << endl;
 
-    return 0;
+	return 0;
 }
-
