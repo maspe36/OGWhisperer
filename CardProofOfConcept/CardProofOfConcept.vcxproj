@@ -23,6 +23,7 @@
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>CardProofOfConcept</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <ProjectName>WhispererServer</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -179,7 +180,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Card.cpp" />
-    <ClCompile Include="CardProofOfConcept.cpp" />
+    <ClCompile Include="WhispererServer.cpp" />
     <ClCompile Include="Fire_Spirit.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="Hellhound.cpp" />
