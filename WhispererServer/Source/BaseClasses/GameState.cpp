@@ -64,13 +64,24 @@ void GameState::PlayCard(Player* CardOwner, int HandIndex)
 }
 
 void GameState::Start() {
-	bool IsGameLive = true;
+	cout << "Begin Mulligans!" << endl;
+	cout << endl;
+
+	MulliganState();
+	
+	cout << "End Mulligans..." << endl;
+	cout << endl;
+	cout << "Start Game!" << endl;
+
+	PlayState();
+	
+}
+
+void GameState::MulliganState()
+{
 	bool IsMulliganState = true;
 	int MaxPlayerKeeps = PlayersInGame.size();
 	int PlayersThatKept = 0;
-
-	cout << "Begin Mulligans!" << endl;
-	cout << endl;
 
 	for (size_t i = 0; i < PlayersInGame.size(); i++) {
 		// Draw 5 cards before the game starts
@@ -87,7 +98,7 @@ void GameState::Start() {
 			cout << PlayersInGame[i]->UserName << endl;
 			cout << PlayersInGame[i]->HandToString() << endl;
 		}
-			
+
 		// Get the user input
 		// UserIndex	:	IsMulligan
 		// Parts[0]		:	Parts[1]
@@ -143,20 +154,40 @@ void GameState::Start() {
 			IsMulliganState = false;
 		}
 	}
-	cout << "End Mulligans..." << endl;
-	cout << endl;
-	cout << "Start Game!" << endl;
+}
+
+void GameState::PlayState()
+{
+	bool IsGameLive = true;
 
 	//While the game is ongoing or 'live'
 	while (IsGameLive)
 	{
+		cout << ActivePlayer->UserName << " turn" << endl;
+
 		// Should be a message recieved in plain text from the client
 		string ClientInput;
-		cin >> ClientInput;
-		// EX
-		char Protocol = ClientInput[0];
-		int Index = (int)ClientInput[1];
-		string Detail = ClientInput.substr(2);
+		getline(cin, ClientInput);
+		
+		// Remove delimiter character and replace it with space
+		for (size_t i = 0; i < ClientInput.length(); i++)
+		{
+			if (ClientInput[i] == ':') {
+				ClientInput[i] = ' ';
+			}
+		}
+
+		// Split the string and store the contents 
+		vector<char> Parts;
+		stringstream Spliter(ClientInput);
+		int temp;
+		while (Spliter >> temp) {
+			Parts.push_back(temp);
+		}
+
+		char Protocol	= Parts[0];
+		int Index		= Parts[1];
+		int CardIndex	= Parts[2];
 
 		// CURRENT PROTOCOL
 		// c = card entering play
@@ -167,8 +198,11 @@ void GameState::Start() {
 		switch (Protocol) {
 		case 'c':
 		{
-			Card *FromHand = PlayersInGame[Index]->Hand.at(stoi(Detail));
+			Card *FromHand = PlayersInGame[Index]->Hand.at(CardIndex);
+			// If this player has enough mana and the card exists in their hand
+			if (PlayersInGame[Index]->IsPlayable(FromHand)) {
 
+			}
 		}
 		break;
 		case 'e':

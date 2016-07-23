@@ -7,6 +7,8 @@
 #include <ctime>        // std::time
 #include <cstdlib>      // std::rand, std::srand
 #include <memory>
+#include <algorithm>
+#include <random>
 #include "Card.h"
 
 class Soul;
@@ -22,7 +24,9 @@ public:
 	string UserName;
 	bool KeepHand = false;
 
-	int Devotion[6] = {1,1,1,1,1,1};
+	mt19937 seed{ random_device{}() };
+
+	vector<int> Devotion = {1,1,1,1,1,1};
 	vector<Card*> MainDeck;
 	vector<Card*> Hand;
 	vector<Soul*> SoulsInPlay;

@@ -16,6 +16,8 @@ public:
 	~GameState();
 
 	void Start();
+	void MulliganState();
+	void PlayState();
 	void ChangeActivePlayer();
 	void PlayCard(Player * CardOwner, int HandIndex);
 };

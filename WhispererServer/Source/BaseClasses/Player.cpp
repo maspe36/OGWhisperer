@@ -1,5 +1,7 @@
 #include "stdafx.h"
 #include <string>
+#include <algorithm>
+#include <random>
 #include "BaseClasses.h"
 using namespace std;
 
@@ -79,9 +81,19 @@ bool Player::Compare(Player * OtherPlayer)
 	}
 }
 
-bool Player::IsPlayable(Card * ToPlay)
+bool Player::IsPlayable(Card* ToPlay)
 {
-	return false;
+	// If this card exists in the players hand
+	if (find(Hand.begin(), Hand.end(), ToPlay) != Hand.end()) {
+		// Loop through devotion
+		for (size_t i = 0; i < Devotion.size(); i++) {
+			// At any point, does the player have insignifficant devotion?
+			if (Devotion[i] < ToPlay->Cost[i]) {
+				return false;
+			}
+		}
+	}
+	return true;
 }
 
 void Player::DrawCard()
@@ -106,21 +118,7 @@ void Player::DrawCard(int Amount)
 
 void Player::ShuffleDeck()
 {
-	vector<Card*> Copy(MainDeck);
-	int Max, Current;
-
-	Max = MainDeck.size();
-
-	MainDeck.clear();
-	//Seed rand()
-	srand((unsigned int)time(NULL));
-
-	for (int Counter = 0; Counter < Max; Counter++)
-	{
-		Current = rand() % Copy.size();
-		MainDeck.push_back(Copy[Current]);
-		Copy.erase(Copy.begin() + Current);
-	}
+	std::shuffle(begin(MainDeck), end(MainDeck), seed);
 }
 
 void Player::HandToDeck()
