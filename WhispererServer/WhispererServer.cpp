@@ -38,10 +38,11 @@ int main()
 	genericDeck.push_back(hellsparkmutt2);
 
 	// New players need a deck and a name
-	Player* player1 = new Player(genericDeck, "refrigerator");
-	Player* player2 = new Player(genericDeck, "blender");
+	Player* player1 = new Player("Sam", genericDeck);
+	Player* player2 = new Player("Ben", genericDeck);
+	Player* player3 = new Player("Nick", genericDeck);
 
-	vector<Player*> Players = { player1, player2 };
+	vector<Player*> Players = { player1, player2, player3 };
 
 	GameState* myGame = new GameState(Players);
 

@@ -306,7 +306,4 @@
       <Filter>Header Files\BaseClasses</Filter>
     </ClInclude>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
 </Project>

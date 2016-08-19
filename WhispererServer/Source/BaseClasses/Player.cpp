@@ -11,7 +11,7 @@ Player::~Player()
 {
 }
 
-Player::Player(vector<Card*> NewDeck, string NewUserName) : MainDeck(NewDeck), UserName(NewUserName)
+Player::Player(string NewUserName, vector<Card*> NewDeck) : UserName(NewUserName), MainDeck(NewDeck)
 {	
 	// Set card owner
 	for (size_t i = 0; i < MainDeck.size(); i++) 

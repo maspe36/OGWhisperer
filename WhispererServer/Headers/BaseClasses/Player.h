@@ -6,7 +6,6 @@
 #include <algorithm>    // std::random_shuffle
 #include <ctime>        // std::time
 #include <cstdlib>      // std::rand, std::srand
-#include <memory>
 #include <algorithm>
 #include <random>
 
@@ -19,7 +18,7 @@ class Player
 {
 public:
 	~Player();
-	Player(vector<Card*> NewDeck, string NewUserName);
+	Player(string NewUserName, vector<Card*> NewDeck);
 
 	int Health = 30;
 	int MulligansTaken = 0;

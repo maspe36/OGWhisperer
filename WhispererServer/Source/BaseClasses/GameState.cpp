@@ -44,7 +44,7 @@ void GameState::PlayCard(Player* CardOwner, int HandIndex)
 	//Type2 *t2 = nullptr;
 	//Type3 *t3 = nullptr;
 
-	if (SoulCard = dynamic_cast<Soul*>(FromHand))
+	if (SoulCard == dynamic_cast<Soul*>(FromHand))
 	{
 		// Logically put the card in play
 		CardOwner->SoulsInPlay.push_back(SoulCard);
@@ -82,7 +82,7 @@ void GameState::Start() {
 void GameState::MulliganState()
 {
 	bool IsMulliganState = true;
-	int MaxPlayerKeeps = PlayersInGame.size();
+	size_t MaxPlayerKeeps = PlayersInGame.size();
 	int PlayersThatKept = 0;
 
 	for (size_t i = 0; i < PlayersInGame.size(); i++) {
