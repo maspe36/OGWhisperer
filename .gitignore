@@ -1,5 +1,6 @@
 .vs/
 Debug/
+packages/
 WhispererServer.VC.db
 WhispererServer.VC.VC.db
 WhispererServer.VC.VC.opendb

@@ -2,31 +2,23 @@
 #include <string>
 #include <algorithm>
 #include <random>
-#include "BaseClasses.h"
-using namespace std;
+
+#include "Player.h"
+#include "Card.h"
+#include "Soul.h"
 
 Player::~Player()
 {
-	//Delete the hand
-	for (auto i : Hand) {
-		delete i;
-	}
-	//Delete the souls in play
-	for (auto i : SoulsInPlay) {
-		delete i;
-	}
-	////Delete the constants in play
-	//for (auto i : ConstatnsInPlay) {
-	//	delete i;
-	//}
-	////Delete the swifts in play
-	//for (auto i : SwiftsInPlay) {
-	//	delete i;
-	//}
 }
 
 Player::Player(vector<Card*> NewDeck, string NewUserName) : MainDeck(NewDeck), UserName(NewUserName)
-{
+{	
+	// Set card owner
+	for (size_t i = 0; i < MainDeck.size(); i++) 
+	{
+		MainDeck[i]->Owner = this;
+	}
+
 	ShuffleDeck();
 }
 
@@ -81,8 +73,9 @@ bool Player::Compare(Player * OtherPlayer)
 	}
 }
 
-bool Player::IsPlayable(Card* ToPlay)
+bool Player::IsPlayable(int HandIndex)
 {
+	Card *ToPlay = Hand.at(HandIndex);
 	// If this card exists in the players hand
 	if (find(Hand.begin(), Hand.end(), ToPlay) != Hand.end()) {
 		// Loop through devotion
@@ -129,31 +122,6 @@ void Player::HandToDeck()
 		MainDeck.push_back(temp);
 	}
 	Hand.clear();
-}
-
-void Player::PlayCard(Card* ToPlay, string Detail)
-{
-	Soul *SoulCard = nullptr;
-	//Type2 *t2 = nullptr;
-	//Type3 *t3 = nullptr;
-
-	if (SoulCard = dynamic_cast<Soul*>(ToPlay))
-	{
-		// Logically put the card in play
-		SoulsInPlay.push_back(SoulCard);
-		// Declare it has entered play
-		cout << SoulCard->Name << " has entered the field for " << UserName << endl;
-		// Remove the card from the hand if it succesfully enters the field
-		Hand.erase(Hand.begin() + stoi(Detail));
-	}
-	// if (t2 = dynamic_cast<Type2*>(p))
-	//{
-	//t2->type2Method();
-	//}
-	//else if (t3 = dynamic_cast<Type3*>(p))
-	//{
-	//t3->type3Method();
-	//}
 }
 
 void Player::PrintDeck() {

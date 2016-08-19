@@ -1,32 +1,71 @@
 #pragma once
-#include<iostream>
+#include <iostream>
 #include <vector>
 
 using namespace std;
 
+class GameState;
+class Action;
+class Player;
+
 class Card
 {
 public:
-	// Order of colors in cost vector (Alphabetical)
-	// 0: Dark
-	// 1: Earth
-	// 2: Fire
-	// 3: Light
-	// 4: Water
-	// 5: Wind
+	 /* Order of colors in cost vector (Alphabetical)
+	    0: Dark
+	    1: Earth
+		2: Fire
+		3: Light
+		4: Water
+		5: Wind */
 	vector<int> Cost;
 	// Name of the card
 	string Name;
-	// The description or flavour text of a card
-	string Description;
+	// The flavour text of a card
+	string FlavourText;
 	// The effect of a card in text
 	string EffectText;
 	// The color of a card
-	string Color;
+	enum _Color 
+	{
+		Dark,
+		Earth,
+		Fire,
+		Light,
+		Water,
+		Wind
+	} Color;
+	// Base Card Types
+	enum _CardType 
+	{
+		Constant,
+		Soul, 
+		Swift
+	} CardType;
+	// Different possible effect types
+	enum _EffectType
+	{
+		Continuous,
+		Downfall, 
+		HighTide,
+		InHand,
+		Introduce,
+		None, 
+		OnDiscard,
+		OnDraw, 
+		Rush, 
+		Statis, 
+		Trigger
+	} EffectType;
 
-	virtual ~Card();
+	vector<_EffectType> Effects;
+	Player* Owner;
+
 	string ToString();
-	Card(vector<int> Cost, string Name, string EffectText, string Description, string Color) : 
-		Cost(Cost), Name(Name), EffectText(EffectText), Description(Description), Color(Color) {}
-};
+	virtual void Effect(GameState* CurrentGame);
+	virtual bool IsEffectTriggered(Action* CurrentAction);
 
+	Card(vector<int> Cost, string Name, string EffectText, string FlavourText, 
+		_Color Color, _CardType CardType, vector<_EffectType> Effects);	
+	virtual ~Card();
+};

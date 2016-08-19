@@ -3,6 +3,7 @@
 #include <vector>
 #include "Cards.h"
 #include "GameState.h"
+#include "Player.h"
 
 int main()
 {

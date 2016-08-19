@@ -1,10 +1,11 @@
 #pragma once
-#include "Player.h"
-#include "stdafx.h"
+#include <vector>
 
 using namespace std;
 
-class Soul;
+class Player;
+class Card;
+class Action;
 
 class GameState
 {
@@ -12,7 +13,7 @@ public:
 	GameState(vector<Player*> Players);
 	vector<Player*> PlayersInGame;
 	Player* ActivePlayer;
-	vector<Card*> Stack; // Stack is the order of cards that entered the field so we can resolve effects
+	vector<Card*> CardOrder; 
 	~GameState();
 
 	void Start();
@@ -20,5 +21,6 @@ public:
 	void PlayState();
 	void ChangeActivePlayer();
 	void PlayCard(Player * CardOwner, int HandIndex);
+	void CheckEffects(Action * CurrentAction);
 };
 

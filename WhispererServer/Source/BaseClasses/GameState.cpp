@@ -1,7 +1,11 @@
 #include "stdafx.h"
 #include <string>
 #include <sstream>
-#include "BaseClasses.h"
+
+#include "Soul.h"
+#include "Player.h"
+#include "GameState.h"
+#include "Action.h"
 
 GameState::GameState(vector<Player*> Players) : PlayersInGame(Players)
 {
@@ -13,11 +17,6 @@ GameState::GameState(vector<Player*> Players) : PlayersInGame(Players)
 
 GameState::~GameState()
 {
-	//For every player in the game, 
-	//delete their pointers stored here when the game ends.
-	for (Player* i : PlayersInGame) {
-		delete i;
-	}
 }
 
 void GameState::ChangeActivePlayer() {
@@ -34,6 +33,9 @@ void GameState::ChangeActivePlayer() {
 	}
 }
 
+/* Play card from given owners hand at the given index.
+   Puts the card into the correct area of play and 
+   removes it from the hand afterwards */
 void GameState::PlayCard(Player* CardOwner, int HandIndex)
 {
 	Card *FromHand = CardOwner->Hand.at(HandIndex);
@@ -51,7 +53,7 @@ void GameState::PlayCard(Player* CardOwner, int HandIndex)
 		// Remove the card from the hand if it succesfully enters the field
 		CardOwner->Hand.erase(CardOwner->Hand.begin() + HandIndex);
 		// Add the card to the stack
-		Stack.push_back(SoulCard);
+		CardOrder.push_back(SoulCard);
 	}
 	// if (t2 = dynamic_cast<Type2*>(p))
 	//{
@@ -168,7 +170,7 @@ void GameState::PlayState()
 		// Should be a message recieved in plain text from the client
 		string ClientInput;
 		getline(cin, ClientInput);
-		
+
 		// Remove delimiter character and replace it with space
 		for (size_t i = 0; i < ClientInput.length(); i++)
 		{
@@ -180,6 +182,7 @@ void GameState::PlayState()
 		// Split the string and store the contents 
 		vector<char> Parts;
 		stringstream Spliter(ClientInput);
+
 		int temp;
 		while (Spliter >> temp) {
 			Parts.push_back(temp);
@@ -188,6 +191,8 @@ void GameState::PlayState()
 		char Protocol	= Parts[0];
 		int Index		= Parts[1];
 		int CardIndex	= Parts[2];
+
+		Action* CurrentAction = new Action;
 
 		// CURRENT PROTOCOL
 		// c = card entering play
@@ -200,8 +205,13 @@ void GameState::PlayState()
 		{
 			Card *FromHand = PlayersInGame[Index]->Hand.at(CardIndex);
 			// If this player has enough mana and the card exists in their hand
-			if (PlayersInGame[Index]->IsPlayable(FromHand)) {
-
+			if (PlayersInGame[Index]->IsPlayable(CardIndex)) {
+				// Go ahead and play it. This method removes it from the hand as well.
+				PlayCard(PlayersInGame[Index], CardIndex);
+				// Fill Current Action Accordingly
+				CurrentAction->ActionType = Action::_ActionType::Summon;
+				CurrentAction->CardTargets.push_back(FromHand);
+				CurrentAction->Owner = PlayersInGame[Index];
 			}
 		}
 		break;
@@ -212,7 +222,20 @@ void GameState::PlayState()
 			break;
 
 		}
-		//Check effects
+		// Check effects
+		CheckEffects(CurrentAction);
+		// We don't need it anymore
+		delete CurrentAction;
+	}
+}
+
+void GameState::CheckEffects(Action* CurrentAction)
+{
+	for (size_t i = 0; i < CardOrder.size(); i++) 
+	{
+		if (CardOrder[i]->IsEffectTriggered(CurrentAction)) {
+			CardOrder[i]->Effect(this);
+		}
 	}
 }
 

@@ -9,8 +9,10 @@
 #include <memory>
 #include <algorithm>
 #include <random>
-#include "Card.h"
 
+using namespace std;
+
+class Card;
 class Soul;
 
 class Player
@@ -40,13 +42,12 @@ public:
 	string SoulsInPlayToString();
 
 	bool Compare(Player* OtherPlayer);
-	bool IsPlayable(Card* ToPlay);
+	bool IsPlayable(int HandIndex);
 
 	void DrawCard();
 	void DrawCard(int Amount);
 	void ShuffleDeck();
 	void HandToDeck();
-	void PlayCard(Card* ToPlay, string Detail);
 
 	void PrintDeck();
 };
