@@ -1,5 +1,12 @@
 #pragma once
-#include "GameState.h"
+#include "stdafx.h"
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+class Player;
+class Card;
 
 class Action
 {
