@@ -20,7 +20,7 @@ You'll see the following terms throughout the code and the cards
 Devotion is defined by 2 metrics, available devotion and total devotion. Devotion increases by 1 every time a card from that element is played. For example, a fire element card being summoned or cast increases total devotion to fire by 1. When a player casts or summons a card, all devotion to other elements decreases by 1 while the devotion element of the card casted or summoned increases by 1. When a conflict happens between devotion of elements, the element being summoned or cast increases by 1, however the other devotion will decrease by the cost of the card being cast (See table below for all conflicts between devotions.) All cards contain devotion costs. Unless stated otherwise, the only way to have a card enter play is by paying its devotion cost. Paying a devotion cost decreases total available devotion by the cost specified on the card.
 
 ## Card Types
-* Souls
+* #### Souls
   * Souls have attack and health properties. 
   * A soul may only be summoned by paying its devotion cost, or by other card effect. 
   * Souls participate in combat. 
@@ -28,13 +28,13 @@ Devotion is defined by 2 metrics, available devotion and total devotion. Devotio
   * On the turn a soul is summoned it cannot attack a player, only opposing souls.
   * Souls may possess 0 or more 1 word effects (i.e. introduce, rush.) 
 
- * Swifts
+* ##### Swifts
   * To cast swifts, players must pay the devotion cost. 
   * Swifts may only be played on your turn and may not be cast while there is an effect waiting to resolve on the stack 
   * When cast, a swift’s effect enters the stack. 
   * When a swift has resolved, it is sent to the graveyard.
 
-* Constants
+* #### Constants
   * Constants may only be cast by paying the devotion cost labeled on the card. 
   * As a constant enters the battlefield it enters the stack. 
   * Constants have 2 kinds of effects. 
