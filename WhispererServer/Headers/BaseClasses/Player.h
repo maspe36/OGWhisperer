@@ -9,6 +9,10 @@
 #include <algorithm>
 #include <random>
 
+/* At some point there will 
+   probably need to be a unique 
+   hash in all objects for each game */
+
 using namespace std;
 
 class Card;

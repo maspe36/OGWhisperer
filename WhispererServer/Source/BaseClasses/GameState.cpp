@@ -2,6 +2,8 @@
 #include <string>
 #include <sstream>
 
+#include <boost/algorithm/string.hpp>
+
 #include "Soul.h"
 #include "Player.h"
 #include "GameState.h"
@@ -48,8 +50,6 @@ void GameState::PlayCard(Player* CardOwner, int HandIndex)
 	{
 		// Logically put the card in play
 		CardOwner->SoulsInPlay.push_back(SoulCard);
-		// Declare it has entered play
-		cout << SoulCard->Name << " has entered the field for " << CardOwner->UserName << endl;
 		// Remove the card from the hand if it succesfully enters the field
 		CardOwner->Hand.erase(CardOwner->Hand.begin() + HandIndex);
 		// Add the card to the stack
@@ -107,23 +107,13 @@ void GameState::MulliganState()
 		string Choice;
 		getline(cin, Choice);
 
-		// Remove delimiter character and replace it with space
-		for (size_t i = 0; i < Choice.length(); i++)
-		{
-			if (Choice[i] == ':')
-				Choice[i] = ' ';
-		}
+		vector<string> Parts;
 
-		// Split the string and store the contents 
-		vector<int> Parts;
-		stringstream Spliter(Choice);
-		int temp;
-		while (Spliter >> temp) {
-			Parts.push_back(temp);
-		}
+		boost::split(Parts, Choice, boost::is_any_of(":"));
 
-		int Index = Parts[0];
-		int IsMulligan = Parts[1];
+		// Grab the first (only..) char.
+		int Index = stoi(Parts[0]);
+		int IsMulligan = stoi(Parts[1]);
 
 		// They want to mulligan
 		if (IsMulligan == 1) {
@@ -165,32 +155,29 @@ void GameState::PlayState()
 	//While the game is ongoing or 'live'
 	while (IsGameLive)
 	{
-		cout << ActivePlayer->UserName << " turn" << endl;
+		cout << "----------" << ActivePlayer->UserName << "----------" << endl;
+		cout << "Hand: " << ActivePlayer->HandToString() << endl;
+		cout << "Health: " << ActivePlayer->Health << endl;
+		cout << "----------Devotion----------" << endl;
+		cout << "Dark: " << ActivePlayer->Devotion[0] << endl;
+		cout << "Earth: " << ActivePlayer->Devotion[1] << endl;
+		cout << "Fire: " << ActivePlayer->Devotion[2] << endl;
+		cout << "Light: " << ActivePlayer->Devotion[3] << endl;
+		cout << "Water: " << ActivePlayer->Devotion[4] << endl;
+		cout << "Wind: " << ActivePlayer->Devotion[5] << endl;
+		cout << "----------In Play----------" << endl;
+		cout << "Souls in play: " << ActivePlayer->SoulsInPlayToString() << endl;
 
 		// Should be a message recieved in plain text from the client
 		string ClientInput;
 		getline(cin, ClientInput);
 
-		// Remove delimiter character and replace it with space
-		for (size_t i = 0; i < ClientInput.length(); i++)
-		{
-			if (ClientInput[i] == ':') {
-				ClientInput[i] = ' ';
-			}
-		}
+		vector<string> Parts;
 
-		// Split the string and store the contents 
-		vector<char> Parts;
-		stringstream Spliter(ClientInput);
+		boost::split(Parts, ClientInput, boost::is_any_of(delemiter));
 
-		int temp;
-		while (Spliter >> temp) {
-			Parts.push_back(temp);
-		}
-
-		char Protocol	= Parts[0];
-		int Index		= Parts[1];
-		int CardIndex	= Parts[2];
+		// Grab the frist char from the string (only char)
+		char Protocol	= ClientInput[0];
 
 		Action* CurrentAction = new Action;
 
@@ -198,16 +185,23 @@ void GameState::PlayState()
 		// c = card entering play
 		// e = end of active players turn
 		// a = attack 
-		// f = effect that requires a trigger
 
 		switch (Protocol) {
 		case 'c':
 		{
+			int Index = stoi(Parts[1]);
+			int CardIndex = stoi(Parts[2]);
+			// Maybe surround this in a try catch so we can give the user 
+			// detailed explanations on why they cannot do what they want to do
 			Card *FromHand = PlayersInGame[Index]->Hand.at(CardIndex);
+			cout << "Checking if " << FromHand->Name << " can be played..." << endl;
 			// If this player has enough mana and the card exists in their hand
 			if (PlayersInGame[Index]->IsPlayable(CardIndex)) {
+				cout << FromHand->Name << " is playable!" << endl;
 				// Go ahead and play it. This method removes it from the hand as well.
 				PlayCard(PlayersInGame[Index], CardIndex);
+				// Declare it has entered play
+				cout << FromHand->Name << " has entered the field for " << PlayersInGame[Index]->UserName << endl;
 				// Fill Current Action Accordingly
 				CurrentAction->ActionType = Action::_ActionType::Summon;
 				CurrentAction->CardTargets.push_back(FromHand);
@@ -216,11 +210,11 @@ void GameState::PlayState()
 		}
 		break;
 		case 'e':
+			//int Index = stoi(Parts[1]);
 			//Active player changes from the active player that entered the switch here
 			ChangeActivePlayer();
 			//The now active player needs to draw and have their mana refilled
 			break;
-
 		}
 		// Check effects
 		CheckEffects(CurrentAction);

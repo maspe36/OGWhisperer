@@ -1,6 +1,10 @@
 #pragma once
 #include <vector>
 
+/* At some point there will
+   probably need to be a unique
+   hash in all objects for each game */
+
 using namespace std;
 
 class Player;
@@ -22,5 +26,7 @@ public:
 	void ChangeActivePlayer();
 	void PlayCard(Player * CardOwner, int HandIndex);
 	void CheckEffects(Action * CurrentAction);
+private:
+	string delemiter = ":";
 };
 
