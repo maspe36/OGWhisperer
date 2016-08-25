@@ -3,17 +3,17 @@ A fun fast paced card game that takes inspiration from Yu-gi-oh, Magic: The Gath
 
 ## Terms
 You'll see the following terms throughout the code and the cards
-* Stack 
+* #### Stack 
   * Abstract location in which all card effects resolve, last in first out.
-* Field
+* #### Field
   * Overall playing field. Other fields are contained here. 
-* Banished
+* #### Banished
   * Cards "removed" from the game. When a card is entering this field it is "Vanquished"
-* Graveyard
+* #### Graveyard
   * When a card is destroyed, it enters the graveyard unless otherwise specified.
-* Deck
+* #### Deck
   * Containment field of all the cards a player has immediate non effect access to. 40 cards.
-* Hand
+* #### Hand
   * Any Card that is drawn enters the hand. Maximum hand size is 8. If a player draws a card and the yhave 8 or more cards in hand, send that card to the graveyard.
 
 ## Devotion
@@ -44,29 +44,29 @@ Devotion is defined by 2 metrics, available devotion and total devotion. Devotio
    * Trigger effects do enter the stack.  
 
 ## One Word Effects
-* Rush
+* #### Rush
   * The turn a creature enters the battlefield, they may attack players as well as souls.
-* Overwhelm
+* #### Overwhelm
   * During combat between an attacking soul with higher attack strength than the defending soul’s health, inflict the difference as damage to your opponent.
-* Introduce
+* #### Introduce
   * Triggers an effect specified on the card when a soul enters the battlefield. This can be from anywhere.
-* Downfall
+* #### Downfall
   * Triggers an effect when a soul dies.
-* Soulwalk
+* #### Soulwalk
   * Souls with soulwalk may attack a player directly. They are still unable to attack a player the turn they are summoned unless they have rush.
-* Flurry
+* #### Flurry
   * Souls with flurry may attack X number of times per turn. For example a soul with Flurry 3 may declare 3 attacks in a single turn.
-* High-Tide
+* #### High-Tide
   * This cost may be paid for a card if the card is drawn and played before any other card. For example if a player draws a 4 cost card with a high-tide of 3, if they cast that card before any other card they may pay the high-tide cost instead.
-* Stasis
+* #### Stasis
   * Souls with stasis cannot attack or be destroyed for the duration of their stasis. A stasis lasts X turns. When the player who cast the stasis card’s turn starts, it counts towards this number. Souls in stasis do not prevent other souls from attacking a player directly. 
-* Sequence
+* #### Sequence
   * Cards may be played with a sequence cost if there was another card played previously during that turn. The only cards that count towards a sequence cost are ones that the player controls who is trying to cast a card for its sequence cost.
-* Burst
+* #### Burst
   * Burst is an alternate cost a player may pay when casting or summoning a card. When the card is casted or summoned the player who casted or summoned the card lose devotion equal to half of the burst cost. 
-* Recursion
+* #### Recursion
   * When a player casts a card with recursion, that cards owner vanquishes souls until the total devotion of souls vanquished is greater than or equal to the devotion cost of the card with recursion.
-* Heavenborn
+* #### Heavenborn
   * When a player casts a card with heavenborn return souls from that players battlefield back to the deck equal to or greater than the cost of the card with heavenborn.
 
 ## Combat
