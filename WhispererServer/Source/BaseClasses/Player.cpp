@@ -51,28 +51,6 @@ string Player::SoulsInPlayToString()
 	return SoulsInPlayString;
 }
 
-bool Player::Compare(Player * OtherPlayer)
-{
-	// If username is not sufficent...
-	// Must compare the following...
-	// Health
-	// Deck Contents
-	// Username
-	// Hand Contents
-	// Souls on Field
-	// Swifts on Field
-	// Constants on Field
-	// Graveyard
-
-	// But for now we will assume that the username is sufficent enough
-	if (UserName.compare(OtherPlayer->UserName) != 0) {
-		return false;
-	}
-	else {
-		return true;
-	}
-}
-
 bool Player::IsPlayable(int HandIndex)
 {
 	Card *ToPlay = Hand.at(HandIndex);

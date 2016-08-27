@@ -9,3 +9,8 @@ Pyrophile::Pyrophile()
 Pyrophile::~Pyrophile()
 {
 }
+
+void Pyrophile::Effect(GameState* CurrentGame)
+{
+	cout << "Pyrophile effect" << endl;
+}

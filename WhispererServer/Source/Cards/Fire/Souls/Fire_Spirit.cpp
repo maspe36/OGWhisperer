@@ -11,3 +11,8 @@ Fire_Spirit::Fire_Spirit()
 Fire_Spirit::~Fire_Spirit()
 {
 }
+
+void Fire_Spirit::Effect(GameState* CurrentGame)
+{
+	cout << "Fire Spirit effect" << endl;
+}

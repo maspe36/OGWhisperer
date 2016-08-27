@@ -6,4 +6,5 @@ class Pyromaniac :
 public:
 	Pyromaniac();
 	~Pyromaniac();
+	virtual void Effect(GameState* CurrentGame);
 };

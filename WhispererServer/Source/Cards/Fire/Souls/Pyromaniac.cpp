@@ -10,3 +10,8 @@ Pyromaniac::Pyromaniac()
 Pyromaniac::~Pyromaniac()
 {
 }
+
+void Pyromaniac::Effect(GameState* CurrentGame)
+{
+	cout << "Pyromaniac effect" << endl;
+}

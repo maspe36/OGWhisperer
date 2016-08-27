@@ -44,14 +44,12 @@ public:
 	string ToString();
 	string SoulsInPlayToString();
 
-	bool Compare(Player* OtherPlayer);
 	bool IsPlayable(int HandIndex);
 
 	void DrawCard();
 	void DrawCard(int Amount);
 	void ShuffleDeck();
 	void HandToDeck();
-
 	void PrintDeck();
 };
 

@@ -11,31 +11,41 @@ int main()
 	//How should I do this part? This seems complex
 	//I could do the CardFactory method where I create a new Card* from the specific cards class
 	//Then it fits into my game structure
-
-	Fire_Spirit *firespirit1 = new Fire_Spirit();
-	Fire_Spirit *firespirit2 = new Fire_Spirit();
-
-	Pyromaniac *pyromaniac1 = new Pyromaniac();
-	Pyromaniac *pyromaniac2 = new Pyromaniac();
-
-	Hellhound *hellhound1 = new Hellhound();
-	Hellhound *hellhound2 = new Hellhound();
-
-	Hellspark_Mutt *hellsparkmutt1 = new Hellspark_Mutt();
-	Hellspark_Mutt *hellsparkmutt2 = new Hellspark_Mutt();
-
 	vector<Card*> genericDeck;
-	genericDeck.push_back(firespirit1);
-	genericDeck.push_back(firespirit2);
 
-	genericDeck.push_back(pyromaniac1);
-	genericDeck.push_back(pyromaniac2);
+	Card* foo = NULL;
 
-	genericDeck.push_back(hellhound1);
-	genericDeck.push_back(hellhound2);
+	Fire_Spirit firespirit1;
+	foo = &firespirit1;
+	genericDeck.push_back(foo);
 
-	genericDeck.push_back(hellsparkmutt1);
-	genericDeck.push_back(hellsparkmutt2);
+	Fire_Spirit firespirit2;
+	foo = &firespirit2;
+	genericDeck.push_back(foo);
+
+	Pyromaniac pyromaniac1;
+	foo = &pyromaniac1;
+	genericDeck.push_back(foo);
+
+	Pyromaniac pyromaniac2;
+	foo = &pyromaniac2;
+	genericDeck.push_back(foo);
+
+	Hellhound hellhound1;
+	foo = &hellhound1;
+	genericDeck.push_back(foo);
+
+	Hellhound hellhound2;
+	foo = &hellhound2;
+	genericDeck.push_back(foo);
+
+	Hellspark_Mutt hellsparkmutt1;
+	foo = &hellsparkmutt1;
+	genericDeck.push_back(foo);
+
+	Hellspark_Mutt hellsparkmutt2;
+	foo = &hellsparkmutt2;
+	genericDeck.push_back(foo);
 
 	// New players need a deck and a name
 	Player* player1 = new Player("Sam", genericDeck);

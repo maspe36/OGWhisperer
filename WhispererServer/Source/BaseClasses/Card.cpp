@@ -17,4 +17,11 @@ Card::~Card()
 {
 }
 
+void Card::Effect(GameState* CurrentGame) 
+{
+}
 
+bool Card::IsEffectTriggered(Action* CurrentAction) 
+{
+	return false;
+}

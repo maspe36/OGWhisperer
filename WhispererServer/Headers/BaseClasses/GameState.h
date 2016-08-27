@@ -16,17 +16,23 @@ class GameState
 public:
 	GameState(vector<Player*> Players);
 	vector<Player*> PlayersInGame;
-	Player* ActivePlayer;
+	int ActiveIndex;
 	vector<Card*> CardOrder; 
+
+	const string delemiter = ":";
+	static const char PlayerProto = 'p';
+	static const char CardProto = 'c';
+	static const char SoulProto = 's';
+	static const char EndTurnProto = 'e';
+	static const char AttackProto = 'a';
+
 	~GameState();
 
 	void Start();
 	void MulliganState();
 	void PlayState();
 	void ChangeActivePlayer();
-	void PlayCard(Player * CardOwner, int HandIndex);
+	void PlayCard(int PlayerIndex, int HandIndex);
 	void CheckEffects(Action * CurrentAction);
-private:
-	string delemiter = ":";
 };
 

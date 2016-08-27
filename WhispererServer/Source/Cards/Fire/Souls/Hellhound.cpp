@@ -9,3 +9,8 @@ Hellhound::Hellhound()
 Hellhound::~Hellhound()
 {
 }
+
+void Hellhound::Effect(GameState* CurrentGame)
+{
+	cout << "Hellhound effect" << endl;
+}

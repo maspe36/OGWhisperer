@@ -7,5 +7,6 @@ class Fire_Spirit :
 public:
 	Fire_Spirit();
 	~Fire_Spirit();
+	virtual void Effect(GameState* CurrentGame);
 };
 

@@ -14,7 +14,7 @@ GameState::GameState(vector<Player*> Players) : PlayersInGame(Players)
 	// Initialize ActivePlayer
 	// This determines who goes first, we need to make it random whoever goes first
 	// For now we can just let the first player in the vector go first
-	ActivePlayer = PlayersInGame[0];
+	ActiveIndex = 0;
 }
 
 GameState::~GameState()
@@ -23,35 +23,28 @@ GameState::~GameState()
 
 void GameState::ChangeActivePlayer() {
 	//If the active player is the last item in the vector
-	if (ActivePlayer->Compare(PlayersInGame.back())) {
+	if (ActiveIndex == (PlayersInGame.size() - 1)) {
 		//Set it to the front of the vector
-		ActivePlayer = PlayersInGame.front();
+		ActiveIndex = 0;
 	}
 	else {
-		//Find the index of the current active player
-		int IndexOfActivePlayer = find(PlayersInGame.begin(), PlayersInGame.end(), ActivePlayer) - PlayersInGame.begin();
-		//Go one past it
-		ActivePlayer = PlayersInGame[IndexOfActivePlayer + 1];
+		ActiveIndex++;
 	}
 }
 
 /* Play card from given owners hand at the given index.
-   Puts the card into the correct area of play and 
+   Puts the card into the correct area of play and
    removes it from the hand afterwards */
-void GameState::PlayCard(Player* CardOwner, int HandIndex)
+void GameState::PlayCard(int PlayerIndex, int HandIndex)
 {
-	Card *FromHand = CardOwner->Hand.at(HandIndex);
+	Card *FromHand = PlayersInGame[PlayerIndex]->Hand.at(HandIndex);
 
-	Soul *SoulCard = nullptr;
-	//Type2 *t2 = nullptr;
-	//Type3 *t3 = nullptr;
-
-	if (SoulCard == dynamic_cast<Soul*>(FromHand))
+	if (Soul* SoulCard = dynamic_cast<Soul*>(FromHand))
 	{
 		// Logically put the card in play
-		CardOwner->SoulsInPlay.push_back(SoulCard);
+		PlayersInGame[PlayerIndex]->SoulsInPlay.push_back(SoulCard);
 		// Remove the card from the hand if it succesfully enters the field
-		CardOwner->Hand.erase(CardOwner->Hand.begin() + HandIndex);
+		PlayersInGame[PlayerIndex]->Hand.erase(PlayersInGame[PlayerIndex]->Hand.begin() + HandIndex);
 		// Add the card to the stack
 		CardOrder.push_back(SoulCard);
 	}
@@ -70,13 +63,13 @@ void GameState::Start() {
 	cout << endl;
 
 	MulliganState();
-	
+
 	cout << "End Mulligans..." << endl;
 	cout << endl;
 	cout << "Start Game!" << endl;
 
 	PlayState();
-	
+
 }
 
 void GameState::MulliganState()
@@ -152,21 +145,23 @@ void GameState::PlayState()
 {
 	bool IsGameLive = true;
 
+	PlayersInGame[ActiveIndex]->Devotion[2] = 10;
+
 	//While the game is ongoing or 'live'
 	while (IsGameLive)
 	{
-		cout << "----------" << ActivePlayer->UserName << "----------" << endl;
-		cout << "Hand: " << ActivePlayer->HandToString() << endl;
-		cout << "Health: " << ActivePlayer->Health << endl;
+		cout << "----------" << PlayersInGame[ActiveIndex]->UserName << "----------" << endl;
+		cout << "Hand: " << PlayersInGame[ActiveIndex]->HandToString() << endl;
+		cout << "Health: " << PlayersInGame[ActiveIndex]->Health << endl;
 		cout << "----------Devotion----------" << endl;
-		cout << "Dark: " << ActivePlayer->Devotion[0] << endl;
-		cout << "Earth: " << ActivePlayer->Devotion[1] << endl;
-		cout << "Fire: " << ActivePlayer->Devotion[2] << endl;
-		cout << "Light: " << ActivePlayer->Devotion[3] << endl;
-		cout << "Water: " << ActivePlayer->Devotion[4] << endl;
-		cout << "Wind: " << ActivePlayer->Devotion[5] << endl;
+		cout << "Dark: " << PlayersInGame[ActiveIndex]->Devotion[0] << endl;
+		cout << "Earth: " << PlayersInGame[ActiveIndex]->Devotion[1] << endl;
+		cout << "Fire: " << PlayersInGame[ActiveIndex]->Devotion[2] << endl;
+		cout << "Light: " << PlayersInGame[ActiveIndex]->Devotion[3] << endl;
+		cout << "Water: " << PlayersInGame[ActiveIndex]->Devotion[4] << endl;
+		cout << "Wind: " << PlayersInGame[ActiveIndex]->Devotion[5] << endl;
 		cout << "----------In Play----------" << endl;
-		cout << "Souls in play: " << ActivePlayer->SoulsInPlayToString() << endl;
+		cout << "Souls in play: " << PlayersInGame[ActiveIndex]->SoulsInPlayToString() << endl;
 
 		// Should be a message recieved in plain text from the client
 		string ClientInput;
@@ -177,7 +172,7 @@ void GameState::PlayState()
 		boost::split(Parts, ClientInput, boost::is_any_of(delemiter));
 
 		// Grab the frist char from the string (only char)
-		char Protocol	= ClientInput[0];
+		char Protocol = ClientInput[0];
 
 		Action* CurrentAction = new Action;
 
@@ -187,7 +182,7 @@ void GameState::PlayState()
 		// a = attack 
 
 		switch (Protocol) {
-		case 'c':
+		case GameState::CardProto:
 		{
 			int Index = stoi(Parts[1]);
 			int CardIndex = stoi(Parts[2]);
@@ -199,7 +194,7 @@ void GameState::PlayState()
 			if (PlayersInGame[Index]->IsPlayable(CardIndex)) {
 				cout << FromHand->Name << " is playable!" << endl;
 				// Go ahead and play it. This method removes it from the hand as well.
-				PlayCard(PlayersInGame[Index], CardIndex);
+				PlayCard(Index, CardIndex);
 				// Declare it has entered play
 				cout << FromHand->Name << " has entered the field for " << PlayersInGame[Index]->UserName << endl;
 				// Fill Current Action Accordingly
@@ -207,25 +202,34 @@ void GameState::PlayState()
 				CurrentAction->CardTargets.push_back(FromHand);
 				CurrentAction->Owner = PlayersInGame[Index];
 			}
+			break;
 		}
-		break;
-		case 'e':
+		case GameState::EndTurnProto:
+		{
 			//int Index = stoi(Parts[1]);
 			//Active player changes from the active player that entered the switch here
 			ChangeActivePlayer();
 			//The now active player needs to draw and have their mana refilled
 			break;
 		}
+		} // end of switch. This is annoying
+		cout << "end of switch" << endl;
+		cout << "Checking effects..." << endl;
+
 		// Check effects
 		CheckEffects(CurrentAction);
+
+		cout << "All effects checked!" << endl;
+		cout << "Deleteing CurrentAction..." << endl;
 		// We don't need it anymore
 		delete CurrentAction;
+		cout << "CurrentAction deleted!" << endl;
 	}
 }
 
 void GameState::CheckEffects(Action* CurrentAction)
 {
-	for (size_t i = 0; i < CardOrder.size(); i++) 
+	for (size_t i = 0; i < CardOrder.size(); i++)
 	{
 		if (CardOrder[i]->IsEffectTriggered(CurrentAction)) {
 			CardOrder[i]->Effect(this);

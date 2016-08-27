@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Hellspark_Mutt.h"
+#include <boost/algorithm/string.hpp>
 #include <sstream>
 
 Hellspark_Mutt::Hellspark_Mutt()
@@ -11,48 +12,51 @@ Hellspark_Mutt::~Hellspark_Mutt()
 {
 }
 
-void Card::Effect(GameState* CurrentGame)
+void Hellspark_Mutt::Effect(GameState* CurrentGame)
 {
 	Action* CurrentAction = new Action;
 	CurrentAction->ActionType = Action::_ActionType::Damage;
 	CurrentAction->Owner = Owner;
 
+	cout << "Select a target..." << endl;
 	// Now we take input and depending on what it is set action object.
-	string input;
-	getline(cin, input);
+	string ClientInput;
+	getline(cin, ClientInput);
+	
+	vector<string> Parts;
 
-	// Remove delimiter character and replace it with space
-	for (size_t i = 0; i < input.length(); i++)
+	boost::split(Parts, ClientInput, boost::is_any_of(CurrentGame->delemiter));
+
+	// Grab the frist char from the string (only char)
+	char TargetType = ClientInput[0];
+	int PlayerIndex = stoi(Parts[1]);
+
+	if (TargetType == CurrentGame->PlayerProto) // Player Target
 	{
-		if (input[i] == ':')
-			input[i] = ' ';
+		CurrentGame->PlayersInGame[PlayerIndex]->Health 
+			= CurrentGame->PlayersInGame[PlayerIndex]->Health - 1;
+		cout << CurrentGame->PlayersInGame[PlayerIndex]->UserName << " lost " << 1 << " health!" << endl;
+		cout << CurrentGame->PlayersInGame[PlayerIndex]->UserName << " has " << CurrentGame->PlayersInGame[PlayerIndex]->Health << endl;
+		// The effect was a success!
+		CurrentGame->CheckEffects(CurrentAction);
+	}
+	else if (TargetType == CurrentGame->SoulProto) // Soul target
+	{
+		int SoulIndex = stoi(Parts[2]);
+		CurrentGame->PlayersInGame[PlayerIndex]->SoulsInPlay[SoulIndex]->CurrentDefense 
+			= CurrentGame->PlayersInGame[PlayerIndex]->SoulsInPlay[SoulIndex]->CurrentDefense - 1;
+		// The effect was a success!
+		CurrentGame->CheckEffects(CurrentAction);
+	}
+	else // Return it to the hand if the user gives invalid target input 
+	{
+
 	}
 
-	// Split the string and store the contents 
-	vector<int> Parts;
-	stringstream Spliter(input);
-	int temp;
-	while (Spliter >> temp) {
-		Parts.push_back(temp);
-	}
-
-	int type = Parts[0];
-	int owner = Parts[1];
-	int target = Parts[2];
-
-	if (type == 0) {
-		Player* targetPlayer = CurrentGame->PlayersInGame[target];
-		CurrentAction->PlayerTargets.push_back(targetPlayer);
-	}
-	else {
-		Card* targetCard = CurrentGame->PlayersInGame[owner]->SoulsInPlay[target];
-		CurrentAction->CardTargets.push_back(targetCard);
-	}
-	CurrentGame->CheckEffects(CurrentAction);
 	delete CurrentAction;
 }
 
-bool Card::IsEffectTriggered(Action* CurrentAction)
+bool Hellspark_Mutt::IsEffectTriggered(Action* CurrentAction)
 {
 	// If this card was summoned
 	if (CurrentAction->_ActionType::Summon) {
