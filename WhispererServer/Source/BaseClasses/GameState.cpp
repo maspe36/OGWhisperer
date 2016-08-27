@@ -184,23 +184,22 @@ void GameState::PlayState()
 		switch (Protocol) {
 		case GameState::CardProto:
 		{
-			int Index = stoi(Parts[1]);
-			int CardIndex = stoi(Parts[2]);
+			int CardIndex = stoi(Parts[1]);
 			// Maybe surround this in a try catch so we can give the user 
 			// detailed explanations on why they cannot do what they want to do
-			Card *FromHand = PlayersInGame[Index]->Hand.at(CardIndex);
+			Card *FromHand = PlayersInGame[ActiveIndex]->Hand.at(CardIndex);
 			cout << "Checking if " << FromHand->Name << " can be played..." << endl;
 			// If this player has enough mana and the card exists in their hand
-			if (PlayersInGame[Index]->IsPlayable(CardIndex)) {
+			if (PlayersInGame[ActiveIndex]->IsPlayable(CardIndex)) {
 				cout << FromHand->Name << " is playable!" << endl;
 				// Go ahead and play it. This method removes it from the hand as well.
-				PlayCard(Index, CardIndex);
+				PlayCard(ActiveIndex, CardIndex);
 				// Declare it has entered play
-				cout << FromHand->Name << " has entered the field for " << PlayersInGame[Index]->UserName << endl;
+				cout << FromHand->Name << " has entered the field for " << PlayersInGame[ActiveIndex]->UserName << endl;
 				// Fill Current Action Accordingly
 				CurrentAction->ActionType = Action::_ActionType::Summon;
 				CurrentAction->CardTargets.push_back(FromHand);
-				CurrentAction->Owner = PlayersInGame[Index];
+				CurrentAction->Owner = PlayersInGame[ActiveIndex];
 			}
 			break;
 		}
