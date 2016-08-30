@@ -17,7 +17,7 @@ public:
 	GameState(vector<Player*> Players);
 	vector<Player*> PlayersInGame;
 	int ActiveIndex;
-	vector<Card*> CardOrder; 
+	vector<Card*> CardOrder;
 
 	const string delemiter = ":";
 	static const char PlayerProto = 'p';
@@ -34,5 +34,5 @@ public:
 	void ChangeActivePlayer();
 	void PlayCard(int PlayerIndex, int HandIndex);
 	void CheckEffects(Action * CurrentAction);
+	void ClearDeadCards();
 };
-

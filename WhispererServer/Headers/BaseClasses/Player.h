@@ -9,8 +9,8 @@
 #include <algorithm>
 #include <random>
 
-/* At some point there will 
-   probably need to be a unique 
+/* At some point there will
+   probably need to be a unique
    hash in all objects for each game */
 
 using namespace std;
@@ -31,7 +31,7 @@ public:
 
 	mt19937 seed{ random_device{}() };
 
-	vector<int> Devotion = {1,1,1,1,1,1};
+	vector<int> Devotion = { 1,1,1,1,1,1 };
 	vector<Card*> MainDeck;
 	vector<Card*> Hand;
 	vector<Soul*> SoulsInPlay;
@@ -39,7 +39,7 @@ public:
 	//vector<Constant*> ConstantsInPlay;
 	vector<Card*> Graveyard;
 
-	
+
 	string HandToString();
 	string ToString();
 	string SoulsInPlayToString();
@@ -52,4 +52,3 @@ public:
 	void HandToDeck();
 	void PrintDeck();
 };
-

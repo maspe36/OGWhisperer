@@ -21,8 +21,7 @@ public:
 	int CurrentDefense;
 
 	Soul(vector<int> Cost, string Name, string EffectText, string Description, _Color Color, _CardType CardType, vector<_EffectType> Effects, int OriginalAttack, int OriginalDefense);
-	
+
 	void Attacking(Soul* DefendingSoul);
 	void Attacking(Player* DefendingPlayer);
 };
-

@@ -212,13 +212,16 @@ void GameState::PlayState()
 			break;
 		}
 		} // end of switch. This is annoying
-		cout << "end of switch" << endl;
 		cout << "Checking effects..." << endl;
-
 		// Check effects
 		CheckEffects(CurrentAction);
-
 		cout << "All effects checked!" << endl;
+
+		cout << "Clearing any dead cards..." << endl;
+		// Check for dead cards
+		ClearDeadCards();
+		cout << "No more dead cards in play!" << endl;
+
 		cout << "Deleteing CurrentAction..." << endl;
 		// We don't need it anymore
 		delete CurrentAction;
@@ -233,6 +236,14 @@ void GameState::CheckEffects(Action* CurrentAction)
 		if (CardOrder[i]->IsEffectTriggered(CurrentAction)) {
 			CardOrder[i]->Effect(this);
 		}
+	}
+}
+
+void GameState::ClearDeadCards()
+{
+	for (size_t i = 0; i < CardOrder.size(); i++)
+	{
+
 	}
 }
 

@@ -4,8 +4,9 @@
 #include <sstream>
 
 Hellspark_Mutt::Hellspark_Mutt()
-	: Soul({ 0,0,3,0,0,0 }, "Hellspark Mutt", "Introduce - Deal 1 damage to target soul or player.", "", _Color::Fire, _CardType::Soul, { _EffectType::Introduce }, 3, 2)
+	: Soul({ 0,0,3,0,0,0 }, "Hellspark Mutt", "Introduce - Deal 1 damage to target soul or player.", "", _Color::Fire, _CardType::_Soul, { _EffectType::Introduce }, 3, 2)
 {
+	_Damage = 1;
 }
 
 Hellspark_Mutt::~Hellspark_Mutt()

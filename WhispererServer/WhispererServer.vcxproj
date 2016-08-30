@@ -168,8 +168,8 @@
     <ClCompile Include="WhispererServer.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Action.h" />
     <ClInclude Include="Headers\BaseClasses.h" />
+    <ClInclude Include="Headers\BaseClasses\Action.h" />
     <ClInclude Include="Headers\BaseClasses\Card.h" />
     <ClInclude Include="Headers\BaseClasses\GameState.h" />
     <ClInclude Include="Headers\BaseClasses\Player.h" />

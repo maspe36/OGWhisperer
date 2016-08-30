@@ -36,4 +36,3 @@ public:
 	Action(vector<Card*> CardTargets, vector<Player*> PlayerTargets, Player* Owner, _ActionType ActionType);
 	~Action();
 };
-

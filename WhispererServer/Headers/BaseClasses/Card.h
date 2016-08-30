@@ -11,17 +11,18 @@ using namespace std;
 class GameState;
 class Action;
 class Player;
+class Soul;
 
 class Card
 {
 public:
-	 /* Order of colors in cost vector (Alphabetical)
-	    0: Dark
-	    1: Earth
-		2: Fire
-		3: Light
-		4: Water
-		5: Wind */
+	/* Order of colors in cost vector (Alphabetical)
+	   0: Dark
+	   1: Earth
+	   2: Fire
+	   3: Light
+	   4: Water
+	   5: Wind */
 	vector<int> Cost;
 	// Name of the card
 	string Name;
@@ -30,7 +31,7 @@ public:
 	// The effect of a card in text
 	string EffectText;
 	// The color of a card
-	enum _Color 
+	enum _Color
 	{
 		Dark,
 		Earth,
@@ -40,36 +41,51 @@ public:
 		Wind
 	} Color;
 	// Base Card Types
-	enum _CardType 
+	enum _CardType
 	{
-		Constant,
-		Soul, 
-		Swift
+		_Constant,
+		_Soul,
+		_Swift
 	} CardType;
 	// Different possible effect types
 	enum _EffectType
 	{
 		Continuous,
-		Downfall, 
+		Downfall,
 		HighTide,
 		InHand,
 		Introduce,
-		None, 
+		None,
 		OnDiscard,
-		OnDraw, 
-		Rush, 
-		Statis, 
+		OnDraw,
+		Rush,
+		Statis,
 		Trigger
 	} EffectType;
 
 	vector<_EffectType> Effects;
 	Player* Owner;
+	bool IsDead;
+	int _Damage = 0;
+	int _Heal = 0;
+	int _AttackChange = 0;
+	int _DefenseChange = 0;
 
 	string ToString();
+
+	void Damage(vector<Soul*> Targets);
+	void Damage(vector<Player*> Targets);
+
+	void Heal(vector<Soul*> Targets);
+	void Heal(vector<Player*> Targets);
+
+	void AttackChange(vector<Soul*> Targets);
+	void DefenseChange(vector<Soul*> Targets);
+
 	virtual void Effect(GameState* CurrentGame);
 	virtual bool IsEffectTriggered(Action* CurrentAction);
 
-	Card(vector<int> Cost, string Name, string EffectText, string FlavourText, 
-		_Color Color, _CardType CardType, vector<_EffectType> Effects);	
+	Card(vector<int> Cost, string Name, string EffectText, string FlavourText,
+		_Color Color, _CardType CardType, vector<_EffectType> Effects);
 	virtual ~Card();
 };

@@ -302,7 +302,7 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Action.h">
+    <ClInclude Include="Headers\BaseClasses\Action.h">
       <Filter>Header Files\BaseClasses</Filter>
     </ClInclude>
   </ItemGroup>
