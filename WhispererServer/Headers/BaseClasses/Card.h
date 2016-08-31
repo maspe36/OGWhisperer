@@ -73,14 +73,14 @@ public:
 
 	string ToString();
 
-	void Damage(vector<Soul*> Targets);
-	void Damage(vector<Player*> Targets);
+	void Damage(vector<Soul*> Targets, GameState* CurrentGame, Player* Owner);
+	void Damage(vector<Player*> Targets, GameState* CurrentGame, Player* Owner);
 
-	void Heal(vector<Soul*> Targets);
-	void Heal(vector<Player*> Targets);
+	void Heal(vector<Soul*> Targets, GameState* CurrentGame, Player* Owner);
+	void Heal(vector<Player*> Targets, GameState* CurrentGame, Player* Owner);
 
-	void AttackChange(vector<Soul*> Targets);
-	void DefenseChange(vector<Soul*> Targets);
+	void AttackChange(vector<Soul*> Targets, GameState* CurrentGame, Player* Owner);
+	void DefenseChange(vector<Soul*> Targets, GameState* CurrentGame, Player* Owner);
 
 	virtual void Effect(GameState* CurrentGame);
 	virtual bool IsEffectTriggered(Action* CurrentAction);

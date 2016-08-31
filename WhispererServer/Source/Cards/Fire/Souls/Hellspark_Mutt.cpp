@@ -15,15 +15,11 @@ Hellspark_Mutt::~Hellspark_Mutt()
 
 void Hellspark_Mutt::Effect(GameState* CurrentGame)
 {
-	Action* CurrentAction = new Action;
-	CurrentAction->ActionType = Action::_ActionType::Damage;
-	CurrentAction->Owner = Owner;
-
 	cout << "Select a target..." << endl;
 	// Now we take input and depending on what it is set action object.
 	string ClientInput;
 	getline(cin, ClientInput);
-	
+
 	vector<string> Parts;
 
 	boost::split(Parts, ClientInput, boost::is_any_of(CurrentGame->delemiter));
@@ -34,27 +30,17 @@ void Hellspark_Mutt::Effect(GameState* CurrentGame)
 
 	if (TargetType == CurrentGame->PlayerProto) // Player Target
 	{
-		CurrentGame->PlayersInGame[PlayerIndex]->Health 
-			= CurrentGame->PlayersInGame[PlayerIndex]->Health - 1;
-		cout << CurrentGame->PlayersInGame[PlayerIndex]->UserName << " lost " << 1 << " health!" << endl;
-		cout << CurrentGame->PlayersInGame[PlayerIndex]->UserName << " has " << CurrentGame->PlayersInGame[PlayerIndex]->Health << endl;
-		// The effect was a success!
-		CurrentGame->CheckEffects(CurrentAction);
+		Damage({ CurrentGame->PlayersInGame[PlayerIndex] }, CurrentGame, Owner);
 	}
 	else if (TargetType == CurrentGame->SoulProto) // Soul target
 	{
 		int SoulIndex = stoi(Parts[2]);
-		CurrentGame->PlayersInGame[PlayerIndex]->SoulsInPlay[SoulIndex]->CurrentDefense 
-			= CurrentGame->PlayersInGame[PlayerIndex]->SoulsInPlay[SoulIndex]->CurrentDefense - 1;
-		// The effect was a success!
-		CurrentGame->CheckEffects(CurrentAction);
+		Damage({ CurrentGame->PlayersInGame[PlayerIndex]->SoulsInPlay[SoulIndex] }, CurrentGame, Owner);
 	}
 	else // Return it to the hand if the user gives invalid target input 
 	{
 
 	}
-
-	delete CurrentAction;
 }
 
 bool Hellspark_Mutt::IsEffectTriggered(Action* CurrentAction)

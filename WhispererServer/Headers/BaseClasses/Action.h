@@ -19,8 +19,8 @@ public:
 	{
 		Damage,
 		Heal,
-		Buff,
-		Debuff,
+		AttackChange,
+		DefenseChange,
 		Draw,
 		Discard,
 		Summon,

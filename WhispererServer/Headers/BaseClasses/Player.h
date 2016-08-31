@@ -45,6 +45,7 @@ public:
 	string SoulsInPlayToString();
 
 	bool IsPlayable(int HandIndex);
+	bool IsDead;
 
 	void DrawCard();
 	void DrawCard(int Amount);

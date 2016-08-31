@@ -15,9 +15,17 @@ Soul::Soul(vector<int> Cost, string Name, string EffectText, string Description,
 void Soul::Attacking(Soul* DefendingSoul)
 {
 	DefendingSoul->CurrentDefense = DefendingSoul->CurrentDefense - CurrentAttack;
+	if (DefendingSoul->CurrentDefense < 0)
+	{
+		DefendingSoul->IsDead = true;
+	}
 }
 
 void Soul::Attacking(Player* DefendingPlayer)
 {
 	DefendingPlayer->Health = DefendingPlayer->Health - CurrentAttack;
+	if (DefendingPlayer->Health < 0)
+	{
+		DefendingPlayer->IsDead = true;
+	}
 }
