@@ -57,9 +57,9 @@ bool Player::IsPlayable(int HandIndex)
 	// If this card exists in the players hand
 	if (find(Hand.begin(), Hand.end(), ToPlay) != Hand.end()) {
 		// Loop through devotion
-		for (size_t i = 0; i < Devotion.size(); i++) {
+		for (size_t i = 0; i < AvailableDevotion.size(); i++) {
 			// At any point, does the player have insignifficant devotion?
-			if (Devotion[i] < ToPlay->Cost[i]) {
+			if (AvailableDevotion[i] < ToPlay->Cost[i]) {
 				return false;
 			}
 		}

@@ -56,6 +56,15 @@ void GameState::PlayCard(int PlayerIndex, int HandIndex)
 	//{
 	//t3->type3Method();
 	//}
+
+	// Add the proper devotion
+	// Note - If multi colored cards are ever introtuced this will need to be changed. Specifically the color parameter for Card.
+	PlayersInGame[PlayerIndex]->TotalDevotion[FromHand->Color] = PlayersInGame[PlayerIndex]->TotalDevotion[FromHand->Color] + 1;
+	// Now subtract from available devotion
+	// Loop through all devotions and subtract it from the available devotion
+	for (size_t i = 0; i < PlayersInGame[PlayerIndex]->TotalDevotion.size(); i++) {
+		PlayersInGame[PlayerIndex]->AvailableDevotion[i] = PlayersInGame[PlayerIndex]->AvailableDevotion[i] - FromHand->Cost[i];
+	}
 }
 
 void GameState::Start() {
@@ -145,8 +154,6 @@ void GameState::PlayState()
 {
 	bool IsGameLive = true;
 
-	PlayersInGame[ActiveIndex]->Devotion[2] = 10;
-
 	//While the game is ongoing or 'live'
 	while (IsGameLive)
 	{
@@ -154,12 +161,12 @@ void GameState::PlayState()
 		cout << "Hand: " << PlayersInGame[ActiveIndex]->HandToString() << endl;
 		cout << "Health: " << PlayersInGame[ActiveIndex]->Health << endl;
 		cout << "----------Devotion----------" << endl;
-		cout << "Dark: " << PlayersInGame[ActiveIndex]->Devotion[0] << endl;
-		cout << "Earth: " << PlayersInGame[ActiveIndex]->Devotion[1] << endl;
-		cout << "Fire: " << PlayersInGame[ActiveIndex]->Devotion[2] << endl;
-		cout << "Light: " << PlayersInGame[ActiveIndex]->Devotion[3] << endl;
-		cout << "Water: " << PlayersInGame[ActiveIndex]->Devotion[4] << endl;
-		cout << "Wind: " << PlayersInGame[ActiveIndex]->Devotion[5] << endl;
+		cout << "Dark: " << PlayersInGame[ActiveIndex]->AvailableDevotion[0] << "/" << PlayersInGame[ActiveIndex]->TotalDevotion[0] << endl;
+		cout << "Earth: " << PlayersInGame[ActiveIndex]->AvailableDevotion[1] << "/" << PlayersInGame[ActiveIndex]->TotalDevotion[1] << endl;
+		cout << "Fire: " << PlayersInGame[ActiveIndex]->AvailableDevotion[2] << "/" << PlayersInGame[ActiveIndex]->TotalDevotion[2] << endl;
+		cout << "Light: " << PlayersInGame[ActiveIndex]->AvailableDevotion[3] << "/" << PlayersInGame[ActiveIndex]->TotalDevotion[3] << endl;
+		cout << "Water: " << PlayersInGame[ActiveIndex]->AvailableDevotion[4] << "/" << PlayersInGame[ActiveIndex]->TotalDevotion[4] << endl;
+		cout << "Wind: " << PlayersInGame[ActiveIndex]->AvailableDevotion[5] << "/" << PlayersInGame[ActiveIndex]->TotalDevotion[5] << endl;
 		cout << "----------In Play----------" << endl;
 		cout << "Souls in play: " << PlayersInGame[ActiveIndex]->SoulsInPlayToString() << endl;
 

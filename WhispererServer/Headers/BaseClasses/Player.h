@@ -31,7 +31,8 @@ public:
 
 	mt19937 seed{ random_device{}() };
 
-	vector<int> Devotion = { 1,1,1,1,1,1 };
+	vector<int> AvailableDevotion = { 1, 1, 1, 1, 1, 1 };
+	vector<int> TotalDevotion = { 1, 1, 1, 1, 1, 1 };
 	vector<Card*> MainDeck;
 	vector<Card*> Hand;
 	vector<Soul*> SoulsInPlay;
