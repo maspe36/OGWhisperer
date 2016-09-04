@@ -9,6 +9,7 @@
 using namespace std;
 
 class GameState;
+class Affect;
 class Action;
 class Player;
 class Soul;
@@ -50,6 +51,8 @@ public:
 	// Different possible effect types
 	enum _EffectType
 	{
+		Buff,
+		Debuff,
 		Continuous,
 		Downfall,
 		HighTide,
@@ -65,11 +68,17 @@ public:
 
 	vector<_EffectType> Effects;
 	Player* Owner;
+
 	bool IsDead;
+
+	vector<Affect*> AppliedAffects;
+
 	int _Damage = 0;
 	int _Heal = 0;
-	int _AttackChange = 0;
-	int _DefenseChange = 0;
+	int _AttackBuff = 0;
+	int _AttackDebuff = 0;
+	int _DefenseBuff = 0;
+	int _DefenseDebuff = 0;
 
 	string ToString();
 
@@ -79,8 +88,8 @@ public:
 	void Heal(vector<Soul*> Targets, GameState* CurrentGame, Player* Owner);
 	void Heal(vector<Player*> Targets, GameState* CurrentGame, Player* Owner);
 
-	void AttackChange(vector<Soul*> Targets, GameState* CurrentGame, Player* Owner);
-	void DefenseChange(vector<Soul*> Targets, GameState* CurrentGame, Player* Owner);
+	void SoulBuff(vector<Soul*> Targets, GameState* CurrentGame, Player* Owner);
+	void SoulDebuff(vector<Soul*> Targets, GameState* CurrentGame, Player* Owner);
 
 	virtual void Effect(GameState* CurrentGame);
 	virtual bool IsEffectTriggered(Action* CurrentAction);

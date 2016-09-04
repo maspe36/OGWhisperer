@@ -155,6 +155,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\BaseClasses\Action.cpp" />
+    <ClCompile Include="Source\BaseClasses\Affect.cpp" />
     <ClCompile Include="Source\BaseClasses\Card.cpp" />
     <ClCompile Include="Source\BaseClasses\GameState.cpp" />
     <ClCompile Include="Source\BaseClasses\Player.cpp" />
@@ -170,6 +171,7 @@
   <ItemGroup>
     <ClInclude Include="Headers\BaseClasses.h" />
     <ClInclude Include="Headers\BaseClasses\Action.h" />
+    <ClInclude Include="Headers\BaseClasses\Affect.h" />
     <ClInclude Include="Headers\BaseClasses\Card.h" />
     <ClInclude Include="Headers\BaseClasses\GameState.h" />
     <ClInclude Include="Headers\BaseClasses\Player.h" />

@@ -10,6 +10,7 @@ Soul::Soul(vector<int> Cost, string Name, string EffectText, string Description,
 	BaseAttack(OriginalAttack), BaseDefense(OriginalDefense), 
 	CurrentAttack(OriginalAttack), CurrentDefense(OriginalDefense)
 {
+	CanAttack = false;
 }
 
 void Soul::Attacking(Soul* DefendingSoul)
