@@ -33,6 +33,17 @@ string Player::HandToString()
 	return CardsInHand;
 }
 
+string Player::GraveyardToString()
+{
+	string GraveyardCards;
+
+	for (auto i : Graveyard) {
+		GraveyardCards += (i->ToString() + "#");
+	}
+
+	return GraveyardCards;
+}
+
 string Player::ToString()
 {
 	//PlayerName+PlayerHealth
@@ -90,6 +101,13 @@ void Player::DrawCard(int Amount)
 void Player::ShuffleDeck()
 {
 	std::shuffle(begin(MainDeck), end(MainDeck), seed);
+}
+
+void Player::RefillDevotion()
+{
+	for (size_t i = 0; i < TotalDevotion.size(); i++) {
+		AvailableDevotion[i] = TotalDevotion[i];
+	}
 }
 
 void Player::HandToDeck()

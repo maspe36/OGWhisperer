@@ -42,6 +42,7 @@ public:
 
 
 	string HandToString();
+	string GraveyardToString();
 	string ToString();
 	string SoulsInPlayToString();
 
@@ -51,6 +52,7 @@ public:
 	void DrawCard();
 	void DrawCard(int Amount);
 	void ShuffleDeck();
+	void RefillDevotion();
 	void HandToDeck();
 	void PrintDeck();
 };

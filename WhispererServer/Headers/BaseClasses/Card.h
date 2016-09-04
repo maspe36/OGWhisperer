@@ -63,7 +63,9 @@ public:
 		OnDraw,
 		Rush,
 		Statis,
-		Trigger
+		Trigger,
+		TurnStart,
+		TurnEnd
 	} EffectType;
 
 	vector<_EffectType> Effects;

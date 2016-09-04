@@ -28,6 +28,9 @@ public:
 
 	~GameState();
 
+	static bool IsDeadMessage(Card* Target);
+	static bool IsDead(Card* Target);
+
 	void Start();
 	void MulliganState();
 	void PlayState();

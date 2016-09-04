@@ -11,46 +11,98 @@ int main()
 	//How should I do this part? This seems complex
 	//I could do the CardFactory method where I create a new Card* from the specific cards class
 	//Then it fits into my game structure
-	vector<Card*> genericDeck;
+	vector<Card*> genericDeck1;
+	vector<Card*> genericDeck2;
+	vector<Card*> genericDeck3;
 
-	Card* foo = NULL;
+	Card* foo1 = NULL;
+	Card* foo2 = NULL;
+	Card* foo3 = NULL;
 
-	Fire_Spirit firespirit1;
-	foo = &firespirit1;
-	genericDeck.push_back(foo);
+	Fire_Spirit firespirit11;
+	Fire_Spirit firespirit12;
+	Fire_Spirit firespirit13;
+	foo1 = &firespirit11;
+	foo2 = &firespirit12;
+	foo3 = &firespirit13;
+	genericDeck1.push_back(foo1);
+	genericDeck2.push_back(foo2);
+	genericDeck3.push_back(foo3);
 
-	Fire_Spirit firespirit2;
-	foo = &firespirit2;
-	genericDeck.push_back(foo);
+	Fire_Spirit firespirit21;
+	Fire_Spirit firespirit22;
+	Fire_Spirit firespirit23;
+	foo1 = &firespirit21;
+	foo2 = &firespirit22;
+	foo3 = &firespirit23;
+	genericDeck1.push_back(foo1);
+	genericDeck2.push_back(foo2);
+	genericDeck3.push_back(foo3);
 
-	Pyromaniac pyromaniac1;
-	foo = &pyromaniac1;
-	genericDeck.push_back(foo);
+	Pyromaniac pyromaniac11;
+	Pyromaniac pyromaniac12;
+	Pyromaniac pyromaniac13;
+	foo1 = &pyromaniac11;
+	foo2 = &pyromaniac12;
+	foo3 = &pyromaniac13;
+	genericDeck1.push_back(foo1);
+	genericDeck2.push_back(foo2);
+	genericDeck3.push_back(foo3);
 
-	Pyromaniac pyromaniac2;
-	foo = &pyromaniac2;
-	genericDeck.push_back(foo);
+	Pyromaniac pyromaniac21;
+	Pyromaniac pyromaniac22;
+	Pyromaniac pyromaniac23;
+	foo1 = &pyromaniac21;
+	foo2 = &pyromaniac22;
+	foo3 = &pyromaniac23;
+	genericDeck1.push_back(foo1);
+	genericDeck2.push_back(foo2);
+	genericDeck3.push_back(foo3);
 
-	Hellhound hellhound1;
-	foo = &hellhound1;
-	genericDeck.push_back(foo);
+	Hellhound hellhound11;
+	Hellhound hellhound12;
+	Hellhound hellhound13;
+	foo1 = &hellhound11;
+	foo2 = &hellhound12;
+	foo3 = &hellhound13;
+	genericDeck1.push_back(foo1);
+	genericDeck2.push_back(foo2);
+	genericDeck3.push_back(foo3);
 
-	Hellhound hellhound2;
-	foo = &hellhound2;
-	genericDeck.push_back(foo);
+	Hellhound hellhound21;
+	Hellhound hellhound22;
+	Hellhound hellhound23;
+	foo1 = &hellhound21;
+	foo2 = &hellhound22;
+	foo3 = &hellhound23;
+	genericDeck1.push_back(foo1);
+	genericDeck2.push_back(foo2);
+	genericDeck3.push_back(foo3);
 
-	Hellspark_Mutt hellsparkmutt1;
-	foo = &hellsparkmutt1;
-	genericDeck.push_back(foo);
+	Hellspark_Mutt hellsparkmutt11;
+	Hellspark_Mutt hellsparkmutt12;
+	Hellspark_Mutt hellsparkmutt13;
+	foo1 = &hellsparkmutt11;
+	foo2 = &hellsparkmutt12;
+	foo3 = &hellsparkmutt13;
+	genericDeck1.push_back(foo1);
+	genericDeck2.push_back(foo2);
+	genericDeck3.push_back(foo3);
 
-	Hellspark_Mutt hellsparkmutt2;
-	foo = &hellsparkmutt2;
-	genericDeck.push_back(foo);
+	Hellspark_Mutt hellsparkmutt21;
+	Hellspark_Mutt hellsparkmutt22;
+	Hellspark_Mutt hellsparkmutt23;
+	foo1 = &hellsparkmutt21;
+	foo2 = &hellsparkmutt22;
+	foo3 = &hellsparkmutt23;
+	genericDeck1.push_back(foo1);
+	genericDeck2.push_back(foo2);
+	genericDeck3.push_back(foo3);
 
 	// New players need a deck and a name
-	Player* player1 = new Player("Sam", genericDeck);
-	Player* player2 = new Player("Ben", genericDeck);
-	Player* player3 = new Player("Nick", genericDeck);
+	Player* player1 = new Player("Sam", genericDeck1);
+	Player* player2 = new Player("Ben", genericDeck2);
+	Player* player3 = new Player("Nick", genericDeck3);
 
 	vector<Player*> Players = { player1, player2, player3 };
 
