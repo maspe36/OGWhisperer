@@ -30,6 +30,7 @@ public:
 
 	static bool IsDeadMessage(Card* Target);
 	static bool IsDead(Card* Target);
+	static bool IsPlayerDead(Player* Target);
 
 	void Start();
 	void MulliganState();
@@ -38,4 +39,6 @@ public:
 	void PlayCard(int PlayerIndex, int HandIndex);
 	void CheckEffects(Action * CurrentAction);
 	void ClearDeadCards();
+	void ClearDeadPlayers();
+	bool IsGameOver();
 };

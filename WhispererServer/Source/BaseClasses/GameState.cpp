@@ -39,6 +39,15 @@ bool GameState::IsDead(Card* Target)
 	return false;
 }
 
+bool GameState::IsPlayerDead(Player * Target)
+{
+	if (Target->IsDead) 
+	{
+		return true;
+	}
+	return false;
+}
+
 void GameState::ChangeActivePlayer() {
 	//If the active player is the last item in the vector
 	if (ActiveIndex == (PlayersInGame.size() - 1)) {
@@ -234,55 +243,60 @@ void GameState::PlayState()
 			int AttackerIndex = stoi(Parts[1]);
 			int TargetPlayerIndex = stoi(Parts[2]);
 			string TargetType = Parts[3];
-			// If they are attacking a soul...
-			if (isdigit(TargetType[0]))
+			// Can they even attack?
+			if (PlayersInGame[ActiveIndex]->SoulsInPlay[AttackerIndex]->CanAttack) 
 			{
-				// Convert the string to the appropriate int
-				int DeffenderIndex = stoi(TargetType);
+				// Make sure to reduce flurry (number of times a soul can attack in a turn)
+				PlayersInGame[ActiveIndex]->SoulsInPlay[AttackerIndex]->_Flurry = 
+					PlayersInGame[ActiveIndex]->SoulsInPlay[AttackerIndex]->_Flurry - 1;
 
-				// Attack!
-				PlayersInGame[ActiveIndex]->SoulsInPlay[AttackerIndex]->Attacking(PlayersInGame[TargetPlayerIndex]->SoulsInPlay[DeffenderIndex]);
-
-				// Set the CurrentAction object
-				CurrentAction->Attacker = PlayersInGame[ActiveIndex]->SoulsInPlay[AttackerIndex];
-				CurrentAction->Target = PlayersInGame[TargetPlayerIndex]->SoulsInPlay[DeffenderIndex];
-				CurrentAction->Owner = PlayersInGame[ActiveIndex];
-				CurrentAction->ActionType = Action::_ActionType::Attack;
-
-				cout << PlayersInGame[ActiveIndex]->SoulsInPlay[AttackerIndex]->Name << " attacked " << PlayersInGame[TargetPlayerIndex]->SoulsInPlay[DeffenderIndex]->Name
-					<< " for " << PlayersInGame[ActiveIndex]->SoulsInPlay[AttackerIndex]->CurrentAttack << "!" << endl;
-				cout << PlayersInGame[TargetPlayerIndex]->SoulsInPlay[DeffenderIndex]->Name
-					<< " has " << PlayersInGame[TargetPlayerIndex]->SoulsInPlay[DeffenderIndex]->CurrentDefense << " health!" << endl;
-				cout << PlayersInGame[ActiveIndex]->SoulsInPlay[AttackerIndex]->Name << " was hit for "
-					<< PlayersInGame[TargetPlayerIndex]->SoulsInPlay[DeffenderIndex]->CurrentAttack << "!" << endl;
-				cout << PlayersInGame[ActiveIndex]->SoulsInPlay[AttackerIndex]->Name << " has " << PlayersInGame[ActiveIndex]->SoulsInPlay[AttackerIndex]->CurrentDefense << " health!" << endl;
-				// Are they dead?
-				if (PlayersInGame[TargetPlayerIndex]->SoulsInPlay[DeffenderIndex]->CurrentDefense < 0)
+				if (PlayersInGame[ActiveIndex]->SoulsInPlay[AttackerIndex]->_Flurry <= 0)
 				{
-					PlayersInGame[TargetPlayerIndex]->SoulsInPlay[DeffenderIndex]->IsDead = true;
+					PlayersInGame[ActiveIndex]->SoulsInPlay[AttackerIndex]->CanAttack = false;
+				}
+				// If they are attacking a soul...
+				if (isdigit(TargetType[0]))
+				{
+					// Convert the string to the appropriate int
+					int DeffenderIndex = stoi(TargetType);
+
+					// Attack!
+					PlayersInGame[ActiveIndex]->SoulsInPlay[AttackerIndex]->Attacking(PlayersInGame[TargetPlayerIndex]->SoulsInPlay[DeffenderIndex]);
+
+					// Set the CurrentAction object
+					CurrentAction->Attacker = PlayersInGame[ActiveIndex]->SoulsInPlay[AttackerIndex];
+					CurrentAction->Target = PlayersInGame[TargetPlayerIndex]->SoulsInPlay[DeffenderIndex];
+					CurrentAction->Owner = PlayersInGame[ActiveIndex];
+					CurrentAction->ActionType = Action::_ActionType::Attack;
+
+					cout << PlayersInGame[ActiveIndex]->SoulsInPlay[AttackerIndex]->Owner->UserName << "'s " << PlayersInGame[ActiveIndex]->SoulsInPlay[AttackerIndex]->Name << " attacked " << PlayersInGame[TargetPlayerIndex]->SoulsInPlay[AttackerIndex]->Owner->UserName << "'s " << PlayersInGame[TargetPlayerIndex]->SoulsInPlay[DeffenderIndex]->Name
+						<< " for " << PlayersInGame[ActiveIndex]->SoulsInPlay[AttackerIndex]->CurrentAttack << "!" << endl;
+					cout << PlayersInGame[TargetPlayerIndex]->SoulsInPlay[AttackerIndex]->Owner->UserName << "'s " << PlayersInGame[TargetPlayerIndex]->SoulsInPlay[DeffenderIndex]->Name
+						<< " has " << PlayersInGame[TargetPlayerIndex]->SoulsInPlay[DeffenderIndex]->CurrentDefense << " health!" << endl;
+					cout << PlayersInGame[ActiveIndex]->SoulsInPlay[AttackerIndex]->Owner->UserName << "'s " << PlayersInGame[ActiveIndex]->SoulsInPlay[AttackerIndex]->Name << " was hit for "
+						<< PlayersInGame[TargetPlayerIndex]->SoulsInPlay[DeffenderIndex]->CurrentAttack << "!" << endl;
+					cout << PlayersInGame[ActiveIndex]->SoulsInPlay[AttackerIndex]->Owner->UserName << "'s " << PlayersInGame[ActiveIndex]->SoulsInPlay[AttackerIndex]->Name << " has " << PlayersInGame[ActiveIndex]->SoulsInPlay[AttackerIndex]->CurrentDefense << " health!" << endl;
+				}
+				else // They are attacking a player... 
+				{
+					// Attack!
+					PlayersInGame[ActiveIndex]->SoulsInPlay[AttackerIndex]->Attacking(PlayersInGame[TargetPlayerIndex]);
+
+					// Set CurrentAction object
+					CurrentAction->Attacker = PlayersInGame[ActiveIndex]->SoulsInPlay[AttackerIndex];
+					CurrentAction->PlayerTarget = PlayersInGame[TargetPlayerIndex];
+					CurrentAction->Owner = PlayersInGame[ActiveIndex];
+					CurrentAction->ActionType = Action::_ActionType::Attack;
+
+					cout << PlayersInGame[ActiveIndex]->SoulsInPlay[AttackerIndex]->Name << " attacked " << PlayersInGame[TargetPlayerIndex]->UserName
+						<< " for " << PlayersInGame[ActiveIndex]->SoulsInPlay[AttackerIndex]->CurrentAttack << "!" << endl;
+					cout << PlayersInGame[TargetPlayerIndex]->UserName << " has " << PlayersInGame[TargetPlayerIndex]->Health << " health!" << endl;
 				}
 			}
-			else // They are attacking a player... 
+			else 
 			{
-				// Attack!
-				PlayersInGame[ActiveIndex]->SoulsInPlay[AttackerIndex]->Attacking(PlayersInGame[TargetPlayerIndex]);
-
-				// Set CurrentAction object
-				CurrentAction->Attacker = PlayersInGame[ActiveIndex]->SoulsInPlay[AttackerIndex];
-				CurrentAction->PlayerTarget = PlayersInGame[TargetPlayerIndex];
-				CurrentAction->Owner = PlayersInGame[ActiveIndex];
-				CurrentAction->ActionType = Action::_ActionType::Attack;
-
-				cout << PlayersInGame[ActiveIndex]->SoulsInPlay[AttackerIndex]->Name << " attacked " << PlayersInGame[TargetPlayerIndex]->UserName
-					<< " for " << PlayersInGame[ActiveIndex]->SoulsInPlay[AttackerIndex]->CurrentAttack << "!" << endl;
-				cout << PlayersInGame[TargetPlayerIndex]->UserName << " has " << PlayersInGame[TargetPlayerIndex]->Health << " health!" << endl;
-				// Are they dead?
-				if (PlayersInGame[TargetPlayerIndex]->Health < 0)
-				{
-					PlayersInGame[TargetPlayerIndex]->IsDead = true;
-				}
+				cout << PlayersInGame[ActiveIndex]->SoulsInPlay[AttackerIndex]->Name << " cannot attack!" << endl;
 			}
-
 			break;
 		}
 		case GameState::EndTurnProto:
@@ -294,6 +308,25 @@ void GameState::PlayState()
 
 			// Active player changes from the active player that entered the switch here
 			ChangeActivePlayer();
+		
+			// At the start of a players turn...
+			// Remove the statis from all souls by one unless it is zero
+			for (auto i : PlayersInGame[ActiveIndex]->SoulsInPlay)
+			{
+				if (i->_Statis > 0)
+				{
+					i->_Statis = 
+						i->_Statis - 1;
+				}
+				// If it is zero they can attack
+				if (i->_Statis == 0)
+				{
+					i->CanAttack = true;
+				}
+				// Reset the number of attacks a card can have
+				i->_Flurry = i->_OriginalFlurry;
+			}
+
 			// The active index now reflects the next players turn
 			// Check if there are any beginning of turn effects
 			Action* TurnStartAction = new Action(PlayersInGame[ActiveIndex], Action::_ActionType::TurnStart);
@@ -313,6 +346,19 @@ void GameState::PlayState()
 			break;
 		}
 		} // end of switch. This is annoying
+		cout << "Clearing any dead players..." << endl;
+		// Check for losers
+		ClearDeadPlayers();
+		cout << "No more dead players in game!" << endl;
+		
+		cout << "Checking for winners..." << endl;
+		// Is the game over?
+		if (IsGameOver()) 
+		{
+			IsGameLive = false;
+		}
+		cout << "Done checking winners!" << endl;
+
 		cout << "Checking effects..." << endl;
 		// Check effects
 		CheckEffects(CurrentAction);
@@ -328,6 +374,10 @@ void GameState::PlayState()
 		delete CurrentAction;
 		cout << "CurrentAction deleted!" << endl;
 	}
+	cout << PlayersInGame[0]->UserName << " has won!" << endl;
+	cout << "Congratulations!" << endl;
+	cout << "-------------------------" << endl;
+	cout << "Game Over!" << endl;
 }
 
 void GameState::CheckEffects(Action* CurrentAction)
@@ -345,15 +395,42 @@ void GameState::ClearDeadCards()
 	for (auto i : PlayersInGame)
 	{
 		// Remove all dead souls
-		i->SoulsInPlay.erase(std::remove_if(
-			i->SoulsInPlay.begin(), i->SoulsInPlay.end(),
-			IsDeadMessage), i->SoulsInPlay.end());
+		i->SoulsInPlay.erase(
+			remove_if(i->SoulsInPlay.begin(), i->SoulsInPlay.end(),IsDeadMessage), 
+			i->SoulsInPlay.end()
+		);
 		// Remove all dead swifts 
 		// Remove all dead consts
 	}
 	// Remove all dead cards in CardOrder
-	CardOrder.erase(std::remove_if(
-		CardOrder.begin(), CardOrder.end(),
-		IsDead), CardOrder.end());
+	CardOrder.erase(
+		remove_if(CardOrder.begin(), CardOrder.end(),IsDead), \
+		CardOrder.end()
+	);
 }
 
+void GameState::ClearDeadPlayers() 
+{
+	for (auto i : PlayersInGame) 
+	{
+		if (i->IsDead) {
+			cout << i->UserName << " has lost!" << endl;
+		}
+	}
+	PlayersInGame.erase(
+		remove_if(PlayersInGame.begin(), PlayersInGame.end(), IsPlayerDead),
+		PlayersInGame.end()
+	);
+}
+
+bool GameState::IsGameOver() 
+{
+	if (PlayersInGame.size() == 1) 
+	{
+		return true;
+	}
+	else 
+	{
+		return false;
+	}
+}

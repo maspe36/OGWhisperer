@@ -13,19 +13,30 @@ Soul::Soul(vector<int> Cost, string Name, string EffectText, string Description,
 	CanAttack = false;
 }
 
+/* Applies damage to the target soul from the soul calling the function.
+ Then the soul that called the function has damage applied to it equal to the
+ target soul's current attack. If either soul's current defense is below zero
+ the IsDead flag is set. */
 void Soul::Attacking(Soul* DefendingSoul)
 {
 	DefendingSoul->CurrentDefense = DefendingSoul->CurrentDefense - CurrentAttack;
-	if (DefendingSoul->CurrentDefense < 0)
+	CurrentDefense = CurrentDefense - DefendingSoul->CurrentAttack;
+	if (DefendingSoul->CurrentDefense <= 0)
 	{
 		DefendingSoul->IsDead = true;
 	}
+	if (CurrentDefense <= 0) 
+	{
+		IsDead = true;
+	}
 }
 
+/* Applies damage to the target player equal to soul that called this function's attack.
+If the target players health is below 0 the IsDead flag is set. */
 void Soul::Attacking(Player* DefendingPlayer)
 {
 	DefendingPlayer->Health = DefendingPlayer->Health - CurrentAttack;
-	if (DefendingPlayer->Health < 0)
+	if (DefendingPlayer->Health <= 0)
 	{
 		DefendingPlayer->IsDead = true;
 	}

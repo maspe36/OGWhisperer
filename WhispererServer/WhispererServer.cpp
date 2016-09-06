@@ -102,9 +102,10 @@ int main()
 	// New players need a deck and a name
 	Player* player1 = new Player("Sam", genericDeck1);
 	Player* player2 = new Player("Ben", genericDeck2);
-	Player* player3 = new Player("Nick", genericDeck3);
+	//Player* player3 = new Player("Nick", genericDeck3);
 
-	vector<Player*> Players = { player1, player2, player3 };
+	//vector<Player*> Players = { player1, player2, player3 };
+	vector<Player*> Players = { player1, player2 };
 
 	GameState* myGame = new GameState(Players);
 

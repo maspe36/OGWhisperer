@@ -20,6 +20,13 @@ public:
 	int CurrentAttack;
 	int CurrentDefense;
 
+	// This is essentially how we deal with 
+	// summoning sickness, this number should be reduced each turn
+	// until it is zero. If statis is zero it can attack?
+	int _Statis = 1;
+	// Number of attacks a soul has left
+	int _Flurry = 1;
+	int _OriginalFlurry = 1;
 	bool CanAttack;
 
 	Soul(vector<int> Cost, string Name, string EffectText, string Description, _Color Color, _CardType CardType, vector<_EffectType> Effects, int OriginalAttack, int OriginalDefense);
