@@ -51,6 +51,7 @@ public:
 	// Different possible effect types
 	enum _EffectType
 	{
+		None,
 		Buff,
 		Debuff,
 		Continuous,
@@ -58,7 +59,6 @@ public:
 		HighTide,
 		InHand,
 		Introduce,
-		None,
 		OnDiscard,
 		OnDraw,
 		Rush,
@@ -72,7 +72,6 @@ public:
 	Player* Owner;
 
 	bool IsDead;
-
 	vector<Affect*> AppliedAffects;
 
 	int _Damage = 0;
@@ -81,8 +80,10 @@ public:
 	int _AttackDebuff = 0;
 	int _DefenseBuff = 0;
 	int _DefenseDebuff = 0;
+	vector<int> HighTideCost = { 99,99,99,99,99,99 };
 
 	string ToString();
+	string JsonInfo();
 
 	void Damage(vector<Soul*> Targets, GameState* CurrentGame, Player* Owner);
 	void Damage(vector<Player*> Targets, GameState* CurrentGame, Player* Owner);

@@ -9,13 +9,84 @@
 
 string Card::ToString()
 {
-	return Name;
+	return "{" + JsonInfo() + "}";
+}
+
+string Card::JsonInfo()
+{
+	ostringstream os;
+	os
+		<< "\"name\":" << '"' << Name << '"' << ','
+		<< "\"cost\":" << '{'
+		<< "\"dark\":" << '"' << Cost[0] << '"' << ','
+		<< "\"earth\":" << '"' << Cost[1] << '"' << ','
+		<< "\"fire\":" << '"' << Cost[2] << '"' << ','
+		<< "\"light\":" << '"' << Cost[3] << '"' << ','
+		<< "\"water\":" << '"' << Cost[4] << '"' << ','
+		<< "\"wind\":" << '"' << Cost[5] << '"'
+		<< '}' << ','
+		<< "\"effectText\":" << '"' << EffectText << '"' << ','
+		<< "\"flavorText\":" << '"' << FlavourText << '"' << ','
+		<< "\"color\":" << '"' << Color << '"' << ','
+		<< "\"cardType\":" << '"' << CardType << '"' << ','
+		<< "\"owner\":" << '"' << Owner->UserName << '"' << ','
+		<< "\"effects\":" << '[';
+	// Until the last one
+	for (size_t i = 0; i < Effects.size() - 1; i++)
+	{
+		os << '"' << Effects[i] << '"' << ',';
+	}
+	if(Effects.back() != _EffectType::None)
+	{
+		os << '"' << Effects.back() << '"';
+	}
+	
+	// Fill affects, don't put anything in if it has _EffectType::None.
+	os
+		<< ']' << ','
+		<< "\"affects\":" << '[';
+	for (size_t t = 0; t < AppliedAffects.size() - 1; t++)
+	{
+		os << '"' << AppliedAffects[t]->EffectType << '"' << ',';
+	}
+	if (AppliedAffects.back()->EffectType != _EffectType::None)
+	{
+		os << '"' << AppliedAffects.back()->EffectType << '"' << ',';
+	}
+
+	os 
+		<< ']' << ','
+		<< "\"highTideCost\":" << '{';
+	if (HighTideCost[0] == 99)
+	{
+		os
+			<< "\"dark\":" << '"' << Cost[0] << '"' << ','
+			<< "\"earth\":" << '"' << Cost[1] << '"' << ','
+			<< "\"fire\":" << '"' << Cost[2] << '"' << ','
+			<< "\"light\":" << '"' << Cost[3] << '"' << ','
+			<< "\"water\":" << '"' << Cost[4] << '"' << ','
+			<< "\"wind\":" << '"' << Cost[5] << '"';
+	}
+	else
+	{
+		os
+			<< "\"dark\":" << '"' << HighTideCost[0] << '"' << ','
+			<< "\"earth\":" << '"' << HighTideCost[1] << '"' << ','
+			<< "\"fire\":" << '"' << HighTideCost[2] << '"' << ','
+			<< "\"light\":" << '"' << HighTideCost[3] << '"' << ','
+			<< "\"water\":" << '"' << HighTideCost[4] << '"' << ','
+			<< "\"wind\":" << '"' << HighTideCost[5] << '"';
+	}
+	os << '}';
+
+	return os.str();
 }
 
 Card::Card(vector<int> Cost, string Name, string FlavourText, string EffectText, _Color Color, _CardType CardType, vector<_EffectType> Effects) :
 	Cost(Cost), Name(Name), FlavourText(FlavourText), EffectText(EffectText), Color(Color), CardType(CardType), Effects(Effects)
 {
 	IsDead = false;
+	AppliedAffects = { new Affect(Card::_EffectType::None, this, "") };
 }
 
 Card::~Card()
@@ -31,7 +102,7 @@ bool Card::IsEffectTriggered(Action* CurrentAction)
 	return false;
 }
 
-/* Wrapper function to damage all souls in target vector for _Damage amount and then 
+/* Wrapper function to damage all souls in target vector for _Damage amount and then
 create Action object and check the next layer of effects.  */
 void Card::Damage(vector<Soul*> Targets, GameState* CurrentGame, Player* Owner)
 {
@@ -43,7 +114,7 @@ void Card::Damage(vector<Soul*> Targets, GameState* CurrentGame, Player* Owner)
 		cout << Targets[i]->Owner->UserName << "'s " << Targets[i]->Name << " took " << _Damage << " damage!" << endl;
 		cout << Targets[i]->Name << " has " << Targets[i]->CurrentDefense << " health!" << endl;
 		// Set the dead flag if the card is dead
-		if (Targets[i]->CurrentDefense < 0) 
+		if (Targets[i]->CurrentDefense < 0)
 		{
 			Targets[i]->IsDead = true;
 		}

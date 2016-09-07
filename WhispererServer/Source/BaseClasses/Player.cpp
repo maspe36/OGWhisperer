@@ -6,6 +6,7 @@
 #include "Player.h"
 #include "Card.h"
 #include "Soul.h"
+#include "Affect.h"
 
 Player::~Player()
 {
@@ -27,7 +28,7 @@ string Player::HandToString()
 	string CardsInHand;
 
 	for (auto i : Hand) {
-		CardsInHand += (i->ToString() + "#");
+		CardsInHand += (i->Name + "#");
 	}
 
 	return CardsInHand;
@@ -38,7 +39,7 @@ string Player::GraveyardToString()
 	string GraveyardCards;
 
 	for (auto i : Graveyard) {
-		GraveyardCards += (i->ToString() + "#");
+		GraveyardCards += (i->Name + "#");
 	}
 
 	return GraveyardCards;
@@ -56,7 +57,7 @@ string Player::SoulsInPlayToString()
 	string SoulsInPlayString;
 
 	for (auto i : SoulsInPlay) {
-		SoulsInPlayString += (i->ToString() + "#");
+		SoulsInPlayString += (i->ToString() + ",");
 	}
 
 	return SoulsInPlayString;
