@@ -4,8 +4,8 @@
 #include "Soul.h"
 #include "Player.h"
 
-Soul::Soul(vector<int> Cost, string Name, string EffectText, string Description, _Color Color, _CardType CardType, vector<_EffectType> Effects, int OriginalAttack, int OriginalDefense) :
-	Card(Cost, Name, EffectText, Description, Color, CardType, Effects), 
+Soul::Soul(vector<int> Cost, string Name, string FlavourText, string EffectText, _Color Color, _CardType CardType, vector<_EffectType> Effects, int OriginalAttack, int OriginalDefense) :
+	Card(Cost, Name, FlavourText, EffectText, Color, CardType, Effects),
 	OriginalAttack(OriginalAttack), OriginalDefense(OriginalDefense), 
 	BaseAttack(OriginalAttack), BaseDefense(OriginalDefense), 
 	CurrentAttack(OriginalAttack), CurrentDefense(OriginalDefense)

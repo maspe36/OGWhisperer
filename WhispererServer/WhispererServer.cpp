@@ -99,9 +99,29 @@ int main()
 	genericDeck2.push_back(foo2);
 	genericDeck3.push_back(foo3);
 
+	Pyrophile pyrophile11;
+	Pyrophile pyrophile12;
+	Pyrophile pyrophile13;
+	foo1 = &pyrophile11;
+	foo2 = &pyrophile12;
+	foo3 = &pyrophile13;
+	genericDeck1.push_back(foo1);
+	genericDeck2.push_back(foo2);
+	genericDeck3.push_back(foo3);
+
+	Pyrophile pyrophile21;
+	Pyrophile pyrophile22;
+	Pyrophile pyrophile23;
+	foo1 = &pyrophile21;
+	foo2 = &pyrophile22;
+	foo3 = &pyrophile23;
+	genericDeck1.push_back(foo1);
+	genericDeck2.push_back(foo2);
+	genericDeck3.push_back(foo3);
+
 	// New players need a deck and a name
-	Player* player1 = new Player("Sam", genericDeck1);
-	Player* player2 = new Player("Ben", genericDeck2);
+	Player* player1 = new Player("Mom", genericDeck1);
+	Player* player2 = new Player("Tom", genericDeck2);
 	//Player* player3 = new Player("Nick", genericDeck3);
 
 	//vector<Player*> Players = { player1, player2, player3 };

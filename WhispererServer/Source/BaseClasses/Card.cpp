@@ -9,7 +9,7 @@
 
 string Card::ToString()
 {
-	return "{" + JsonInfo() + "}";
+	return "\"card\":{" + JsonInfo() + "}";
 }
 
 string Card::JsonInfo()
@@ -114,7 +114,7 @@ void Card::Damage(vector<Soul*> Targets, GameState* CurrentGame, Player* Owner)
 		cout << Targets[i]->Owner->UserName << "'s " << Targets[i]->Name << " took " << _Damage << " damage!" << endl;
 		cout << Targets[i]->Name << " has " << Targets[i]->CurrentDefense << " health!" << endl;
 		// Set the dead flag if the card is dead
-		if (Targets[i]->CurrentDefense < 0)
+		if (Targets[i]->CurrentDefense <= 0)
 		{
 			Targets[i]->IsDead = true;
 		}
@@ -134,7 +134,7 @@ void Card::Damage(vector<Player*> Targets, GameState* CurrentGame, Player* Owner
 		cout << Targets[i]->UserName << " has " << Targets[i]->Health << " health!" << endl;
 		CurrentGame->CheckEffects(CurrentAction);
 		// Set the dead flag if they are dead
-		if (Targets[i]->Health < 0)
+		if (Targets[i]->Health <= 0)
 		{
 			Targets[i]->IsDead = true;
 		}

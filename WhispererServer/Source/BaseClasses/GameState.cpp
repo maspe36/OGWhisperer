@@ -99,6 +99,7 @@ void GameState::Start() {
 	cout << endl;
 
 	MulliganState();
+	DrawTill5();
 
 	cout << "End Mulligans..." << endl;
 	cout << endl;
@@ -177,9 +178,60 @@ void GameState::MulliganState()
 	}
 }
 
+/* Draws cards for all players in the game until they have 5 cards in their hand */
+void GameState::DrawTill5()
+{
+	for (auto i : PlayersInGame) 
+	{
+		size_t HandSize = i->Hand.size();
+		if (HandSize < 5) 
+		{
+			i->DrawCard(5 - HandSize);
+		}
+	}
+}
+
+void GameState::TurnStartMaintenance()
+{
+	// The active index now reflects the next players turn
+	// Check if there are any beginning of turn effects
+	Action* TurnStartAction = new Action(PlayersInGame[ActiveIndex], Action::_ActionType::TurnStart);
+	CheckEffects(TurnStartAction);
+	delete TurnStartAction;
+
+	//The now active player needs to draw and have their mana refilled
+	PlayersInGame[ActiveIndex]->DrawCard();
+	// Check if there are any effects from drawing a card
+	// Pass in the card drawn
+	Action* DrawAction = new Action({ PlayersInGame[ActiveIndex]->Hand.back() }, PlayersInGame[ActiveIndex], Action::_ActionType::Draw);
+	CheckEffects(DrawAction);
+	delete DrawAction;
+
+	for (auto i : PlayersInGame[ActiveIndex]->SoulsInPlay)
+	{
+		if (i->_Statis > 0)
+		{
+			i->_Statis =
+				i->_Statis - 1;
+		}
+		// If it is zero they can attack
+		if (i->_Statis == 0)
+		{
+			i->CanAttack = true;
+		}
+		// Reset the number of attacks a card can have
+		i->_Flurry = i->_OriginalFlurry;
+	}
+	// Refill their devotion
+	PlayersInGame[ActiveIndex]->RefillDevotion();
+}
+
 void GameState::PlayState()
 {
 	bool IsGameLive = true;
+
+	// The first player needs to draw and have other misc things happen for their turn
+	TurnStartMaintenance();
 
 	//While the game is ongoing or 'live'
 	while (IsGameLive)
@@ -310,39 +362,7 @@ void GameState::PlayState()
 			ChangeActivePlayer();
 		
 			// At the start of a players turn...
-			// Remove the statis from all souls by one unless it is zero
-			for (auto i : PlayersInGame[ActiveIndex]->SoulsInPlay)
-			{
-				if (i->_Statis > 0)
-				{
-					i->_Statis = 
-						i->_Statis - 1;
-				}
-				// If it is zero they can attack
-				if (i->_Statis == 0)
-				{
-					i->CanAttack = true;
-				}
-				// Reset the number of attacks a card can have
-				i->_Flurry = i->_OriginalFlurry;
-			}
-
-			// The active index now reflects the next players turn
-			// Check if there are any beginning of turn effects
-			Action* TurnStartAction = new Action(PlayersInGame[ActiveIndex], Action::_ActionType::TurnStart);
-			CheckEffects(TurnStartAction);
-			delete TurnStartAction;
-
-			//The now active player needs to draw and have their mana refilled
-			PlayersInGame[ActiveIndex]->DrawCard();
-			// Check if there are any effects from drawing a card
-			// Pass in the card drawn
-			Action* DrawAction = new Action({ PlayersInGame[ActiveIndex]->Hand.back() }, PlayersInGame[ActiveIndex], Action::_ActionType::Draw);
-			CheckEffects(DrawAction);
-			delete DrawAction;
-
-			PlayersInGame[ActiveIndex]->RefillDevotion();
-			// God, we can finally say that the player may now input commands.
+			TurnStartMaintenance();
 			break;
 		}
 		} // end of switch. This is annoying

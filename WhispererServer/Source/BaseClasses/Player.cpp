@@ -51,16 +51,21 @@ string Player::ToString()
 	return UserName + "+" + to_string(Health);
 }
 
-//Do I have a memory leak here? How can I free this memory?
+/* Returns a formatted JSON of all the souls in play for this player.
+Cannot be returned alone, it is missing a wrapping {} on purpose.*/
 string Player::SoulsInPlayToString()
 {
-	string SoulsInPlayString;
+	ostringstream SoulsInPlayString;
+
+	SoulsInPlayString << "\"souls\":" << '{';
 
 	for (auto i : SoulsInPlay) {
-		SoulsInPlayString += (i->ToString() + ",");
+		SoulsInPlayString << (i->ToString()) << ',';
 	}
 
-	return SoulsInPlayString;
+	SoulsInPlayString << '}';
+
+	return SoulsInPlayString.str();
 }
 
 bool Player::IsPlayable(int HandIndex)

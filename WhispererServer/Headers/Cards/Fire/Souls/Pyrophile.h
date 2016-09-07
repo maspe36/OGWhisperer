@@ -6,6 +6,5 @@ class Pyrophile :
 public:
 	Pyrophile();
 	~Pyrophile();
-	virtual void Effect(GameState* CurrentGame);
 };
 

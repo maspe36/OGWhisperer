@@ -6,6 +6,5 @@ class Hellhound :
 public:
 	Hellhound();
 	~Hellhound();
-	virtual void Effect(GameState* CurrentGame);
 };
 

@@ -34,6 +34,8 @@ public:
 
 	void Start();
 	void MulliganState();
+	void DrawTill5();
+	void TurnStartMaintenance();
 	void PlayState();
 	void ChangeActivePlayer();
 	void PlayCard(int PlayerIndex, int HandIndex);
