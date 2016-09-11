@@ -28,6 +28,8 @@ GameState::~GameState()
 {
 }
 
+/* If a card is dead, send it to the graveyard, check effects, and print a message!
+This is used for clear dead cards. */
 bool GameState::IsDeadMessage(Card* Target)
 {
 	if (Target->IsDead) {
@@ -42,6 +44,7 @@ bool GameState::IsDeadMessage(Card* Target)
 	return false;
 }
 
+/* If a card is dead return true. */
 bool GameState::IsDead(Card* Target)
 {
 	if (Target->IsDead) {
@@ -50,6 +53,7 @@ bool GameState::IsDead(Card* Target)
 	return false;
 }
 
+/* If a player is dead return true. */
 bool GameState::IsPlayerDead(Player * Target)
 {
 	if (Target->IsDead)
@@ -59,6 +63,9 @@ bool GameState::IsPlayerDead(Player * Target)
 	return false;
 }
 
+/* Iterates through the players in the game and sets the active index 
+to the index of the current players turn. If we hit the end of players,
+we start over at the 0 index player turn.*/
 void GameState::ChangeActivePlayer() {
 	//If the active player is the last item in the vector
 	if (ActiveIndex == (PlayersInGame.size() - 1)) {
@@ -116,6 +123,7 @@ void GameState::PlayCard(Card* Target)
 	}
 }
 
+/* Starts the game! */
 void GameState::Start() {
 	cout << "Begin Mulligans!" << endl;
 	cout << endl;
@@ -129,8 +137,15 @@ void GameState::Start() {
 
 	PlayState();
 
+	cout << "End game..." << endl;
+	EndGameState();
+	cout << "Jobs done." << endl;
 }
 
+/* Pusedo-Asynchronous function. While there is a player that hasn't decalred they are keeping
+we listen for a decision. The numbers we are listening for are player index and keep or not. 
+Eventually this needs to make sure we are getting a message back from the correct player 
+so another player can't maliciously mulligan for another player. */
 void GameState::MulliganState()
 {
 	bool IsMulliganState = true;
@@ -374,12 +389,19 @@ void GameState::PlayState()
 		ClearDeadCards();
 		cout << "No more dead cards in play!" << endl;
 	}
+}
+
+void GameState::EndGameState()
+{
 	cout << PlayersInGame[0]->UserName << " has won!" << endl;
 	cout << "Congratulations!" << endl;
 	cout << "-------------------------" << endl;
 	cout << "Game Over!" << endl;
 }
 
+/* Loops through all cards in play and checks if their effect is triggered by passing in a
+current action to IsEffecttriggered. If it is triggered we go ahead and call the effect function
+of the card.*/
 void GameState::CheckEffects(Action* CurrentAction)
 {
 	for (size_t i = 0; i < CardOrder.size(); i++)
@@ -390,6 +412,10 @@ void GameState::CheckEffects(Action* CurrentAction)
 	}
 }
 
+/* Loops through all players in the game and removes all cards from the field. 
+It is possible for cards to still be alive after this (Downfall effects, etc) so 
+at the end of this method we recheck if there is anything dead, and if there is
+we recursively call this method. Be careful! */
 void GameState::ClearDeadCards()
 {
 	for (auto i : PlayersInGame)
@@ -424,6 +450,8 @@ void GameState::ClearDeadCards()
 	}
 }
 
+/* Loops through all players in the game and checks if they are dead.
+If they are we remove them from the game. */
 void GameState::ClearDeadPlayers()
 {
 	for (auto i : PlayersInGame)
@@ -438,6 +466,7 @@ void GameState::ClearDeadPlayers()
 	);
 }
 
+/* Checks if there is only 1 player left in the game, if yes we break the game loop. */
 bool GameState::IsGameOver()
 {
 	if (PlayersInGame.size() == 1)

@@ -37,6 +37,7 @@ public:
 	void DrawTill5();
 	void TurnStartMaintenance();
 	void PlayState();
+	void EndGameState();
 	void ChangeActivePlayer();
 	void PlayCard(Card* Target);
 	void CheckEffects(Action * CurrentAction);
