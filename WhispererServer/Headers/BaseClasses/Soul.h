@@ -31,6 +31,7 @@ public:
 
 	Soul(vector<int> Cost, string Name, string EffectText, string Description, _Color Color, _CardType CardType, vector<_EffectType> Effects, int OriginalAttack, int OriginalDefense);
 
+	void PreAttackMaintenance();
 	void Attacking(Soul* DefendingSoul);
 	void Attacking(Player* DefendingPlayer);
 };

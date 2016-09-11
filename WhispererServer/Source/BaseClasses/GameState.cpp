@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include <string>
 #include <sstream>
+#include <algorithm>
 
 #include <boost/algorithm/string.hpp>
 
@@ -15,6 +16,12 @@ GameState::GameState(vector<Player*> Players) : PlayersInGame(Players)
 	// This determines who goes first, we need to make it random whoever goes first
 	// For now we can just let the first player in the vector go first
 	ActiveIndex = 0;
+
+	// Tell all players what game they are in
+	for (auto i : Players)
+	{
+		i->CurrentGame = this;
+	}
 }
 
 GameState::~GameState()
@@ -26,6 +33,10 @@ bool GameState::IsDeadMessage(Card* Target)
 	if (Target->IsDead) {
 		cout << Target->Owner->UserName << "'s " << Target->Name << " is dead!" << endl;
 		Target->Owner->Graveyard.push_back(Target);
+		Action* DeadAction = new Action({ Target }, Target->Owner, Action::_ActionType::Destroy);
+		// What a chain...
+		Target->Owner->CurrentGame->CheckEffects(DeadAction);
+		delete DeadAction;
 		return true;
 	}
 	return false;
@@ -41,7 +52,7 @@ bool GameState::IsDead(Card* Target)
 
 bool GameState::IsPlayerDead(Player * Target)
 {
-	if (Target->IsDead) 
+	if (Target->IsDead)
 	{
 		return true;
 	}
@@ -61,17 +72,24 @@ void GameState::ChangeActivePlayer() {
 
 /* Play card from given owners hand at the given index.
    Puts the card into the correct area of play and
-   removes it from the hand afterwards */
-void GameState::PlayCard(int PlayerIndex, int HandIndex)
+   removes it from the hand afterwards. Throws string.*/
+void GameState::PlayCard(Card* Target)
 {
-	Card *FromHand = PlayersInGame[PlayerIndex]->Hand.at(HandIndex);
-
-	if (Soul* SoulCard = dynamic_cast<Soul*>(FromHand))
+	// Loop through devotion
+	for (size_t i = 0; i < Target->Owner->AvailableDevotion.size(); i++)
+	{
+		// At any point, does the player have insignifficant devotion?
+		if (Target->Owner->AvailableDevotion[i] < Target->Cost[i])
+		{
+			throw Target->Owner->UserName + " doesn't have enough devotion to play " + Target->Name + "!";
+		}
+	}
+	if (Soul* SoulCard = dynamic_cast<Soul*>(Target))
 	{
 		// Logically put the card in play
-		PlayersInGame[PlayerIndex]->SoulsInPlay.push_back(SoulCard);
+		Target->Owner->SoulsInPlay.push_back(SoulCard);
 		// Remove the card from the hand if it succesfully enters the field
-		PlayersInGame[PlayerIndex]->Hand.erase(PlayersInGame[PlayerIndex]->Hand.begin() + HandIndex);
+		Target->Owner->Hand.erase(remove(Target->Owner->Hand.begin(), Target->Owner->Hand.end(), Target), Target->Owner->Hand.end());
 		// Add the card to the stack
 		CardOrder.push_back(SoulCard);
 	}
@@ -84,13 +102,17 @@ void GameState::PlayCard(int PlayerIndex, int HandIndex)
 	//t3->type3Method();
 	//}
 
+	Action* CurrentAction = new Action({ Target }, Target->Owner, Action::_ActionType::Summon);
+	CheckEffects(CurrentAction);
+	delete CurrentAction;
+
 	// Add the proper devotion
 	// Note - If multi colored cards are ever introtuced this will need to be changed. Specifically the color parameter for Card.
-	PlayersInGame[PlayerIndex]->TotalDevotion[FromHand->Color] = PlayersInGame[PlayerIndex]->TotalDevotion[FromHand->Color] + 1;
+	Target->Owner->TotalDevotion[Target->Color] = Target->Owner->TotalDevotion[Target->Color] + 1;
 	// Now subtract from available devotion
 	// Loop through all devotions and subtract it from the available devotion
-	for (size_t i = 0; i < PlayersInGame[PlayerIndex]->TotalDevotion.size(); i++) {
-		PlayersInGame[PlayerIndex]->AvailableDevotion[i] = PlayersInGame[PlayerIndex]->AvailableDevotion[i] - FromHand->Cost[i];
+	for (size_t i = 0; i < Target->Owner->TotalDevotion.size(); i++) {
+		Target->Owner->AvailableDevotion[i] = Target->Owner->AvailableDevotion[i] - Target->Cost[i];
 	}
 }
 
@@ -181,10 +203,10 @@ void GameState::MulliganState()
 /* Draws cards for all players in the game until they have 5 cards in their hand */
 void GameState::DrawTill5()
 {
-	for (auto i : PlayersInGame) 
+	for (auto i : PlayersInGame)
 	{
 		size_t HandSize = i->Hand.size();
-		if (HandSize < 5) 
+		if (HandSize < 5)
 		{
 			i->DrawCard(5 - HandSize);
 		}
@@ -233,6 +255,10 @@ void GameState::PlayState()
 	// The first player needs to draw and have other misc things happen for their turn
 	TurnStartMaintenance();
 
+	// This is just to test obviously.
+	//PlayersInGame[ActiveIndex]->AvailableDevotion = { 99,99,99,99,99,99 };
+	//PlayersInGame[ActiveIndex]->TotalDevotion = { 99,99,99,99,99,99 };
+
 	//While the game is ongoing or 'live'
 	while (IsGameLive)
 	{
@@ -261,8 +287,6 @@ void GameState::PlayState()
 		// Grab the frist char from the string (only char)
 		char Protocol = ClientInput[0];
 
-		Action* CurrentAction = new Action;
-
 		// CURRENT PROTOCOL
 		// c = card entering play
 		// e = end of active players turn
@@ -272,21 +296,18 @@ void GameState::PlayState()
 		case GameState::CardProto:
 		{
 			int CardIndex = stoi(Parts[1]);
-			// Maybe surround this in a try catch so we can give the user 
-			// detailed explanations on why they cannot do what they want to do
-			Card *FromHand = PlayersInGame[ActiveIndex]->Hand.at(CardIndex);
-			cout << "Checking if " << FromHand->Name << " can be played..." << endl;
-			// If this player has enough mana and the card exists in their hand
-			if (PlayersInGame[ActiveIndex]->IsPlayable(CardIndex)) {
-				cout << FromHand->Name << " is playable!" << endl;
-				// Go ahead and play it. This method removes it from the hand as well.
-				PlayCard(ActiveIndex, CardIndex);
-				// Declare it has entered play
-				cout << FromHand->Name << " has entered the field for " << PlayersInGame[ActiveIndex]->UserName << endl;
-				// Fill Current Action Accordingly
-				CurrentAction->ActionType = Action::_ActionType::Summon;
-				CurrentAction->CardTargets.push_back(FromHand);
-				CurrentAction->Owner = PlayersInGame[ActiveIndex];
+
+			try {
+				PlayCard(PlayersInGame.at(ActiveIndex)->Hand.at(CardIndex));
+			}
+			catch (const string& s) {
+				cout << s << endl;
+			}
+			catch (const out_of_range& e) {
+				cout << "The card you are trying to play doesn't exist!" << endl;
+			}
+			catch (...) {
+				cout << "Something went wrong when trying to play this card!" << endl;
 			}
 			break;
 		}
@@ -295,59 +316,28 @@ void GameState::PlayState()
 			int AttackerIndex = stoi(Parts[1]);
 			int TargetPlayerIndex = stoi(Parts[2]);
 			string TargetType = Parts[3];
-			// Can they even attack?
-			if (PlayersInGame[ActiveIndex]->SoulsInPlay[AttackerIndex]->CanAttack) 
-			{
-				// Make sure to reduce flurry (number of times a soul can attack in a turn)
-				PlayersInGame[ActiveIndex]->SoulsInPlay[AttackerIndex]->_Flurry = 
-					PlayersInGame[ActiveIndex]->SoulsInPlay[AttackerIndex]->_Flurry - 1;
 
-				if (PlayersInGame[ActiveIndex]->SoulsInPlay[AttackerIndex]->_Flurry <= 0)
-				{
-					PlayersInGame[ActiveIndex]->SoulsInPlay[AttackerIndex]->CanAttack = false;
-				}
-				// If they are attacking a soul...
+			// Attempt to attack
+			try {
+				// Are they attacking a soul?
 				if (isdigit(TargetType[0]))
 				{
-					// Convert the string to the appropriate int
-					int DeffenderIndex = stoi(TargetType);
-
-					// Attack!
-					PlayersInGame[ActiveIndex]->SoulsInPlay[AttackerIndex]->Attacking(PlayersInGame[TargetPlayerIndex]->SoulsInPlay[DeffenderIndex]);
-
-					// Set the CurrentAction object
-					CurrentAction->Attacker = PlayersInGame[ActiveIndex]->SoulsInPlay[AttackerIndex];
-					CurrentAction->Target = PlayersInGame[TargetPlayerIndex]->SoulsInPlay[DeffenderIndex];
-					CurrentAction->Owner = PlayersInGame[ActiveIndex];
-					CurrentAction->ActionType = Action::_ActionType::Attack;
-
-					cout << PlayersInGame[ActiveIndex]->SoulsInPlay[AttackerIndex]->Owner->UserName << "'s " << PlayersInGame[ActiveIndex]->SoulsInPlay[AttackerIndex]->Name << " attacked " << PlayersInGame[TargetPlayerIndex]->SoulsInPlay[AttackerIndex]->Owner->UserName << "'s " << PlayersInGame[TargetPlayerIndex]->SoulsInPlay[DeffenderIndex]->Name
-						<< " for " << PlayersInGame[ActiveIndex]->SoulsInPlay[AttackerIndex]->CurrentAttack << "!" << endl;
-					cout << PlayersInGame[TargetPlayerIndex]->SoulsInPlay[AttackerIndex]->Owner->UserName << "'s " << PlayersInGame[TargetPlayerIndex]->SoulsInPlay[DeffenderIndex]->Name
-						<< " has " << PlayersInGame[TargetPlayerIndex]->SoulsInPlay[DeffenderIndex]->CurrentDefense << " health!" << endl;
-					cout << PlayersInGame[ActiveIndex]->SoulsInPlay[AttackerIndex]->Owner->UserName << "'s " << PlayersInGame[ActiveIndex]->SoulsInPlay[AttackerIndex]->Name << " was hit for "
-						<< PlayersInGame[TargetPlayerIndex]->SoulsInPlay[DeffenderIndex]->CurrentAttack << "!" << endl;
-					cout << PlayersInGame[ActiveIndex]->SoulsInPlay[AttackerIndex]->Owner->UserName << "'s " << PlayersInGame[ActiveIndex]->SoulsInPlay[AttackerIndex]->Name << " has " << PlayersInGame[ActiveIndex]->SoulsInPlay[AttackerIndex]->CurrentDefense << " health!" << endl;
+					// Attack that players soul at TargetType
+					PlayersInGame.at(ActiveIndex)->SoulsInPlay.at(AttackerIndex)->Attacking(PlayersInGame.at(TargetPlayerIndex)->SoulsInPlay.at(stoi(TargetType)));
+				} // or a player?
+				else {
+					// Attack that players face at TargetType
+					PlayersInGame.at(ActiveIndex)->SoulsInPlay.at(AttackerIndex)->Attacking(PlayersInGame.at(TargetPlayerIndex));
 				}
-				else // They are attacking a player... 
-				{
-					// Attack!
-					PlayersInGame[ActiveIndex]->SoulsInPlay[AttackerIndex]->Attacking(PlayersInGame[TargetPlayerIndex]);
-
-					// Set CurrentAction object
-					CurrentAction->Attacker = PlayersInGame[ActiveIndex]->SoulsInPlay[AttackerIndex];
-					CurrentAction->PlayerTarget = PlayersInGame[TargetPlayerIndex];
-					CurrentAction->Owner = PlayersInGame[ActiveIndex];
-					CurrentAction->ActionType = Action::_ActionType::Attack;
-
-					cout << PlayersInGame[ActiveIndex]->SoulsInPlay[AttackerIndex]->Name << " attacked " << PlayersInGame[TargetPlayerIndex]->UserName
-						<< " for " << PlayersInGame[ActiveIndex]->SoulsInPlay[AttackerIndex]->CurrentAttack << "!" << endl;
-					cout << PlayersInGame[TargetPlayerIndex]->UserName << " has " << PlayersInGame[TargetPlayerIndex]->Health << " health!" << endl;
-				}
+			}// If they can't attack, what went wrong?
+			catch (const string& s) {
+				cout << s << endl;
+			} // If they tried to attack something that doesn't exist
+			catch (const out_of_range& e) {
+				cout << "That target doesn't exist!" << endl;
 			}
-			else 
-			{
-				cout << PlayersInGame[ActiveIndex]->SoulsInPlay[AttackerIndex]->Name << " cannot attack!" << endl;
+			catch (...) {
+				cout << "Something went wrong during the attack!" << endl;
 			}
 			break;
 		}
@@ -360,7 +350,7 @@ void GameState::PlayState()
 
 			// Active player changes from the active player that entered the switch here
 			ChangeActivePlayer();
-		
+
 			// At the start of a players turn...
 			TurnStartMaintenance();
 			break;
@@ -370,29 +360,19 @@ void GameState::PlayState()
 		// Check for losers
 		ClearDeadPlayers();
 		cout << "No more dead players in game!" << endl;
-		
+
 		cout << "Checking for winners..." << endl;
 		// Is the game over?
-		if (IsGameOver()) 
+		if (IsGameOver())
 		{
 			IsGameLive = false;
 		}
 		cout << "Done checking winners!" << endl;
 
-		cout << "Checking effects..." << endl;
-		// Check effects
-		CheckEffects(CurrentAction);
-		cout << "All effects checked!" << endl;
-
 		cout << "Clearing any dead cards..." << endl;
 		// Check for dead cards
 		ClearDeadCards();
 		cout << "No more dead cards in play!" << endl;
-
-		cout << "Deleteing CurrentAction..." << endl;
-		// We don't need it anymore
-		delete CurrentAction;
-		cout << "CurrentAction deleted!" << endl;
 	}
 	cout << PlayersInGame[0]->UserName << " has won!" << endl;
 	cout << "Congratulations!" << endl;
@@ -405,7 +385,7 @@ void GameState::CheckEffects(Action* CurrentAction)
 	for (size_t i = 0; i < CardOrder.size(); i++)
 	{
 		if (CardOrder[i]->IsEffectTriggered(CurrentAction)) {
-			CardOrder[i]->Effect(this);
+			CardOrder[i]->Effect();
 		}
 	}
 }
@@ -416,22 +396,37 @@ void GameState::ClearDeadCards()
 	{
 		// Remove all dead souls
 		i->SoulsInPlay.erase(
-			remove_if(i->SoulsInPlay.begin(), i->SoulsInPlay.end(),IsDeadMessage), 
+			remove_if(i->SoulsInPlay.begin(), i->SoulsInPlay.end(), IsDeadMessage),
 			i->SoulsInPlay.end()
 		);
 		// Remove all dead swifts 
-		// Remove all dead consts
+		// Remove all dead constants
 	}
 	// Remove all dead cards in CardOrder
 	CardOrder.erase(
-		remove_if(CardOrder.begin(), CardOrder.end(),IsDead), \
+		remove_if(CardOrder.begin(), CardOrder.end(), IsDead), \
 		CardOrder.end()
 	);
+	for (auto p : PlayersInGame)
+	{
+		// check if there are any remaining dead souls (Effects can cause this to happen)
+		for (auto s : p->SoulsInPlay)
+		{
+			if (s->IsDead)
+			{
+				// Recursive call to this method to keep removing dead cards. 
+				// This will create the destroy action and checkeffects for us
+				ClearDeadCards();
+			}
+		}
+		// Do the same thing for swifts 
+		// Do the same thing for constants
+	}
 }
 
-void GameState::ClearDeadPlayers() 
+void GameState::ClearDeadPlayers()
 {
-	for (auto i : PlayersInGame) 
+	for (auto i : PlayersInGame)
 	{
 		if (i->IsDead) {
 			cout << i->UserName << " has lost!" << endl;
@@ -443,13 +438,13 @@ void GameState::ClearDeadPlayers()
 	);
 }
 
-bool GameState::IsGameOver() 
+bool GameState::IsGameOver()
 {
-	if (PlayersInGame.size() == 1) 
+	if (PlayersInGame.size() == 1)
 	{
 		return true;
 	}
-	else 
+	else
 	{
 		return false;
 	}

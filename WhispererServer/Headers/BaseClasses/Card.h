@@ -82,19 +82,19 @@ public:
 	int _DefenseDebuff = 0;
 	vector<int> HighTideCost = { 99,99,99,99,99,99 };
 
-	string ToString();
-	string JsonInfo();
+	virtual string ToString();
+	virtual string JsonInfo();
 
-	void Damage(vector<Soul*> Targets, GameState* CurrentGame, Player* Owner);
-	void Damage(vector<Player*> Targets, GameState* CurrentGame, Player* Owner);
+	void Damage(vector<Soul*> Targets, Player* Owner);
+	void Damage(vector<Player*> Targets, Player* Owner);
 
-	void Heal(vector<Soul*> Targets, GameState* CurrentGame, Player* Owner);
-	void Heal(vector<Player*> Targets, GameState* CurrentGame, Player* Owner);
+	void Heal(vector<Soul*> Targets, Player* Owner);
+	void Heal(vector<Player*> Targets, Player* Owner);
 
-	void SoulBuff(vector<Soul*> Targets, GameState* CurrentGame, Player* Owner);
-	void SoulDebuff(vector<Soul*> Targets, GameState* CurrentGame, Player* Owner);
+	void SoulBuff(vector<Soul*> Targets, Player* Owner);
+	void SoulDebuff(vector<Soul*> Targets, Player* Owner);
 
-	virtual void Effect(GameState* CurrentGame);
+	virtual void Effect();
 	virtual bool IsEffectTriggered(Action* CurrentAction);
 
 	Card(vector<int> Cost, string Name, string EffectText, string FlavourText,

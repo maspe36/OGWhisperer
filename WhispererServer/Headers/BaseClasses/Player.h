@@ -8,6 +8,7 @@
 #include <cstdlib>      // std::rand, std::srand
 #include <algorithm>
 #include <random>
+#include "GameState.h"
 
 /* At some point there will
    probably need to be a unique
@@ -17,6 +18,7 @@ using namespace std;
 
 class Card;
 class Soul;
+class GameState;
 
 class Player
 {
@@ -40,13 +42,15 @@ public:
 	//vector<Constant*> ConstantsInPlay;
 	vector<Card*> Graveyard;
 
+	// With this all cards know what game they are in. 
+	// This may cause some rewrites?
+	GameState* CurrentGame;
 
 	string HandToString();
 	string GraveyardToString();
 	string ToString();
 	string SoulsInPlayToString();
 
-	bool IsPlayable(int HandIndex);
 	bool IsDead = false;
 
 	void DrawCard();

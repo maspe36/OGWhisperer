@@ -13,7 +13,7 @@ Hellspark_Mutt::~Hellspark_Mutt()
 {
 }
 
-void Hellspark_Mutt::Effect(GameState* CurrentGame)
+void Hellspark_Mutt::Effect()
 {
 	cout << "Select a target..." << endl;
 	// Now we take input and depending on what it is set action object.
@@ -22,20 +22,20 @@ void Hellspark_Mutt::Effect(GameState* CurrentGame)
 
 	vector<string> Parts;
 
-	boost::split(Parts, ClientInput, boost::is_any_of(CurrentGame->delemiter));
+	boost::split(Parts, ClientInput, boost::is_any_of(this->Owner->CurrentGame->delemiter));
 
 	// Grab the frist char from the string (only char)
 	char TargetType = ClientInput[0];
 	int PlayerIndex = stoi(Parts[1]);
 
-	if (TargetType == CurrentGame->PlayerProto) // Player Target
+	if (TargetType == this->Owner->CurrentGame->PlayerProto) // Player Target
 	{
-		Damage({ CurrentGame->PlayersInGame[PlayerIndex] }, CurrentGame, Owner);
+		Damage({ this->Owner->CurrentGame->PlayersInGame[PlayerIndex] }, Owner);
 	}
-	else if (TargetType == CurrentGame->SoulProto) // Soul target
+	else if (TargetType == this->Owner->CurrentGame->SoulProto) // Soul target
 	{
 		int SoulIndex = stoi(Parts[2]);
-		Damage({ CurrentGame->PlayersInGame[PlayerIndex]->SoulsInPlay[SoulIndex] }, CurrentGame, Owner);
+		Damage({ this->Owner->CurrentGame->PlayersInGame[PlayerIndex]->SoulsInPlay[SoulIndex] }, Owner);
 	}
 	else // Return it to the hand if the user gives invalid target input 
 	{
@@ -46,7 +46,7 @@ void Hellspark_Mutt::Effect(GameState* CurrentGame)
 bool Hellspark_Mutt::IsEffectTriggered(Action* CurrentAction)
 {
 	// If this card was summoned
-	if (CurrentAction->_ActionType::Summon) {
+	if (CurrentAction->ActionType == Action::_ActionType::Summon) {
 		for (size_t i = 0; i < CurrentAction->CardTargets.size(); i++)
 		{
 			if (CurrentAction->CardTargets[i] == this) {

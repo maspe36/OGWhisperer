@@ -38,7 +38,7 @@ public:
 	void TurnStartMaintenance();
 	void PlayState();
 	void ChangeActivePlayer();
-	void PlayCard(int PlayerIndex, int HandIndex);
+	void PlayCard(Card* Target);
 	void CheckEffects(Action * CurrentAction);
 	void ClearDeadCards();
 	void ClearDeadPlayers();

@@ -68,22 +68,6 @@ string Player::SoulsInPlayToString()
 	return SoulsInPlayString.str();
 }
 
-bool Player::IsPlayable(int HandIndex)
-{
-	Card *ToPlay = Hand.at(HandIndex);
-	// If this card exists in the players hand
-	if (find(Hand.begin(), Hand.end(), ToPlay) != Hand.end()) {
-		// Loop through devotion
-		for (size_t i = 0; i < AvailableDevotion.size(); i++) {
-			// At any point, does the player have insignifficant devotion?
-			if (AvailableDevotion[i] < ToPlay->Cost[i]) {
-				return false;
-			}
-		}
-	}
-	return true;
-}
-
 void Player::DrawCard()
 {
 	Card* temp = MainDeck.front();

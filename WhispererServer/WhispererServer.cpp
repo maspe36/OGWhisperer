@@ -7,10 +7,10 @@
 
 int main()
 {
-	//I want a factory...
-	//How should I do this part? This seems complex
-	//I could do the CardFactory method where I create a new Card* from the specific cards class
-	//Then it fits into my game structure
+	// I want a factory...
+	// How should I do this part? This seems complex
+	// I could do the CardFactory method where I create a new Card* from the specific cards class
+	// Then it fits into my game structure
 	vector<Card*> genericDeck1;
 	vector<Card*> genericDeck2;
 	vector<Card*> genericDeck3;
@@ -120,28 +120,16 @@ int main()
 	genericDeck3.push_back(foo3);
 
 	// New players need a deck and a name
-	Player* player1 = new Player("Mom", genericDeck1);
-	Player* player2 = new Player("Tom", genericDeck2);
-	//Player* player3 = new Player("Nick", genericDeck3);
+	Player* player1 = new Player("Sam", genericDeck1);
+	Player* player2 = new Player("Ben", genericDeck2);
+	Player* player3 = new Player("Nick", genericDeck3);
 
-	//vector<Player*> Players = { player1, player2, player3 };
-	vector<Player*> Players = { player1, player2 };
+	vector<Player*> Players = { player1, player2, player3 };
+	//vector<Player*> Players = { player1, player2 };
 
 	GameState* myGame = new GameState(Players);
 
 	myGame->Start();
-
-	//// Attack the player with the first soul in play
-
-	//// This will be sent along with the message from the client as to who to declare an attack on
-	//int PlayerIndexToBeAttacked = 1;
-	//int AttackingSoulIndex = 0;
-	//myGame->ActivePlayer->SoulsInPlay.at
-	//	(AttackingSoulIndex)->Attacking(myGame->PlayersInGame[PlayerIndexToBeAttacked]);
-
-	//cout << myGame->ActivePlayer->SoulsInPlay.at
-	//	(AttackingSoulIndex)->Name + " attacked " + myGame->PlayersInGame
-	//		[PlayerIndexToBeAttacked]->UserName + " for " + to_string(myGame->ActivePlayer->SoulsInPlay.at(0)->Attack) << endl;
 
 	return 0;
 }

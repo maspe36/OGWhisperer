@@ -7,7 +7,7 @@ class Hellspark_Mutt :
 public:
 	Hellspark_Mutt();
 	~Hellspark_Mutt();
-	virtual void Effect(GameState* CurrentGame);
+	virtual void Effect();
 	virtual bool IsEffectTriggered(Action* CurrentAction);
 };
 
