@@ -87,6 +87,7 @@ void Card::Effect()
 {
 }
 
+/* Function to check if the Action passed will trigger a cards effect. */
 bool Card::IsEffectTriggered(Action* CurrentAction)
 {
 	return false;

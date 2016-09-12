@@ -10,6 +10,7 @@ Affect::~Affect()
 {
 }
 
+/* Returns a summary of the affect object. */
 string Affect::ToString()
 {
 	return Description + " from " + Owner->Name;

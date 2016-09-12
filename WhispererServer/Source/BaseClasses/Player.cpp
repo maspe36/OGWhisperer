@@ -23,6 +23,7 @@ Player::Player(string NewUserName, vector<Card*> NewDeck) : UserName(NewUserName
 	ShuffleDeck();
 }
 
+/* Returns a string with names of all cards in hand. Name#Name#Name */
 string Player::HandToString()
 {
 	string CardsInHand;
@@ -34,6 +35,8 @@ string Player::HandToString()
 	return CardsInHand;
 }
 
+/* Returns a list of all cards names in a players graveyard.
+Name#Name#Name*/
 string Player::GraveyardToString()
 {
 	string GraveyardCards;
@@ -45,6 +48,7 @@ string Player::GraveyardToString()
 	return GraveyardCards;
 }
 
+/* Returns the username and health of a player. Name+Health */
 string Player::ToString()
 {
 	//PlayerName+PlayerHealth
@@ -68,6 +72,7 @@ string Player::SoulsInPlayToString()
 	return SoulsInPlayString.str();
 }
 
+/* Draws a single card from the front a deck (vetor<Card*>) */
 void Player::DrawCard()
 {
 	Card* temp = MainDeck.front();
@@ -77,6 +82,7 @@ void Player::DrawCard()
 	Hand.push_back(temp);
 }
 
+/* Draw the specified amount of cards from the deck (vector<Card*>) */
 void Player::DrawCard(int Amount)
 {
 	for (int i = 0; i < Amount; i++) {
@@ -88,11 +94,13 @@ void Player::DrawCard(int Amount)
 	}
 }
 
+/* Shuffles a players deck using std::shuffle. */
 void Player::ShuffleDeck()
 {
-	std::shuffle(begin(MainDeck), end(MainDeck), seed);
+	shuffle(begin(MainDeck), end(MainDeck), seed);
 }
 
+/* Refills a players AvailableDevotion to their TotalDevotion. */
 void Player::RefillDevotion()
 {
 	for (size_t i = 0; i < TotalDevotion.size(); i++) {
@@ -100,6 +108,7 @@ void Player::RefillDevotion()
 	}
 }
 
+/* Returns every card in a players hand to their deck. Clears their hand. */
 void Player::HandToDeck()
 {
 	for (size_t i = 0; i < Hand.size(); i++) {
@@ -110,6 +119,7 @@ void Player::HandToDeck()
 	Hand.clear();
 }
 
+/* Prints all the cards in a players deck. */
 void Player::PrintDeck() {
 	// For debugging purposes, print the deck
 	for (size_t i = 0; i < MainDeck.size(); i++) {
