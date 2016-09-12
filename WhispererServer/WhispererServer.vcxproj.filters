@@ -216,6 +216,12 @@
     <ClCompile Include="Source\BaseClasses\CardUtility.cpp">
       <Filter>Source Files\BaseClasses</Filter>
     </ClCompile>
+    <ClCompile Include="Swift.cpp">
+      <Filter>Source Files\BaseClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Cards\Fire\Swifts\Kindling.cpp">
+      <Filter>Source Files\Cards\Fire\Swifts</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Headers\BaseClasses\Player.h">
@@ -322,6 +328,12 @@
     </ClInclude>
     <ClInclude Include="Headers\BaseClasses\CardUtility.h">
       <Filter>Header Files\BaseClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="Swift.h">
+      <Filter>Header Files\BaseClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\Cards\Fire\Swifts\Kindling.h">
+      <Filter>Header Files\Cards\Fire\Swifts</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

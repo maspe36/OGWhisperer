@@ -29,7 +29,7 @@ public:
 	int _OriginalFlurry = 1;
 	bool CanAttack;
 
-	Soul(vector<int> Cost, string Name, string EffectText, string Description, _Color Color, _CardType CardType, vector<_EffectType> Effects, int OriginalAttack, int OriginalDefense);
+	Soul(vector<int> Cost, string Name, string FlavourText, string EffectText, _Color Color, _CardType CardType, vector<_EffectType> Effects, int OriginalAttack, int OriginalDefense);
 
 	void PreAttackMaintenance();
 	void Attacking(Soul* DefendingSoul);

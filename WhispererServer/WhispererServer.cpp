@@ -19,6 +19,26 @@ int main()
 	Card* foo2 = NULL;
 	Card* foo3 = NULL;
 
+	Kindling kindling11;
+	Kindling kindling12;
+	Kindling kindling13;
+	foo1 = &kindling11;
+	foo2 = &kindling12;
+	foo3 = &kindling13;
+	genericDeck1.push_back(foo1);
+	genericDeck2.push_back(foo2);
+	genericDeck3.push_back(foo3);
+
+	Kindling kindling21;
+	Kindling kindling22;
+	Kindling kindling23;
+	foo1 = &kindling21;
+	foo2 = &kindling22;
+	foo3 = &kindling23;
+	genericDeck1.push_back(foo1);
+	genericDeck2.push_back(foo2);
+	genericDeck3.push_back(foo3);
+
 	Spark_Mouse sparkmouse11;
 	Spark_Mouse sparkmouse12;
 	Spark_Mouse sparkmouse13;

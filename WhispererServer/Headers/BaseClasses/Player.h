@@ -18,6 +18,7 @@ using namespace std;
 
 class Card;
 class Soul;
+class Swift;
 class GameState;
 
 class Player
@@ -38,7 +39,7 @@ public:
 	vector<Card*> MainDeck;
 	vector<Card*> Hand;
 	vector<Soul*> SoulsInPlay;
-	//vector<Swift*> SwiftsInPlay;
+	vector<Swift*> SwiftsInPlay;
 	//vector<Constant*> ConstantsInPlay;
 	vector<Card*> Graveyard;
 

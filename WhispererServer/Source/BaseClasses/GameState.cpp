@@ -6,6 +6,7 @@
 #include <boost/algorithm/string.hpp>
 
 #include "Soul.h"
+#include "Swift.h"
 #include "Player.h"
 #include "GameState.h"
 #include "Action.h"
@@ -105,10 +106,13 @@ void GameState::PlayCard(Card* Target)
 		// Remove the card from the hand if it succesfully enters the field
 		Target->Owner->Hand.erase(remove(Target->Owner->Hand.begin(), Target->Owner->Hand.end(), Target), Target->Owner->Hand.end());
 	}
-	// if (t2 = dynamic_cast<Type2*>(p))
-	//{
-	//t2->type2Method();
-	//}
+	if (Swift* SwiftCard = dynamic_cast<Swift*>(Target))
+	{
+		// Logically put the card in play
+		Target->Owner->SwiftsInPlay.push_back(SwiftCard);
+		// Remove the card from the hand if it succesfully enters the field
+		Target->Owner->Hand.erase(remove(Target->Owner->Hand.begin(), Target->Owner->Hand.end(), Target), Target->Owner->Hand.end());
+	}
 	//else if (t3 = dynamic_cast<Type3*>(p))
 	//{
 	//t3->type3Method();
@@ -431,7 +435,10 @@ void GameState::ClearDeadCards()
 			remove_if(i->SoulsInPlay.begin(), i->SoulsInPlay.end(), IsDeadMessage),
 			i->SoulsInPlay.end()
 		);
-		// Remove all dead swifts 
+		i->SwiftsInPlay.erase(
+			remove_if(i->SwiftsInPlay.begin(), i->SwiftsInPlay.end(), IsDeadMessage),
+			i->SwiftsInPlay.end()
+		);
 		// Remove all dead constants
 	}
 	// Remove all dead cards in CardOrder

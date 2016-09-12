@@ -17,22 +17,33 @@ void Hellspark_Mutt::Effect()
 {
 	vector<string> Parts = CardUtility::GetUserSoulOrPlayerTarget();
 
-	// Grab the frist char from the string (only char)
-	string TargetType = Parts[0];
-	int PlayerIndex = stoi(Parts[1]);
+	try {
+		// Grab the frist char from the string (only char)
+		string TargetType = Parts[0];
+		int PlayerIndex = stoi(Parts[1]);
 
-	if (TargetType[0] == Owner->CurrentGame->PlayerProto) // Player Target
-	{
-		Damage({ Owner->CurrentGame->PlayersInGame[PlayerIndex] }, Owner);
+		if (TargetType[0] == Owner->CurrentGame->PlayerProto) // Player Target
+		{
+			Damage({ Owner->CurrentGame->PlayersInGame[PlayerIndex] }, Owner);
+		}
+		else if (TargetType[0] == Owner->CurrentGame->SoulProto) // Soul target
+		{
+			int SoulIndex = stoi(Parts[2]);
+			Damage({ Owner->CurrentGame->PlayersInGame[PlayerIndex]->SoulsInPlay[SoulIndex] }, Owner);
+		}
+		else {
+			cout << "Invalid input!" << endl;
+			Effect();
+		}
+	}// target doesn't exits
+	catch (const out_of_range& e) {
+		cout << "That target doesn't exist!" << endl;
+		Effect();
 	}
-	else if (TargetType[0] == Owner->CurrentGame->SoulProto) // Soul target
+	catch (...) // All else fails
 	{
-		int SoulIndex = stoi(Parts[2]);
-		Damage({ Owner->CurrentGame->PlayersInGame[PlayerIndex]->SoulsInPlay[SoulIndex] }, Owner);
-	}
-	else // Return it to the hand if the user gives invalid target input 
-	{
-
+		cout << "Something went wrong!" << endl;
+		Effect();
 	}
 }
 

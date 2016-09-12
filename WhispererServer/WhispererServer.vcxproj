@@ -166,8 +166,10 @@
     <ClCompile Include="Source\Cards\Fire\Souls\Hellspark_Mutt.cpp" />
     <ClCompile Include="Source\Cards\Fire\Souls\Pyromaniac.cpp" />
     <ClCompile Include="Source\Cards\Fire\Souls\Pyrophile.cpp" />
+    <ClCompile Include="Source\Cards\Fire\Swifts\Kindling.cpp" />
     <ClCompile Include="Spark_Mouse.cpp" />
     <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="Swift.cpp" />
     <ClCompile Include="WhispererServer.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -195,6 +197,7 @@
     <ClInclude Include="Headers\Cards\Fire\Souls\Pyromaniac.h" />
     <ClInclude Include="Headers\Cards\Fire\Souls\Pyrophile.h" />
     <ClInclude Include="Headers\Cards\Fire\Souls\Spark_Mouse.h" />
+    <ClInclude Include="Headers\Cards\Fire\Swifts\Kindling.h" />
     <ClInclude Include="Headers\Cards\Light\Light_Constants.h" />
     <ClInclude Include="Headers\Cards\Light\Light_Souls.h" />
     <ClInclude Include="Headers\Cards\Light\Light_Swifts.h" />
@@ -205,6 +208,7 @@
     <ClInclude Include="Headers\Cards\Wind\Wind_Souls.h" />
     <ClInclude Include="Headers\Cards\Wind\Wind_Swifts.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="Swift.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
