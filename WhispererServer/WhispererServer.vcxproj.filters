@@ -210,6 +210,12 @@
     <ClCompile Include="Source\BaseClasses\Affect.cpp">
       <Filter>Source Files\BaseClasses</Filter>
     </ClCompile>
+    <ClCompile Include="Spark_Mouse.cpp">
+      <Filter>Source Files\Cards\Fire\Souls</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\BaseClasses\CardUtility.cpp">
+      <Filter>Source Files\BaseClasses</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Headers\BaseClasses\Player.h">
@@ -309,6 +315,12 @@
       <Filter>Header Files\BaseClasses</Filter>
     </ClInclude>
     <ClInclude Include="Headers\BaseClasses\Affect.h">
+      <Filter>Header Files\BaseClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\Cards\Fire\Souls\Spark_Mouse.h">
+      <Filter>Header Files\Cards\Fire\Souls</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\BaseClasses\CardUtility.h">
       <Filter>Header Files\BaseClasses</Filter>
     </ClInclude>
   </ItemGroup>

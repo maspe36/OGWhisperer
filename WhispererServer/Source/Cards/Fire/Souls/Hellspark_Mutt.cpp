@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Hellspark_Mutt.h"
-#include <boost/algorithm/string.hpp>
 #include <sstream>
+#include "CardUtility.h"
 
 Hellspark_Mutt::Hellspark_Mutt()
 	: Soul({ 0,0,3,0,0,0 }, "Hellspark Mutt", "", "Introduce - Deal 1 damage to target soul or player.", _Color::Fire, _CardType::_Soul, { _EffectType::Introduce }, 3, 2)
@@ -15,27 +15,20 @@ Hellspark_Mutt::~Hellspark_Mutt()
 
 void Hellspark_Mutt::Effect()
 {
-	cout << "Select a target..." << endl;
-	// Now we take input and depending on what it is set action object.
-	string ClientInput;
-	getline(cin, ClientInput);
-
-	vector<string> Parts;
-
-	boost::split(Parts, ClientInput, boost::is_any_of(this->Owner->CurrentGame->delemiter));
+	vector<string> Parts = CardUtility::GetUserSoulOrPlayerTarget();
 
 	// Grab the frist char from the string (only char)
-	char TargetType = ClientInput[0];
+	string TargetType = Parts[0];
 	int PlayerIndex = stoi(Parts[1]);
 
-	if (TargetType == this->Owner->CurrentGame->PlayerProto) // Player Target
+	if (TargetType[0] == Owner->CurrentGame->PlayerProto) // Player Target
 	{
-		Damage({ this->Owner->CurrentGame->PlayersInGame[PlayerIndex] }, Owner);
+		Damage({ Owner->CurrentGame->PlayersInGame[PlayerIndex] }, Owner);
 	}
-	else if (TargetType == this->Owner->CurrentGame->SoulProto) // Soul target
+	else if (TargetType[0] == Owner->CurrentGame->SoulProto) // Soul target
 	{
 		int SoulIndex = stoi(Parts[2]);
-		Damage({ this->Owner->CurrentGame->PlayersInGame[PlayerIndex]->SoulsInPlay[SoulIndex] }, Owner);
+		Damage({ Owner->CurrentGame->PlayersInGame[PlayerIndex]->SoulsInPlay[SoulIndex] }, Owner);
 	}
 	else // Return it to the hand if the user gives invalid target input 
 	{

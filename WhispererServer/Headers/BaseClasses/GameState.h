@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <string>
 
 /* At some point there will
    probably need to be a unique
@@ -18,7 +19,8 @@ public:
 	vector<Player*> PlayersInGame;
 	int ActiveIndex;
 	vector<Card*> CardOrder;
-
+	
+	static const char delmchar = ':';
 	const string delemiter = ":";
 	static const char PlayerProto = 'p';
 	static const char CardProto = 'c';

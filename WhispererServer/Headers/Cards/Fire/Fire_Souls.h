@@ -5,3 +5,4 @@
 #include "Hellspark_Mutt.h"
 #include "Pyromaniac.h"
 #include "Pyrophile.h"
+#include "Spark_Mouse.h"

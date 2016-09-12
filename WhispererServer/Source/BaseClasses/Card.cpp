@@ -9,67 +9,7 @@
 
 string Card::ToString()
 {
-	return "\"card\":{" + JsonInfo() + "}";
-}
-
-string Card::JsonInfo()
-{
-	ostringstream os;
-	os
-		<< "\"name\":" << '"' << Name << '"' << ','
-		<< "\"cost\":" << '{'
-		<< "\"dark\":" << '"' << Cost[0] << '"' << ','
-		<< "\"earth\":" << '"' << Cost[1] << '"' << ','
-		<< "\"fire\":" << '"' << Cost[2] << '"' << ','
-		<< "\"light\":" << '"' << Cost[3] << '"' << ','
-		<< "\"water\":" << '"' << Cost[4] << '"' << ','
-		<< "\"wind\":" << '"' << Cost[5] << '"'
-		<< '}' << ','
-		<< "\"effectText\":" << '"' << EffectText << '"' << ','
-		<< "\"flavorText\":" << '"' << FlavourText << '"' << ','
-		<< "\"color\":" << '"' << Color << '"' << ','
-		<< "\"cardType\":" << '"' << CardType << '"' << ','
-		<< "\"owner\":" << '"' << Owner->UserName << '"' << ','
-		<< "\"effects\":" << '[';
-	// Until the last one
-	for (size_t i = 0; i < Effects.size() - 1; i++)
-	{
-		os << '"' << Effects[i] << '"' << ',';
-	}
-	if(Effects.back() != _EffectType::None)
-	{
-		os << '"' << Effects.back() << '"';
-	}
-	
-	// Fill affects, don't put anything in if it has _EffectType::None.
-	os
-		<< ']' << ','
-		<< "\"affects\":" << '[';
-	for (size_t t = 0; t < AppliedAffects.size() - 1; t++)
-	{
-		os << '"' << AppliedAffects[t]->EffectType << '"' << ',';
-	}
-	if (AppliedAffects.back()->EffectType != _EffectType::None)
-	{
-		os << '"' << AppliedAffects.back()->EffectType << '"' << ',';
-	}
-
-	os 
-		<< ']' << ','
-		<< "\"highTideCost\":" << '{';
-	if (HighTideCost[0] != 99)
-	{
-		os
-			<< "\"dark\":" << '"' << HighTideCost[0] << '"' << ','
-			<< "\"earth\":" << '"' << HighTideCost[1] << '"' << ','
-			<< "\"fire\":" << '"' << HighTideCost[2] << '"' << ','
-			<< "\"light\":" << '"' << HighTideCost[3] << '"' << ','
-			<< "\"water\":" << '"' << HighTideCost[4] << '"' << ','
-			<< "\"wind\":" << '"' << HighTideCost[5] << '"';
-	}
-	os << '}';
-
-	return os.str();
+	return Name;
 }
 
 Card::Card(vector<int> Cost, string Name, string FlavourText, string EffectText, _Color Color, _CardType CardType, vector<_EffectType> Effects) :

@@ -82,6 +82,13 @@ void GameState::ChangeActivePlayer() {
    removes it from the hand afterwards. Throws string.*/
 void GameState::PlayCard(Card* Target)
 {
+	// Add the card to the stack
+	CardOrder.push_back(Target);
+
+	Action* CurrentAction = new Action({ Target }, Target->Owner, Action::_ActionType::Summon);
+	CheckEffects(CurrentAction);
+	delete CurrentAction;
+
 	// Loop through devotion
 	for (size_t i = 0; i < Target->Owner->AvailableDevotion.size(); i++)
 	{
@@ -97,8 +104,6 @@ void GameState::PlayCard(Card* Target)
 		Target->Owner->SoulsInPlay.push_back(SoulCard);
 		// Remove the card from the hand if it succesfully enters the field
 		Target->Owner->Hand.erase(remove(Target->Owner->Hand.begin(), Target->Owner->Hand.end(), Target), Target->Owner->Hand.end());
-		// Add the card to the stack
-		CardOrder.push_back(SoulCard);
 	}
 	// if (t2 = dynamic_cast<Type2*>(p))
 	//{
@@ -108,10 +113,6 @@ void GameState::PlayCard(Card* Target)
 	//{
 	//t3->type3Method();
 	//}
-
-	Action* CurrentAction = new Action({ Target }, Target->Owner, Action::_ActionType::Summon);
-	CheckEffects(CurrentAction);
-	delete CurrentAction;
 
 	// Add the proper devotion
 	// Note - If multi colored cards are ever introtuced this will need to be changed. Specifically the color parameter for Card.
@@ -165,7 +166,10 @@ void GameState::MulliganState()
 		// Show them the cards
 		for (size_t i = 0; i < PlayersInGame.size(); i++) {
 			cout << PlayersInGame[i]->UserName << endl;
+			cout << "----------" << endl;
 			cout << PlayersInGame[i]->HandToString() << endl;
+			cout << "----------------------------------------" << endl;
+			cout << endl;
 		}
 
 		// Get the user input
@@ -312,7 +316,8 @@ void GameState::PlayState()
 		{
 			int CardIndex = stoi(Parts[1]);
 
-			try {
+			try 
+			{
 				PlayCard(PlayersInGame.at(ActiveIndex)->Hand.at(CardIndex));
 			}
 			catch (const string& s) {
@@ -333,7 +338,8 @@ void GameState::PlayState()
 			string TargetType = Parts[3];
 
 			// Attempt to attack
-			try {
+			try 
+			{
 				// Are they attacking a soul?
 				if (isdigit(TargetType[0]))
 				{

@@ -83,7 +83,6 @@ public:
 	vector<int> HighTideCost = { 99,99,99,99,99,99 };
 
 	virtual string ToString();
-	virtual string JsonInfo();
 
 	void Damage(vector<Soul*> Targets, Player* Owner);
 	void Damage(vector<Player*> Targets, Player* Owner);

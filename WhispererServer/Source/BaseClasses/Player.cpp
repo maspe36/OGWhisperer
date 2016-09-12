@@ -26,13 +26,13 @@ Player::Player(string NewUserName, vector<Card*> NewDeck) : UserName(NewUserName
 /* Returns a string with names of all cards in hand. Name#Name#Name */
 string Player::HandToString()
 {
-	string CardsInHand;
+	stringstream CardsInHand;
 
 	for (auto i : Hand) {
-		CardsInHand += (i->Name + "#");
+		CardsInHand << i->Name << "; ";
 	}
 
-	return CardsInHand;
+	return CardsInHand.str();
 }
 
 /* Returns a list of all cards names in a players graveyard.
@@ -61,13 +61,9 @@ string Player::SoulsInPlayToString()
 {
 	ostringstream SoulsInPlayString;
 
-	SoulsInPlayString << "\"souls\":" << '{';
-
 	for (auto i : SoulsInPlay) {
-		SoulsInPlayString << (i->ToString()) << ',';
+		SoulsInPlayString << (i->ToString()) << "; ";
 	}
-
-	SoulsInPlayString << '}';
 
 	return SoulsInPlayString.str();
 }

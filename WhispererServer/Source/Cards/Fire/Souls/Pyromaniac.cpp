@@ -2,8 +2,9 @@
 #include "Pyromaniac.h"
 #include <boost/algorithm/string.hpp>
 #include <sstream>
+#include "CardUtility.h"
 
-Pyromaniac::Pyromaniac() 
+Pyromaniac::Pyromaniac()
 	: Soul({ 0,0,4,0,0,0 }, "Pyromaniac", "", "Downfall - Deal 2 damage to target player or soul", _Color::Fire, _CardType::_Soul, { _EffectType::Downfall }, 3, 4)
 {
 	_Damage = 2;
@@ -15,31 +16,37 @@ Pyromaniac::~Pyromaniac()
 
 void Pyromaniac::Effect()
 {
-	cout << "Select a target..." << endl;
-	// Now we take input and depending on what it is set action object.
-	string ClientInput;
-	getline(cin, ClientInput);
+	vector<string> Parts = CardUtility::GetUserSoulOrPlayerTarget();
 
-	vector<string> Parts;
-
-	boost::split(Parts, ClientInput, boost::is_any_of(this->Owner->CurrentGame->delemiter));
-
-	// Grab the frist char from the string (only char)
-	char TargetType = ClientInput[0];
-	int PlayerIndex = stoi(Parts[1]);
-
-	if (TargetType == this->Owner->CurrentGame->PlayerProto) // Player Target
+	try
 	{
-		Damage({ this->Owner->CurrentGame->PlayersInGame[PlayerIndex] }, Owner);
+		// Grab the frist char from the string (only char)
+		string TargetType = Parts[0];
+		int PlayerIndex = stoi(Parts[1]);
+
+		if (TargetType[0] == Owner->CurrentGame->PlayerProto) // Player Target
+		{
+			Damage({ Owner->CurrentGame->PlayersInGame[PlayerIndex] }, Owner);
+		}
+		else if (TargetType[0] == Owner->CurrentGame->SoulProto) // Soul target
+		{
+			int SoulIndex = stoi(Parts[2]);
+			Damage({ Owner->CurrentGame->PlayersInGame[PlayerIndex]->SoulsInPlay[SoulIndex] }, Owner);
+		}
+		else // Invalid input, try again.
+		{
+			cout << "Invalid input!" << endl;
+			Effect();
+		}
+	}// target doesn't exits
+	catch (const out_of_range& e) {
+		cout << "That target doesn't exist!" << endl;
+		Effect();
 	}
-	else if (TargetType == this->Owner->CurrentGame->SoulProto) // Soul target
+	catch (...) // All else fails
 	{
-		int SoulIndex = stoi(Parts[2]);
-		Damage({ this->Owner->CurrentGame->PlayersInGame[PlayerIndex]->SoulsInPlay[SoulIndex] }, Owner);
-	}
-	else // Return it to the hand if the user gives invalid target input 
-	{
-
+		cout << "Something went wrong!" << endl;
+		Effect();
 	}
 }
 

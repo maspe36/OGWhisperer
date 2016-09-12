@@ -157,6 +157,7 @@
     <ClCompile Include="Source\BaseClasses\Action.cpp" />
     <ClCompile Include="Source\BaseClasses\Affect.cpp" />
     <ClCompile Include="Source\BaseClasses\Card.cpp" />
+    <ClCompile Include="Source\BaseClasses\CardUtility.cpp" />
     <ClCompile Include="Source\BaseClasses\GameState.cpp" />
     <ClCompile Include="Source\BaseClasses\Player.cpp" />
     <ClCompile Include="Source\BaseClasses\Soul.cpp" />
@@ -165,6 +166,7 @@
     <ClCompile Include="Source\Cards\Fire\Souls\Hellspark_Mutt.cpp" />
     <ClCompile Include="Source\Cards\Fire\Souls\Pyromaniac.cpp" />
     <ClCompile Include="Source\Cards\Fire\Souls\Pyrophile.cpp" />
+    <ClCompile Include="Spark_Mouse.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="WhispererServer.cpp" />
   </ItemGroup>
@@ -173,6 +175,7 @@
     <ClInclude Include="Headers\BaseClasses\Action.h" />
     <ClInclude Include="Headers\BaseClasses\Affect.h" />
     <ClInclude Include="Headers\BaseClasses\Card.h" />
+    <ClInclude Include="Headers\BaseClasses\CardUtility.h" />
     <ClInclude Include="Headers\BaseClasses\GameState.h" />
     <ClInclude Include="Headers\BaseClasses\Player.h" />
     <ClInclude Include="Headers\BaseClasses\Soul.h" />
@@ -191,6 +194,7 @@
     <ClInclude Include="Headers\Cards\Fire\Souls\Hellspark_Mutt.h" />
     <ClInclude Include="Headers\Cards\Fire\Souls\Pyromaniac.h" />
     <ClInclude Include="Headers\Cards\Fire\Souls\Pyrophile.h" />
+    <ClInclude Include="Headers\Cards\Fire\Souls\Spark_Mouse.h" />
     <ClInclude Include="Headers\Cards\Light\Light_Constants.h" />
     <ClInclude Include="Headers\Cards\Light\Light_Souls.h" />
     <ClInclude Include="Headers\Cards\Light\Light_Swifts.h" />
