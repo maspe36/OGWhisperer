@@ -210,13 +210,7 @@
     <ClCompile Include="Source\BaseClasses\Affect.cpp">
       <Filter>Source Files\BaseClasses</Filter>
     </ClCompile>
-    <ClCompile Include="Spark_Mouse.cpp">
-      <Filter>Source Files\Cards\Fire\Souls</Filter>
-    </ClCompile>
     <ClCompile Include="Source\BaseClasses\CardUtility.cpp">
-      <Filter>Source Files\BaseClasses</Filter>
-    </ClCompile>
-    <ClCompile Include="Swift.cpp">
       <Filter>Source Files\BaseClasses</Filter>
     </ClCompile>
     <ClCompile Include="Source\Cards\Fire\Swifts\Kindling.cpp">
@@ -227,6 +221,12 @@
     </ClCompile>
     <ClCompile Include="Source\Cards\Fire\Constants\Tavern_Hearth.cpp">
       <Filter>Source Files\Cards\Fire\Constants</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Cards\Fire\Souls\Spark_Mouse.cpp">
+      <Filter>Source Files\Cards\Fire\Souls</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\BaseClasses\Swift.cpp">
+      <Filter>Source Files\BaseClasses</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -335,9 +335,6 @@
     <ClInclude Include="Headers\BaseClasses\CardUtility.h">
       <Filter>Header Files\BaseClasses</Filter>
     </ClInclude>
-    <ClInclude Include="Swift.h">
-      <Filter>Header Files\BaseClasses</Filter>
-    </ClInclude>
     <ClInclude Include="Headers\Cards\Fire\Swifts\Kindling.h">
       <Filter>Header Files\Cards\Fire\Swifts</Filter>
     </ClInclude>
@@ -346,6 +343,9 @@
     </ClInclude>
     <ClInclude Include="Headers\Cards\Fire\Constants\Tavern_Hearth.h">
       <Filter>Header Files\Cards\Fire\Constants</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\BaseClasses\Swift.h">
+      <Filter>Header Files\BaseClasses</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

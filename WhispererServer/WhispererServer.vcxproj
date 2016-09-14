@@ -162,16 +162,16 @@
     <ClCompile Include="Source\BaseClasses\GameState.cpp" />
     <ClCompile Include="Source\BaseClasses\Player.cpp" />
     <ClCompile Include="Source\BaseClasses\Soul.cpp" />
+    <ClCompile Include="Source\BaseClasses\Swift.cpp" />
     <ClCompile Include="Source\Cards\Fire\Constants\Tavern_Hearth.cpp" />
     <ClCompile Include="Source\Cards\Fire\Souls\Fire_Spirit.cpp" />
     <ClCompile Include="Source\Cards\Fire\Souls\Hellhound.cpp" />
     <ClCompile Include="Source\Cards\Fire\Souls\Hellspark_Mutt.cpp" />
     <ClCompile Include="Source\Cards\Fire\Souls\Pyromaniac.cpp" />
     <ClCompile Include="Source\Cards\Fire\Souls\Pyrophile.cpp" />
+    <ClCompile Include="Source\Cards\Fire\Souls\Spark_Mouse.cpp" />
     <ClCompile Include="Source\Cards\Fire\Swifts\Kindling.cpp" />
-    <ClCompile Include="Spark_Mouse.cpp" />
     <ClCompile Include="stdafx.cpp" />
-    <ClCompile Include="Swift.cpp" />
     <ClCompile Include="WhispererServer.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -184,6 +184,7 @@
     <ClInclude Include="Headers\BaseClasses\GameState.h" />
     <ClInclude Include="Headers\BaseClasses\Player.h" />
     <ClInclude Include="Headers\BaseClasses\Soul.h" />
+    <ClInclude Include="Headers\BaseClasses\Swift.h" />
     <ClInclude Include="Headers\Cards.h" />
     <ClInclude Include="Headers\Cards\Dark\Dark_Constants.h" />
     <ClInclude Include="Headers\Cards\Dark\Dark_Souls.h" />
@@ -212,7 +213,6 @@
     <ClInclude Include="Headers\Cards\Wind\Wind_Souls.h" />
     <ClInclude Include="Headers\Cards\Wind\Wind_Swifts.h" />
     <ClInclude Include="stdafx.h" />
-    <ClInclude Include="Swift.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>

@@ -20,30 +20,35 @@ Spark_Mouse::~Spark_Mouse()
 
 void Spark_Mouse::Effect()
 {
-	if (CardUtility::IsColorSoulPresent(this->Owner->CurrentGame, this->Color))
+	if (CardUtility::IsColorSoulPresent(Owner->CurrentGame, Color))
 	{
 		vector<string> Parts = CardUtility::GetUserSoulTarget();
 		try 
 		{
 			// Grab the frist char from the string (only char)
-			string TargetType = Parts[0];
-			int PlayerIndex = stoi(Parts[1]);
-			int SoulIndex = stoi(Parts[2]);
+			string TargetType = Parts.at(0);
+			int PlayerIndex = stoi(Parts.at(1));
+			int SoulIndex = stoi(Parts.at(2));
 
-			if (TargetType[0] == this->Owner->CurrentGame->SoulProto) // Soul target
+			if (TargetType.at(0) == Owner->CurrentGame->SoulProto) // Soul target
 			{
-				SoulBuff({ this->Owner->CurrentGame->PlayersInGame[PlayerIndex]->SoulsInPlay[SoulIndex] }, Owner);
+				SoulBuff({ Owner->CurrentGame->PlayersInGame.at(PlayerIndex)->SoulsInPlay.at(SoulIndex) }, Owner);
 			}
 			else // Invalid input, try again.
 			{
+				cout << "Invalid input!" << endl;
 				Effect();
 			}
-		} // We don't really care what happened here. We will call this recursively anyway. 
-		catch (...) // maybe one day this will need to be changed.
-		{
+		}// target doesn't exits
+		catch (const out_of_range& e) {
+			cout << "That target doesn't exist!" << endl;
 			Effect();
 		}
-
+		catch (...) // All else fails
+		{
+			cout << "Something went wrong!" << endl;
+			Effect();
+		}
 	}
 	else
 	{
