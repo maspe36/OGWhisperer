@@ -158,9 +158,11 @@
     <ClCompile Include="Source\BaseClasses\Affect.cpp" />
     <ClCompile Include="Source\BaseClasses\Card.cpp" />
     <ClCompile Include="Source\BaseClasses\CardUtility.cpp" />
+    <ClCompile Include="Source\BaseClasses\Constant.cpp" />
     <ClCompile Include="Source\BaseClasses\GameState.cpp" />
     <ClCompile Include="Source\BaseClasses\Player.cpp" />
     <ClCompile Include="Source\BaseClasses\Soul.cpp" />
+    <ClCompile Include="Source\Cards\Fire\Constants\Tavern_Hearth.cpp" />
     <ClCompile Include="Source\Cards\Fire\Souls\Fire_Spirit.cpp" />
     <ClCompile Include="Source\Cards\Fire\Souls\Hellhound.cpp" />
     <ClCompile Include="Source\Cards\Fire\Souls\Hellspark_Mutt.cpp" />
@@ -178,6 +180,7 @@
     <ClInclude Include="Headers\BaseClasses\Affect.h" />
     <ClInclude Include="Headers\BaseClasses\Card.h" />
     <ClInclude Include="Headers\BaseClasses\CardUtility.h" />
+    <ClInclude Include="Headers\BaseClasses\Constant.h" />
     <ClInclude Include="Headers\BaseClasses\GameState.h" />
     <ClInclude Include="Headers\BaseClasses\Player.h" />
     <ClInclude Include="Headers\BaseClasses\Soul.h" />
@@ -188,6 +191,7 @@
     <ClInclude Include="Headers\Cards\Earth\Earth_Constants.h" />
     <ClInclude Include="Headers\Cards\Earth\Earth_Souls.h" />
     <ClInclude Include="Headers\Cards\Earth\Earth_Swifts.h" />
+    <ClInclude Include="Headers\Cards\Fire\Constants\Tavern_Hearth.h" />
     <ClInclude Include="Headers\Cards\Fire\Fire_Constants.h" />
     <ClInclude Include="Headers\Cards\Fire\Fire_Souls.h" />
     <ClInclude Include="Headers\Cards\Fire\Fire_Swifts.h" />

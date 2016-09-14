@@ -51,10 +51,12 @@ void Kindling::Effect()
 bool Kindling::IsEffectTriggered(Action * CurrentAction)
 {
 	// If this card was played
-	if (CurrentAction->ActionType == Action::_ActionType::Summon) {
+	if (CurrentAction->ActionType == Action::_ActionType::Summon) 
+	{
 		for (size_t i = 0; i < CurrentAction->CardTargets.size(); i++)
 		{
-			if (CurrentAction->CardTargets[i] == this) {
+			if (CurrentAction->CardTargets[i] == this) 
+			{
 				return true;
 			}
 		}

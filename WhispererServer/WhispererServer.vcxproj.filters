@@ -222,6 +222,12 @@
     <ClCompile Include="Source\Cards\Fire\Swifts\Kindling.cpp">
       <Filter>Source Files\Cards\Fire\Swifts</Filter>
     </ClCompile>
+    <ClCompile Include="Source\BaseClasses\Constant.cpp">
+      <Filter>Source Files\BaseClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Cards\Fire\Constants\Tavern_Hearth.cpp">
+      <Filter>Source Files\Cards\Fire\Constants</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Headers\BaseClasses\Player.h">
@@ -334,6 +340,12 @@
     </ClInclude>
     <ClInclude Include="Headers\Cards\Fire\Swifts\Kindling.h">
       <Filter>Header Files\Cards\Fire\Swifts</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\BaseClasses\Constant.h">
+      <Filter>Header Files\BaseClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\Cards\Fire\Constants\Tavern_Hearth.h">
+      <Filter>Header Files\Cards\Fire\Constants</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

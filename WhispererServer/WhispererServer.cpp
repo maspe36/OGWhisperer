@@ -19,6 +19,26 @@ int main()
 	Card* foo2 = NULL;
 	Card* foo3 = NULL;
 
+	Tavern_Hearth tavernhearth11;
+	Tavern_Hearth tavernhearth12;
+	Tavern_Hearth tavernhearth13;
+	foo1 = &tavernhearth11;
+	foo2 = &tavernhearth12;
+	foo3 = &tavernhearth13;
+	genericDeck1.push_back(foo1);
+	genericDeck2.push_back(foo2);
+	genericDeck3.push_back(foo3);
+
+	Tavern_Hearth tavernhearth21;
+	Tavern_Hearth tavernhearth22;
+	Tavern_Hearth tavernhearth23;
+	foo1 = &tavernhearth21;
+	foo2 = &tavernhearth22;
+	foo3 = &tavernhearth23;
+	genericDeck1.push_back(foo1);
+	genericDeck2.push_back(foo2);
+	genericDeck3.push_back(foo3);
+
 	Kindling kindling11;
 	Kindling kindling12;
 	Kindling kindling13;

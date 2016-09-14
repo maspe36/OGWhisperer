@@ -5,6 +5,7 @@
 
 #include <boost/algorithm/string.hpp>
 
+#include "Constant.h"
 #include "Soul.h"
 #include "Swift.h"
 #include "Player.h"
@@ -27,6 +28,23 @@ GameState::GameState(vector<Player*> Players) : PlayersInGame(Players)
 
 GameState::~GameState()
 {
+}
+
+bool GameState::IsConstantDeadMessage(Card* Target)
+{
+	if (Target->IsDead) {
+		cout << Target->Owner->UserName << "'s " << Target->Name << " is dead!" << endl;
+		Target->Owner->Graveyard.push_back(Target);
+		Action* DeadAction = new Action({ Target }, Target->Owner, Action::_ActionType::Destroy);
+		// What a chain...
+		Target->Owner->CurrentGame->CheckEffects(DeadAction);
+		delete DeadAction;
+		// Only constants part.
+		Constant* ConstantCard = dynamic_cast<Constant*>(Target);
+		ConstantCard->IsDeadMaintenance();
+		return true;
+	}
+	return false;
 }
 
 /* If a card is dead, send it to the graveyard, check effects, and print a message!
@@ -103,20 +121,20 @@ void GameState::PlayCard(Card* Target)
 	{
 		// Logically put the card in play
 		Target->Owner->SoulsInPlay.push_back(SoulCard);
-		// Remove the card from the hand if it succesfully enters the field
-		Target->Owner->Hand.erase(remove(Target->Owner->Hand.begin(), Target->Owner->Hand.end(), Target), Target->Owner->Hand.end());
 	}
 	if (Swift* SwiftCard = dynamic_cast<Swift*>(Target))
 	{
 		// Logically put the card in play
 		Target->Owner->SwiftsInPlay.push_back(SwiftCard);
-		// Remove the card from the hand if it succesfully enters the field
-		Target->Owner->Hand.erase(remove(Target->Owner->Hand.begin(), Target->Owner->Hand.end(), Target), Target->Owner->Hand.end());
 	}
-	//else if (t3 = dynamic_cast<Type3*>(p))
-	//{
-	//t3->type3Method();
-	//}
+	if (Constant* ConstantCard = dynamic_cast<Constant*>(Target))
+	{
+		// Logically put the card in play
+		Target->Owner->ConstantsInPlay.push_back(ConstantCard);
+	}
+
+	// Remove the card from the hand if it succesfully enters the field
+	Target->Owner->Hand.erase(remove(Target->Owner->Hand.begin(), Target->Owner->Hand.end(), Target), Target->Owner->Hand.end());
 
 	// Add the proper devotion
 	// Note - If multi colored cards are ever introtuced this will need to be changed. Specifically the color parameter for Card.
@@ -126,6 +144,8 @@ void GameState::PlayCard(Card* Target)
 	for (size_t i = 0; i < Target->Owner->TotalDevotion.size(); i++) {
 		Target->Owner->AvailableDevotion[i] = Target->Owner->AvailableDevotion[i] - Target->Cost[i];
 	}
+
+	cout << Target->Name << " has entered the field for " << Target->Owner->UserName << "!" << endl;
 }
 
 /* Starts the game! */
@@ -279,8 +299,8 @@ void GameState::PlayState()
 	TurnStartMaintenance();
 
 	// This is just to test obviously.
-	//PlayersInGame[ActiveIndex]->AvailableDevotion = { 99,99,99,99,99,99 };
-	//PlayersInGame[ActiveIndex]->TotalDevotion = { 99,99,99,99,99,99 };
+	PlayersInGame[ActiveIndex]->AvailableDevotion = { 99,99,99,99,99,99 };
+	PlayersInGame[ActiveIndex]->TotalDevotion = { 99,99,99,99,99,99 };
 
 	//While the game is ongoing or 'live'
 	while (IsGameLive)
@@ -298,6 +318,7 @@ void GameState::PlayState()
 		cout << "Wind: " << PlayersInGame[ActiveIndex]->AvailableDevotion[5] << "/" << PlayersInGame[ActiveIndex]->TotalDevotion[5] << endl;
 		cout << "----------In Play----------" << endl;
 		cout << "Souls in play: " << PlayersInGame[ActiveIndex]->SoulsInPlayToString() << endl;
+		cout << "Constants in play: " << PlayersInGame[ActiveIndex]->ConstantsInPlayToString() << endl;
 
 		// Should be a message recieved in plain text from the client
 		string ClientInput;
@@ -439,11 +460,14 @@ void GameState::ClearDeadCards()
 			remove_if(i->SwiftsInPlay.begin(), i->SwiftsInPlay.end(), IsDeadMessage),
 			i->SwiftsInPlay.end()
 		);
-		// Remove all dead constants
+		i->ConstantsInPlay.erase(
+			remove_if(i->ConstantsInPlay.begin(), i->ConstantsInPlay.end(), IsConstantDeadMessage),
+			i->ConstantsInPlay.end()
+		);
 	}
 	// Remove all dead cards in CardOrder
 	CardOrder.erase(
-		remove_if(CardOrder.begin(), CardOrder.end(), IsDead), \
+		remove_if(CardOrder.begin(), CardOrder.end(), IsDead), 
 		CardOrder.end()
 	);
 	for (auto p : PlayersInGame)
@@ -458,8 +482,16 @@ void GameState::ClearDeadCards()
 				ClearDeadCards();
 			}
 		}
-		// Do the same thing for swifts 
-		// Do the same thing for constants
+		// check if there are any remaining dead constants (Effects can cause this to happen)
+		for (auto c : p->ConstantsInPlay)
+		{
+			if (c->IsDead)
+			{
+				// Recursive call to this method to keep removing dead cards. 
+				// This will create the destroy action and checkeffects for us
+				ClearDeadCards();
+			}
+		}
 	}
 }
 

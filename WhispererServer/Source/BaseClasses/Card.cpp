@@ -108,17 +108,29 @@ void Card::SoulBuff(vector<Soul*> Targets, Player * Owner)
 {
 	vector<Card*> tmpCardTargets(Targets.begin(), Targets.end());
 	Action* CurrentAction = new Action(tmpCardTargets, Owner, Action::_ActionType::Buff);
-	Affect* CurrentAffect = new Affect(Card::_EffectType::Buff, this, ("+" + to_string(_AttackBuff) + "/+" + to_string(_DefenseBuff)));
 	for (size_t i = 0; i < Targets.size(); i++) {
 		Targets[i]->BaseAttack = Targets[i]->BaseAttack + _AttackBuff;
 		Targets[i]->CurrentAttack = Targets[i]->CurrentAttack + _AttackBuff;
 		Targets[i]->BaseDefense = Targets[i]->BaseDefense + _DefenseBuff;
 		Targets[i]->CurrentDefense = Targets[i]->CurrentDefense + _DefenseBuff;
-		Targets[i]->AppliedAffects.push_back(CurrentAffect);
+		Targets[i]->AppliedAffects.push_back(CardAffect);
 		this->Owner->CurrentGame->CheckEffects(CurrentAction);
+		cout << Targets[i]->Name << " gained " << CardAffect->Description;
 	}
 	delete CurrentAction;
-	delete CurrentAffect;
+}
+
+void Card::SoulBuffNoTrigger(vector<Soul*> Targets, Player * Owner)
+{
+	vector<Card*> tmpCardTargets(Targets.begin(), Targets.end());
+	for (size_t i = 0; i < Targets.size(); i++) {
+		Targets[i]->BaseAttack = Targets[i]->BaseAttack + _AttackBuff;
+		Targets[i]->CurrentAttack = Targets[i]->CurrentAttack + _AttackBuff;
+		Targets[i]->BaseDefense = Targets[i]->BaseDefense + _DefenseBuff;
+		Targets[i]->CurrentDefense = Targets[i]->CurrentDefense + _DefenseBuff;
+		Targets[i]->AppliedAffects.push_back(CardAffect);
+		cout << Targets[i]->Name << " gained " << CardAffect->Description;
+	}
 }
 
 /* Wrapper function to debuff all souls in target vector for _AttackDebuff and _DefenseDebuff amounts and then
@@ -127,15 +139,27 @@ void Card::SoulDebuff(vector<Soul*> Targets, Player * Owner)
 {
 	vector<Card*> tmpCardTargets(Targets.begin(), Targets.end());
 	Action* CurrentAction = new Action(tmpCardTargets, Owner, Action::_ActionType::Debuff);
-	Affect* CurrentAffect = new Affect(Card::_EffectType::Buff, this, ("-" + to_string(_AttackBuff) + "/-" + to_string(_DefenseBuff)));
 	for (size_t i = 0; i < Targets.size(); i++) {
 		Targets[i]->BaseAttack = Targets[i]->BaseAttack + _AttackDebuff;
 		Targets[i]->CurrentAttack = Targets[i]->CurrentAttack + _AttackDebuff;
 		Targets[i]->BaseDefense = Targets[i]->BaseDefense + _DefenseDebuff;
 		Targets[i]->CurrentDefense = Targets[i]->CurrentDefense + _DefenseDebuff;
-		Targets[i]->AppliedAffects.push_back(CurrentAffect);
+		Targets[i]->AppliedAffects.push_back(CardAffect);
 		this->Owner->CurrentGame->CheckEffects(CurrentAction);
+		cout << Targets[i]->Name << " lost " << CardAffect->Description;
 	}
 	delete CurrentAction;
-	delete CurrentAffect;
+}
+
+void Card::SoulDebuffNoTrigger(vector<Soul*> Targets, Player * Owner)
+{
+	vector<Card*> tmpCardTargets(Targets.begin(), Targets.end());
+	for (size_t i = 0; i < Targets.size(); i++) {
+		Targets[i]->BaseAttack = Targets[i]->BaseAttack + _AttackDebuff;
+		Targets[i]->CurrentAttack = Targets[i]->CurrentAttack + _AttackDebuff;
+		Targets[i]->BaseDefense = Targets[i]->BaseDefense + _DefenseDebuff;
+		Targets[i]->CurrentDefense = Targets[i]->CurrentDefense + _DefenseDebuff;
+		Targets[i]->AppliedAffects.push_back(CardAffect);
+		cout << Targets[i]->Name << " lost " << CardAffect->Description;
+	}
 }

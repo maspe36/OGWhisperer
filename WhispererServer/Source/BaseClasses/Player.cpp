@@ -7,6 +7,7 @@
 #include "Card.h"
 #include "Soul.h"
 #include "Affect.h"
+#include "Constant.h"
 
 Player::~Player()
 {
@@ -66,6 +67,17 @@ string Player::SoulsInPlayToString()
 	}
 
 	return SoulsInPlayString.str();
+}
+
+string Player::ConstantsInPlayToString()
+{
+	ostringstream ConstantsInPlayString;
+
+	for (auto i : ConstantsInPlay) {
+		ConstantsInPlayString << (i->ToString()) << "; ";
+	}
+
+	return ConstantsInPlayString.str();
 }
 
 /* Draws a single card from the front a deck (vetor<Card*>) */

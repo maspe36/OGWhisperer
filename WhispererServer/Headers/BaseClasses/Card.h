@@ -73,6 +73,7 @@ public:
 
 	bool IsDead;
 	vector<Affect*> AppliedAffects;
+	Affect* CardAffect;
 
 	int _Damage = 0;
 	int _Heal = 0;
@@ -91,7 +92,9 @@ public:
 	void Heal(vector<Player*> Targets, Player* Owner);
 
 	void SoulBuff(vector<Soul*> Targets, Player* Owner);
+	void SoulBuffNoTrigger(vector<Soul*> Targets, Player* Owner);
 	void SoulDebuff(vector<Soul*> Targets, Player* Owner);
+	void SoulDebuffNoTrigger(vector<Soul*> Targets, Player* Owner);
 
 	virtual void Effect();
 	virtual bool IsEffectTriggered(Action* CurrentAction);

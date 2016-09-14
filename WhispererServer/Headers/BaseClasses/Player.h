@@ -17,6 +17,7 @@
 using namespace std;
 
 class Card;
+class Constant;
 class Soul;
 class Swift;
 class GameState;
@@ -40,7 +41,7 @@ public:
 	vector<Card*> Hand;
 	vector<Soul*> SoulsInPlay;
 	vector<Swift*> SwiftsInPlay;
-	//vector<Constant*> ConstantsInPlay;
+	vector<Constant*> ConstantsInPlay;
 	vector<Card*> Graveyard;
 
 	// With this all cards know what game they are in. 
@@ -51,6 +52,7 @@ public:
 	string GraveyardToString();
 	string ToString();
 	string SoulsInPlayToString();
+	string ConstantsInPlayToString();
 
 	bool IsDead = false;
 

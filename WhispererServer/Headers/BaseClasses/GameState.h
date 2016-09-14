@@ -24,12 +24,15 @@ public:
 	const string delemiter = ":";
 	static const char PlayerProto = 'p';
 	static const char CardProto = 'c';
+	static const char ConstantProto = 't';
 	static const char SoulProto = 's';
+	static const char SwiftProto = 'w';
 	static const char EndTurnProto = 'e';
 	static const char AttackProto = 'a';
 
 	~GameState();
 
+	static bool IsConstantDeadMessage(Card* Target);
 	static bool IsDeadMessage(Card* Target);
 	static bool IsDead(Card* Target);
 	static bool IsPlayerDead(Player* Target);
