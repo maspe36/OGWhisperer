@@ -112,7 +112,7 @@ void GameState::PlayCard(Card* Target)
 	for (size_t i = 0; i < Target->Owner->AvailableDevotion.size(); i++)
 	{
 		// At any point, does the player have insignifficant devotion?
-		if (Target->Owner->AvailableDevotion[i] < Target->Cost[i])
+		if (Target->Owner->AvailableDevotion.at(i) < Target->Cost.at(i))
 		{
 			throw Target->Owner->UserName + " doesn't have enough devotion to play " + Target->Name + "!";
 		}
@@ -138,11 +138,11 @@ void GameState::PlayCard(Card* Target)
 
 	// Add the proper devotion
 	// Note - If multi colored cards are ever introtuced this will need to be changed. Specifically the color parameter for Card.
-	Target->Owner->TotalDevotion[Target->Color] = Target->Owner->TotalDevotion[Target->Color] + 1;
+	Target->Owner->TotalDevotion.at(Target->Color) = Target->Owner->TotalDevotion.at(Target->Color) + 1;
 	// Now subtract from available devotion
 	// Loop through all devotions and subtract it from the available devotion
 	for (size_t i = 0; i < Target->Owner->TotalDevotion.size(); i++) {
-		Target->Owner->AvailableDevotion[i] = Target->Owner->AvailableDevotion[i] - Target->Cost[i];
+		Target->Owner->AvailableDevotion.at(i) = Target->Owner->AvailableDevotion.at(i) - Target->Cost.at(i);
 	}
 
 	cout << Target->Name << " has entered the field for " << Target->Owner->UserName << "!" << endl;
@@ -322,14 +322,19 @@ void GameState::PlayState()
 
 		// Should be a message recieved in plain text from the client
 		string ClientInput;
-		getline(cin, ClientInput);
-
 		vector<string> Parts;
+		char Protocol;
 
-		boost::split(Parts, ClientInput, boost::is_any_of(delemiter));
-
-		// Grab the frist char from the string (only char)
-		char Protocol = ClientInput[0];
+		try 
+		{
+			getline(cin, ClientInput);
+			boost::split(Parts, ClientInput, boost::is_any_of(delemiter));
+			Protocol = ClientInput.at(0);
+		}
+		catch (...) 
+		{
+			cout << "ERROR: Please check your message!" << endl;
+		}
 
 		// CURRENT PROTOCOL
 		// c = card entering play
@@ -339,10 +344,9 @@ void GameState::PlayState()
 		switch (Protocol) {
 		case GameState::CardProto:
 		{
-			int CardIndex = stoi(Parts[1]);
-
 			try 
 			{
+				int CardIndex = stoi(Parts.at(1));
 				PlayCard(PlayersInGame.at(ActiveIndex)->Hand.at(CardIndex));
 			}
 			catch (const string& s) {
@@ -358,15 +362,14 @@ void GameState::PlayState()
 		}
 		case GameState::AttackProto:
 		{
-			int AttackerIndex = stoi(Parts[1]);
-			int TargetPlayerIndex = stoi(Parts[2]);
-			string TargetType = Parts[3];
-
 			// Attempt to attack
 			try 
 			{
+				int AttackerIndex = stoi(Parts.at(1));
+				int TargetPlayerIndex = stoi(Parts.at(2));
+				string TargetType = Parts.at(3);
 				// Are they attacking a soul?
-				if (isdigit(TargetType[0]))
+				if (isdigit(TargetType.at(0)))
 				{
 					// Attack that players soul at TargetType
 					PlayersInGame.at(ActiveIndex)->SoulsInPlay.at(AttackerIndex)->Attacking(PlayersInGame.at(TargetPlayerIndex)->SoulsInPlay.at(stoi(TargetType)));

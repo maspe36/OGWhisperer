@@ -115,7 +115,7 @@ void Card::SoulBuff(vector<Soul*> Targets, Player * Owner)
 		Targets[i]->CurrentDefense = Targets[i]->CurrentDefense + _DefenseBuff;
 		Targets[i]->AppliedAffects.push_back(CardAffect);
 		this->Owner->CurrentGame->CheckEffects(CurrentAction);
-		cout << Targets[i]->Name << " gained " << CardAffect->Description;
+		cout << Targets[i]->Name << " gained " << CardAffect->Description << endl;
 	}
 	delete CurrentAction;
 }
@@ -129,7 +129,7 @@ void Card::SoulBuffNoTrigger(vector<Soul*> Targets, Player * Owner)
 		Targets[i]->BaseDefense = Targets[i]->BaseDefense + _DefenseBuff;
 		Targets[i]->CurrentDefense = Targets[i]->CurrentDefense + _DefenseBuff;
 		Targets[i]->AppliedAffects.push_back(CardAffect);
-		cout << Targets[i]->Name << " gained " << CardAffect->Description;
+		cout << Targets[i]->Name << " gained " << CardAffect->Description << endl;
 	}
 }
 
@@ -146,7 +146,7 @@ void Card::SoulDebuff(vector<Soul*> Targets, Player * Owner)
 		Targets[i]->CurrentDefense = Targets[i]->CurrentDefense + _DefenseDebuff;
 		Targets[i]->AppliedAffects.push_back(CardAffect);
 		this->Owner->CurrentGame->CheckEffects(CurrentAction);
-		cout << Targets[i]->Name << " lost " << CardAffect->Description;
+		cout << Targets[i]->Name << " lost " << CardAffect->Description << endl;
 	}
 	delete CurrentAction;
 }
@@ -160,6 +160,6 @@ void Card::SoulDebuffNoTrigger(vector<Soul*> Targets, Player * Owner)
 		Targets[i]->BaseDefense = Targets[i]->BaseDefense + _DefenseDebuff;
 		Targets[i]->CurrentDefense = Targets[i]->CurrentDefense + _DefenseDebuff;
 		Targets[i]->AppliedAffects.push_back(CardAffect);
-		cout << Targets[i]->Name << " lost " << CardAffect->Description;
+		cout << Targets[i]->Name << " lost " << CardAffect->Description << endl;
 	}
 }
