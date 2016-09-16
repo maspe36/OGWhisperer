@@ -82,7 +82,7 @@ bool GameState::IsPlayerDead(Player * Target)
 	return false;
 }
 
-/* Iterates through the players in the game and sets the active index 
+/* Iterates through the players in the game and sets the active index
 to the index of the current players turn. If we hit the end of players,
 we start over at the 0 index player turn.*/
 void GameState::ChangeActivePlayer() {
@@ -168,8 +168,8 @@ void GameState::Start() {
 }
 
 /* Pusedo-Asynchronous function. While there is a player that hasn't decalred they are keeping
-we listen for a decision. The numbers we are listening for are player index and keep or not. 
-Eventually this needs to make sure we are getting a message back from the correct player 
+we listen for a decision. The numbers we are listening for are player index and keep or not.
+Eventually this needs to make sure we are getting a message back from the correct player
 so another player can't maliciously mulligan for another player. */
 void GameState::MulliganState()
 {
@@ -200,45 +200,52 @@ void GameState::MulliganState()
 		// UserIndex	:	IsMulligan
 		// Parts[0]		:	Parts[1]
 		string Choice;
-		getline(cin, Choice);
-
 		vector<string> Parts;
 
-		boost::split(Parts, Choice, boost::is_any_of(":"));
+		try
+		{
+			getline(cin, Choice);
+			boost::split(Parts, Choice, boost::is_any_of(":"));
 
-		// Grab the first (only..) char.
-		int Index = stoi(Parts[0]);
-		int IsMulligan = stoi(Parts[1]);
+			// Grab the first (only..) char.
+			int Index = stoi(Parts.at(0));
+			int IsMulligan = stoi(Parts.at(1));
 
-		// They want to mulligan
-		if (IsMulligan == 1) {
-			// Have they mulliganed too many times?
-			if (PlayersInGame[Index]->MulligansTaken >= 5) {
-				PlayersInGame[Index]->KeepHand = true;
-				PlayersThatKept++;
-				break;
+			// They want to mulligan
+			if (IsMulligan == 1) {
+				// If they haven't mulliganed 5+ times...
+				if (!(PlayersInGame.at(Index)->MulligansTaken >= 5)) {
+					// Increase the mulligan counter
+					PlayersInGame.at(Index)->MulligansTaken = (PlayersInGame.at(Index)->MulligansTaken + 1);
+					// Return their hand to the deck
+					PlayersInGame.at(Index)->HandToDeck();
+					// Shuffle the deck!
+					PlayersInGame.at(Index)->ShuffleDeck();
+					// Draw 5 cards minus the amount of mulligans taken!
+					PlayersInGame.at(Index)->DrawCard(5 - PlayersInGame.at(Index)->MulligansTaken);
+					// Have they mulliganed too many times?
+					if (PlayersInGame.at(Index)->MulligansTaken >= 5) {
+						PlayersThatKept++;
+						PlayersInGame.at(Index)->KeepHand = true;
+					}
+				}
 			}
-			// Begin mulligan logic
+			// They want to keep
 			else {
-				// Increase the mulligan counter
-				PlayersInGame[Index]->MulligansTaken = (PlayersInGame[Index]->MulligansTaken + 1);
-				// Return their hand to the deck
-				PlayersInGame[Index]->HandToDeck();
-				// Shuffle the deck!
-				PlayersInGame[Index]->ShuffleDeck();
-				// Draw 5 cards minus the amount of mulligans taken!
-				PlayersInGame[Index]->DrawCard(5 - PlayersInGame[Index]->MulligansTaken);
+				PlayersInGame.at(Index)->KeepHand = true;
+				PlayersThatKept++;
+			}
+			// If every player has decided to keep, we are done mulliganning
+			if (PlayersThatKept == MaxPlayerKeeps) {
+				IsMulliganState = false;
 			}
 		}
-		// They want to keep
-		else {
-			PlayersInGame[Index]->KeepHand = true;
-			PlayersThatKept++;
+		catch (const out_of_range& e) {
+			cout << "The player or mulligan choice doesn't exist! Check your input and try again!" << endl;
 		}
-
-		// If every player has decided to keep, we are done mulliganning
-		if (PlayersThatKept == MaxPlayerKeeps) {
-			IsMulliganState = false;
+		catch (...)
+		{
+			cout << "Something went wrong! Please check your input and try again!" << endl;
 		}
 	}
 }
@@ -325,13 +332,13 @@ void GameState::PlayState()
 		vector<string> Parts;
 		char Protocol;
 
-		try 
+		try
 		{
 			getline(cin, ClientInput);
 			boost::split(Parts, ClientInput, boost::is_any_of(delemiter));
 			Protocol = ClientInput.at(0);
 		}
-		catch (...) 
+		catch (...)
 		{
 			cout << "ERROR: Please check your message!" << endl;
 		}
@@ -344,7 +351,7 @@ void GameState::PlayState()
 		switch (Protocol) {
 		case GameState::CardProto:
 		{
-			try 
+			try
 			{
 				int CardIndex = stoi(Parts.at(1));
 				PlayCard(PlayersInGame.at(ActiveIndex)->Hand.at(CardIndex));
@@ -363,7 +370,7 @@ void GameState::PlayState()
 		case GameState::AttackProto:
 		{
 			// Attempt to attack
-			try 
+			try
 			{
 				int AttackerIndex = stoi(Parts.at(1));
 				int TargetPlayerIndex = stoi(Parts.at(2));
@@ -446,8 +453,8 @@ void GameState::CheckEffects(Action* CurrentAction)
 	}
 }
 
-/* Loops through all players in the game and removes all cards from the field. 
-It is possible for cards to still be alive after this (Downfall effects, etc) so 
+/* Loops through all players in the game and removes all cards from the field.
+It is possible for cards to still be alive after this (Downfall effects, etc) so
 at the end of this method we recheck if there is anything dead, and if there is
 we recursively call this method. Be careful! */
 void GameState::ClearDeadCards()
@@ -470,7 +477,7 @@ void GameState::ClearDeadCards()
 	}
 	// Remove all dead cards in CardOrder
 	CardOrder.erase(
-		remove_if(CardOrder.begin(), CardOrder.end(), IsDead), 
+		remove_if(CardOrder.begin(), CardOrder.end(), IsDead),
 		CardOrder.end()
 	);
 	for (auto p : PlayersInGame)
