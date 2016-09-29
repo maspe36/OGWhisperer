@@ -1,5 +1,6 @@
 #pragma once
-#include "Soul.h"
+#include "BaseClasses.h"
+
 class Pyrophile :
 	public Soul
 {

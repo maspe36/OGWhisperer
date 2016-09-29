@@ -1,8 +1,11 @@
 #include "Tavern_Hearth.h"
 #include "Affect.h"
 
+//Registrar registar("Tavern Hearth", Tavern_Hearth());
+REGISTER_CLASS("Tavern Hearth", Tavern_Hearth);
+
 Tavern_Hearth::Tavern_Hearth() 
-	: Constant({ 0,0,3,0,0,0 }, "Tavern Hearth", "All red souls have +1/+0.", "Where theres smoke theres fire!", _Color::Fire, _CardType::_Constant, { _EffectType::Introduce })
+	: Constant({ 0,0,3,0,0,0 }, "Tavern Hearth", "All red souls have +1/+0.", "When theres smoke theres fire!", _Color::Fire, _CardType::_Constant, { _EffectType::Introduce })
 {
 	_AttackBuff = 1;
 	CardAffect = new Affect(Card::_EffectType::Buff, this, ("+" + to_string(_AttackBuff) + "/+" + to_string(_DefenseBuff)));

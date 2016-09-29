@@ -5,6 +5,12 @@
 #include "GameState.h"
 #include "Player.h"
 
+void AddCard(string name, vector<Card*>& deck) 
+{
+	auto foo = Factory::Instance()->Create(name);
+	deck.push_back(&*foo);
+}
+
 int main()
 {
 	// I want a factory...
@@ -15,7 +21,63 @@ int main()
 	vector<Card*> genericDeck2;
 	vector<Card*> genericDeck3;
 
-	Card* foo1 = NULL;
+	AddCard("Tavern Hearth", genericDeck1);
+	AddCard("Tavern Hearth", genericDeck1);
+	AddCard("Tavern Hearth", genericDeck2);
+	AddCard("Tavern Hearth", genericDeck2);
+	AddCard("Tavern Hearth", genericDeck3);
+	AddCard("Tavern Hearth", genericDeck3);
+
+	AddCard("Kindling", genericDeck1);
+	AddCard("Kindling", genericDeck1);
+	AddCard("Kindling", genericDeck2);
+	AddCard("Kindling", genericDeck2);
+	AddCard("Kindling", genericDeck3);
+	AddCard("Kindling", genericDeck3);
+
+	AddCard("Spark Mouse", genericDeck1);
+	AddCard("Spark Mouse", genericDeck1);
+	AddCard("Spark Mouse", genericDeck2);
+	AddCard("Spark Mouse", genericDeck2);
+	AddCard("Spark Mouse", genericDeck3);
+	AddCard("Spark Mouse", genericDeck3);
+
+	AddCard("Fire Spirit", genericDeck1);
+	AddCard("Fire Spirit", genericDeck1);
+	AddCard("Fire Spirit", genericDeck2);
+	AddCard("Fire Spirit", genericDeck2);
+	AddCard("Fire Spirit", genericDeck3);
+	AddCard("Fire Spirit", genericDeck3);
+
+	AddCard("Pyromaniac", genericDeck1);
+	AddCard("Pyromaniac", genericDeck1);
+	AddCard("Pyromaniac", genericDeck2);
+	AddCard("Pyromaniac", genericDeck2);
+	AddCard("Pyromaniac", genericDeck3);
+	AddCard("Pyromaniac", genericDeck3);
+
+	AddCard("Hellhound", genericDeck1);
+	AddCard("Hellhound", genericDeck1);
+	AddCard("Hellhound", genericDeck2);
+	AddCard("Hellhound", genericDeck2);
+	AddCard("Hellhound", genericDeck3);
+	AddCard("Hellhound", genericDeck3);
+
+	AddCard("Hellspark Mutt", genericDeck1);
+	AddCard("Hellspark Mutt", genericDeck1);
+	AddCard("Hellspark Mutt", genericDeck2);
+	AddCard("Hellspark Mutt", genericDeck2);
+	AddCard("Hellspark Mutt", genericDeck3);
+	AddCard("Hellspark Mutt", genericDeck3);
+
+	AddCard("Pyrophile", genericDeck1);
+	AddCard("Pyrophile", genericDeck1);
+	AddCard("Pyrophile", genericDeck2);
+	AddCard("Pyrophile", genericDeck2);
+	AddCard("Pyrophile", genericDeck3);
+	AddCard("Pyrophile", genericDeck3);
+
+	/*Card* foo1 = NULL;
 	Card* foo2 = NULL;
 	Card* foo3 = NULL;
 
@@ -177,7 +239,7 @@ int main()
 	foo3 = &pyrophile23;
 	genericDeck1.push_back(foo1);
 	genericDeck2.push_back(foo2);
-	genericDeck3.push_back(foo3);
+	genericDeck3.push_back(foo3);*/
 
 	// New players need a deck and a name
 	Player* player1 = new Player("Sam", genericDeck1);

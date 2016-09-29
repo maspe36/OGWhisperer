@@ -228,6 +228,9 @@
     <ClCompile Include="Source\BaseClasses\Swift.cpp">
       <Filter>Source Files\BaseClasses</Filter>
     </ClCompile>
+    <ClCompile Include="Source\BaseClasses\Factory.cpp">
+      <Filter>Source Files\BaseClasses</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Headers\BaseClasses\Player.h">
@@ -345,6 +348,9 @@
       <Filter>Header Files\Cards\Fire\Constants</Filter>
     </ClInclude>
     <ClInclude Include="Headers\BaseClasses\Swift.h">
+      <Filter>Header Files\BaseClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\BaseClasses\Factory.h">
       <Filter>Header Files\BaseClasses</Filter>
     </ClInclude>
   </ItemGroup>

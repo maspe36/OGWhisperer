@@ -108,14 +108,14 @@ void Card::SoulBuff(vector<Soul*> Targets, Player * Owner)
 {
 	vector<Card*> tmpCardTargets(Targets.begin(), Targets.end());
 	Action* CurrentAction = new Action(tmpCardTargets, Owner, Action::_ActionType::Buff);
-	for (size_t i = 0; i < Targets.size(); i++) {
-		Targets[i]->BaseAttack = Targets[i]->BaseAttack + _AttackBuff;
-		Targets[i]->CurrentAttack = Targets[i]->CurrentAttack + _AttackBuff;
-		Targets[i]->BaseDefense = Targets[i]->BaseDefense + _DefenseBuff;
-		Targets[i]->CurrentDefense = Targets[i]->CurrentDefense + _DefenseBuff;
-		Targets[i]->AppliedAffects.push_back(CardAffect);
+	for (auto i : Targets) {
+		i->BaseAttack = i->BaseAttack + _AttackBuff;
+		i->CurrentAttack = i->CurrentAttack + _AttackBuff;
+		i->BaseDefense = i->BaseDefense + _DefenseBuff;
+		i->CurrentDefense = i->CurrentDefense + _DefenseBuff;
+		i->AppliedAffects.push_back(CardAffect);
 		this->Owner->CurrentGame->CheckEffects(CurrentAction);
-		cout << Targets[i]->Name << " gained " << CardAffect->Description << endl;
+		cout << i->Name << " gained +" << _AttackBuff << "/+" << _DefenseBuff << endl;
 	}
 	delete CurrentAction;
 }

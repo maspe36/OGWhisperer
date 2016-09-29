@@ -1,6 +1,8 @@
 #include "Kindling.h"
 #include "CardUtility.h"
 
+REGISTER_CLASS("Kindling", Kindling);
+
 Kindling::Kindling()
 	: Swift({ 0,0,1,0,0,0 }, "Kindling", "Deal 2 damage to target player or soul.", "A single spark can set a world ablaze.", _Color::Fire, _CardType::_Swift, { _EffectType::Introduce })
 {

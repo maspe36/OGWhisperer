@@ -177,9 +177,9 @@ void GameState::MulliganState()
 	size_t MaxPlayerKeeps = PlayersInGame.size();
 	int PlayersThatKept = 0;
 
-	for (size_t i = 0; i < PlayersInGame.size(); i++) {
+	for (auto i : PlayersInGame) {
 		// Draw 5 cards before the game starts
-		PlayersInGame[i]->DrawCard(5);
+		i->DrawCard(5);
 	}
 
 	while (IsMulliganState) {
@@ -306,9 +306,11 @@ void GameState::PlayState()
 	TurnStartMaintenance();
 
 	// This is just to test obviously.
-	PlayersInGame[ActiveIndex]->AvailableDevotion = { 99,99,99,99,99,99 };
-	PlayersInGame[ActiveIndex]->TotalDevotion = { 99,99,99,99,99,99 };
-
+	for (auto p : PlayersInGame) {
+		p->AvailableDevotion = { 99,99,99,99,99,99 };
+		p->TotalDevotion = { 99,99,99,99,99,99 };
+	}
+	
 	//While the game is ongoing or 'live'
 	while (IsGameLive)
 	{

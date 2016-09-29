@@ -1,5 +1,5 @@
 #pragma once
-#include "Soul.h"
+#include "BaseClasses.h"
 
 class Fire_Spirit :
 	public Soul

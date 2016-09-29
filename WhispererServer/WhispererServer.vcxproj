@@ -159,6 +159,7 @@
     <ClCompile Include="Source\BaseClasses\Card.cpp" />
     <ClCompile Include="Source\BaseClasses\CardUtility.cpp" />
     <ClCompile Include="Source\BaseClasses\Constant.cpp" />
+    <ClCompile Include="Source\BaseClasses\Factory.cpp" />
     <ClCompile Include="Source\BaseClasses\GameState.cpp" />
     <ClCompile Include="Source\BaseClasses\Player.cpp" />
     <ClCompile Include="Source\BaseClasses\Soul.cpp" />
@@ -181,6 +182,7 @@
     <ClInclude Include="Headers\BaseClasses\Card.h" />
     <ClInclude Include="Headers\BaseClasses\CardUtility.h" />
     <ClInclude Include="Headers\BaseClasses\Constant.h" />
+    <ClInclude Include="Headers\BaseClasses\Factory.h" />
     <ClInclude Include="Headers\BaseClasses\GameState.h" />
     <ClInclude Include="Headers\BaseClasses\Player.h" />
     <ClInclude Include="Headers\BaseClasses\Soul.h" />

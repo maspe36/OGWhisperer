@@ -1,7 +1,7 @@
-#include "stdafx.h"
 #include "Hellspark_Mutt.h"
-#include <sstream>
 #include "CardUtility.h"
+
+REGISTER_CLASS("Hellspark Mutt", Hellspark_Mutt);
 
 Hellspark_Mutt::Hellspark_Mutt()
 	: Soul({ 0,0,3,0,0,0 }, "Hellspark Mutt", "", "Introduce - Deal 1 damage to target soul or player.", _Color::Fire, _CardType::_Soul, { _EffectType::Introduce }, 3, 2)

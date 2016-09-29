@@ -6,3 +6,4 @@
 #include "Player.h"
 #include "GameState.h"
 #include "Action.h"
+#include "Factory.h"

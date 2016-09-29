@@ -16,9 +16,10 @@ Player::~Player()
 Player::Player(string NewUserName, vector<Card*> NewDeck) : UserName(NewUserName), MainDeck(NewDeck)
 {	
 	// Set card owner
-	for (size_t i = 0; i < MainDeck.size(); i++) 
+	for (auto i : MainDeck) 
 	{
-		MainDeck[i]->Owner = this;
+		cout << i->Name << " owned by " << this->UserName << endl;
+		i->Owner = this;
 	}
 
 	ShuffleDeck();
