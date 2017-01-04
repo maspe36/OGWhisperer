@@ -2,7 +2,7 @@
 Debug/
 x64/
 packages/
-WhisperServer/x64
-WhisperServer.VC.db
-WhisperServer.VC.VC.db
-WhisperServer.VC.VC.opendb
+WhispererServer/x64
+WhispererServer.VC.db
+WhispererServer.VC.VC.db
+WhispererServer.VC.VC.opendb

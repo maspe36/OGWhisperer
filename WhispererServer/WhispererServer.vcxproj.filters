@@ -228,7 +228,7 @@
     <ClCompile Include="Source\Cards\Fire\Spells\Kindling.cpp">
       <Filter>Source Files\Cards\Fire\Swifts</Filter>
     </ClCompile>
-    <ClCompile Include="WhisperServer.cpp">
+    <ClCompile Include="WhispererServer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

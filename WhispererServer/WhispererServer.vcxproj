@@ -21,9 +21,9 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{5FB2CC9C-15BF-4C46-AF45-941FBF11A00B}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>WhispersServer</RootNamespace>
+    <RootNamespace>WhispererServer</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.10586.0</WindowsTargetPlatformVersion>
-    <ProjectName>WhisperServer</ProjectName>
+    <ProjectName>WhispererServer</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -174,7 +174,7 @@
     <ClCompile Include="Source\Cards\Fire\Creatures\Spark_Mouse.cpp" />
     <ClCompile Include="Source\Cards\Fire\Spells\Kindling.cpp" />
     <ClCompile Include="stdafx.cpp" />
-    <ClCompile Include="WhisperServer.cpp" />
+    <ClCompile Include="WhispererServer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Headers\BaseClasses.h" />
