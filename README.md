@@ -1,3 +1,6 @@
+# Update
+This now the old repo, I'm starting a rewrite with what I have learned about c++ after getting this far. 
+
 # Whisperer
 A fun fast paced card game that takes inspiration from Yu-gi-oh, Magic: The Gathering, and Hearthstone. 
 
